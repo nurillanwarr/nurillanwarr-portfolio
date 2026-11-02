@@ -1,26 +1,194 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-oda-paper: var(--oda-paper);
+  --color-oda-graphite: var(--oda-graphite);
+  --color-oda-timber: var(--oda-timber);
+  --color-oda-timber-ink: var(--oda-timber-ink);
+  --color-oda-timber-deep: var(--oda-timber-deep);
+  --color-oda-fjord: var(--oda-fjord);
+  --color-oda-pencil: var(--oda-pencil);
+  --color-oda-tile-bg: var(--oda-tile-bg);
+  --color-oda-pad-paper: var(--oda-pad-paper);
+  --color-oda-print-paper: var(--oda-print-paper);
+  --color-oda-hair: var(--oda-hair);
+  --color-oda-ink-2: var(--oda-ink-2);
+  --color-oda-ink-3: var(--oda-ink-3);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ========================================================
+   1. TEMA WARNA (ODA-ARKITEKTER ARCHITECTURAL PALETTE)
+   ======================================================== */
+:root {
+  /* ODA TOKENS - Disesuaikan dengan warna asli kertas sketsa /paper-texture.jpg (#EBE3D7) */
+  --oda-paper: #EBE3D7;
+  --oda-graphite: #1C1C1A;
+  --oda-timber: #B7835A;
+  --oda-timber-ink: #A3724B;
+  --oda-timber-deep: #8C5E38;
+  --oda-fjord: #C9D2D6;
+  --oda-pencil: #8B8983;
+  --oda-tile-bg: #E2D9CB;
+  --oda-pad-paper: #EFE9DF;
+  --oda-print-paper: #F2ECE2;
+  --oda-hair: #D5CBB9;
+  --oda-ink-2: #55534E;
+  --oda-ink-3: #6B6964;
+  --oda-grid-major: rgba(139, 137, 131, 0.2);
+  --oda-grid-minor: rgba(139, 137, 131, 0.09);
+
+  /* ARCHITECTURAL PAPER PALETTE */
+  --background: #EBE3D7;
+  --foreground: #1C1C1A;
+
+  --card: #F2ECE2;
+  --card-foreground: #1C1C1A;
+  --popover: #F2ECE2;
+  --popover-foreground: #1C1C1A;
+
+  --primary: #B7835A;
+  --primary-foreground: #EBE3D7;
+
+  --secondary: #C9D2D6;
+  --secondary-foreground: #1C1C1A;
+
+  --accent: #A3724B;
+  --accent-foreground: #EBE3D7;
+
+  --destructive: #8C5E38;
+  --destructive-foreground: #EBE3D7;
+
+  --muted: #E2D9CB;
+  --muted-foreground: #8B8983;
+
+  --border: #1C1C1A;
+  --input: #D5CBB9;
+  --ring: #B7835A;
+
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body {
+    background-color: #EBE3D7;
+    color: #1C1C1A;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ========================================================
+   2. LENIS SMOOTH SCROLL STANDARD STYLES
+   ======================================================== */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ========================================================
+   3. ARCHITECTURAL GRID UTILITIES
+   ======================================================== */
+@layer utilities {
+  /* Architectural millimeter grid surface (from oda-arkitekter) */
+  .oda-mm-grid {
+    background-image:
+      linear-gradient(to right, var(--oda-grid-major) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--oda-grid-major) 1px, transparent 1px),
+      linear-gradient(to right, var(--oda-grid-minor) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--oda-grid-minor) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  }
+
+  .oda-mm-grid-fine {
+    background-image:
+      linear-gradient(to right, rgba(139, 137, 131, 0.18) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139, 137, 131, 0.18) 1px, transparent 1px),
+      linear-gradient(to right, rgba(139, 137, 131, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139, 137, 131, 0.07) 1px, transparent 1px);
+    background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px;
+  }
+}
+
+/* ========================================================
+   4. ANIMATION & ARCHITECTURAL SCROLLBAR
+   ======================================================== */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Scrollbar Kustom Halus dengan Palet Kertas & Tembaga Oda */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #EBE3D7;
+  border-left: 1px solid rgba(28, 28, 26, 0.2);
+}
+::-webkit-scrollbar-thumb {
+  background: #B7835A;
+  border: 2px solid #EBE3D7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8C5E38;
 }
