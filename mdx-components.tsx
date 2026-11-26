@@ -1,6 +1,9 @@
-import type { MDXComponents } from "mdx/types"
 import React, { ComponentPropsWithoutRef } from "react"
 import Link from "next/link"
+
+export type MDXComponents = {
+  [key: string]: React.ComponentType<any>
+}
 
 type HeadingProps = ComponentPropsWithoutRef<"h1">
 type ParagraphProps = ComponentPropsWithoutRef<"p">
@@ -110,7 +113,7 @@ export const mdxComponents: MDXComponents = {
     <p className="mt-4 text-base leading-relaxed text-[#4A4742]" {...props} />
   ),
 
-  strong: ({ children, ...props }) => (
+  strong: ({ children, ...props }: ComponentPropsWithoutRef<"strong">) => (
     <strong className="font-semibold text-[#1C1C1A]" {...props}>
       {children}
     </strong>
