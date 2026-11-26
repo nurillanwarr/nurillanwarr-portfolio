@@ -10,6 +10,7 @@ import {
 } from "framer-motion"
 import { Link } from "@/i18n/navigation"
 import { DrawingSheet } from "@/components/shared/DrawingSheet"
+import { useTranslations, useLocale } from "next-intl"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -35,16 +36,23 @@ const itemVariants = {
   },
 }
 
+interface AboutHeroProps {
+  locale?: string
+}
+
 /**
  * Komponen AboutHero
  * Menampilkan bagian pembuka (Hero) pada halaman khusus Tentang Saya (/about):
  * - Staggered entrance animation berbasis Framer Motion (blur-to-sharp + slide up)
  * - Efek 3D Tilt & Perspective berbasis fisika pegas (useSpring) saat kursor bergerak di atas kartu foto
  * - Tombol Scroll Down interaktif dengan animasi rotasi dan pantulan halus
- *
- * @returns {JSX.Element} Elemen seksi Hero halaman About
+ * - Terintegrasi dwibahasa penuh (English & Bahasa Indonesia)
  */
-export default function AboutHero() {
+export default function AboutHero({ locale: localeProp }: AboutHeroProps) {
+  const t = useTranslations("aboutPage")
+  const hookLocale = useLocale()
+  const locale = localeProp || hookLocale || "en"
+  const isId = locale === "id"
   const cardRef = useRef<HTMLDivElement>(null)
 
   const rotateXTarget = useMotionValue(0)
@@ -113,18 +121,20 @@ export default function AboutHero() {
             <span className="transition-transform duration-300 group-hover:-translate-x-1">
               ←
             </span>
-            <span>BACK TO OVERVIEW</span>
+            <span>{t("backToOverview")}</span>
           </Link>
 
           <div className="hidden sm:block text-[10px] text-[#736E65]/80">
-            DOSSIER // BIOGRAPHY &amp; CREDENTIALS
+            {isId ? "DOKUMEN // BIOGRAFI & KREDENSIAL" : "DOSSIER // BIOGRAPHY & CREDENTIALS"}
           </div>
 
           <div className="flex items-center gap-2">
             <span className="inline-block border border-[#1C1C1A] bg-[#FAF8F5] px-2 py-0.5 font-semibold text-[#1C1C1A]">
               A-201
             </span>
-            <span className="hidden md:inline">NURIL ANWAR — ARCHIVE</span>
+            <span className="hidden md:inline">
+              {isId ? "NURIL ANWAR — ARSIP" : "NURIL ANWAR — ARCHIVE"}
+            </span>
           </div>
         </motion.div>
 
@@ -142,7 +152,7 @@ export default function AboutHero() {
               className="mb-3 flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#736E65]"
             >
               <span className="font-semibold text-[#A3724B]">(01)</span>
-              <span>PERSONAL DOSSIER</span>
+              <span>{isId ? "DOKUMEN PRIBADI" : "PERSONAL DOSSIER"}</span>
               <span className="text-[#A3724B]">•</span>
               <span>SURAKARTA, ID</span>
             </motion.div>
@@ -151,9 +161,9 @@ export default function AboutHero() {
               variants={itemVariants}
               className="text-[clamp(3rem,6.2vw,5.8rem)] font-medium leading-[0.96] tracking-[-0.04em] text-[#1C1C1A]"
             >
-              About{" "}
+              {isId ? "Tentang " : "About "}
               <span className="font-serif italic font-normal text-[#A3724B]">
-                Me
+                {isId ? "Saya" : "Me"}
               </span>
               <span className="text-[#B7835A]">.</span>
             </motion.h1>
@@ -181,11 +191,23 @@ export default function AboutHero() {
               variants={itemVariants}
               className="mt-6 max-w-xl text-lg leading-relaxed text-[#44423D] md:text-xl"
             >
-              A brief introduction to my journey as a{" "}
-              <span className="font-medium text-[#1C1C1A] underline decoration-[#A3724B]/60 decoration-wavy underline-offset-4">
-                Full-Stack &amp; Applied AI Developer
-              </span>{" "}
-              — bridging clean interface engineering with intelligent system integration.
+              {isId ? (
+                <>
+                  Pengenalan singkat mengenai perjalanan saya sebagai seorang{" "}
+                  <span className="font-medium text-[#1C1C1A] underline decoration-[#A3724B]/60 decoration-wavy underline-offset-4">
+                    Pengembang Full-Stack &amp; Applied AI
+                  </span>{" "}
+                  — memadukan rekayasa antarmuka yang bersih dengan integrasi sistem cerdas.
+                </>
+              ) : (
+                <>
+                  A brief introduction to my journey as a{" "}
+                  <span className="font-medium text-[#1C1C1A] underline decoration-[#A3724B]/60 decoration-wavy underline-offset-4">
+                    Full-Stack &amp; Applied AI Developer
+                  </span>{" "}
+                  — bridging clean interface engineering with intelligent system integration.
+                </>
+              )}
             </motion.p>
 
             {/* Tombol Scroll Down */}
@@ -198,7 +220,7 @@ export default function AboutHero() {
                 className="group inline-flex cursor-pointer items-center gap-4 rounded-full bg-[#1C1C1A] py-2 pr-2 pl-6 text-[14px] font-medium text-[#F2EFE8] transition-colors duration-300 hover:bg-[#8C5E38] hover:shadow-md"
               >
                 <span className="font-mono text-xs uppercase tracking-wider">
-                  Scroll For Dossier
+                  {t("scrollForDossier")}
                 </span>
                 <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-[#F2EFE8] text-[#1C1C1A]">
                   {/* Panah Baru yang Meluncur Masuk dari Atas ke Tengah Saat Hover */}
@@ -265,8 +287,8 @@ export default function AboutHero() {
               />
 
               <div className="mb-2 flex items-center justify-between font-mono text-[10px] tracking-[0.14em] uppercase text-[#736E65]">
-                <span>FIG. 01 — SUBJECT</span>
-                <span>SCALE 1:1</span>
+                <span>{isId ? "GMB. 01 — SUBJEK" : "FIG. 01 — SUBJECT"}</span>
+                <span>{isId ? "SKALA 1:1" : "SCALE 1:1"}</span>
               </div>
 
               {/* Bingkai Gambar dengan Efek Grayscale -> Color */}
@@ -298,7 +320,7 @@ export default function AboutHero() {
                     N
                   </motion.span>
                   <span className="mt-2 font-mono text-[10px] tracking-[0.18em] uppercase text-[#736E65]">
-                    NURIL ANWAR • PORTRAIT
+                    {isId ? "NURIL ANWAR • POTRET" : "NURIL ANWAR • PORTRAIT"}
                   </span>
                 </div>
 
@@ -320,7 +342,7 @@ export default function AboutHero() {
                 <span className="font-semibold text-[#1C1C1A]">NURIL ANWAR</span>
                 <span className="flex items-center gap-1.5 text-[#A3724B]">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A] animate-pulse" />
-                  AVAILABLE FOR WORK
+                  {isId ? "TERSEDIA UNTUK PEKERJAAN" : "AVAILABLE FOR WORK"}
                 </span>
               </div>
             </motion.div>

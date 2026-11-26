@@ -1,0 +1,125 @@
+## Latar Belakang
+
+Sebagai Pengembang Web Fullstack Magang di PDAM Tirta Makmur Surakarta, saya berkolaborasi langsung dengan Sekretariat Perusahaan dan Divisi IT untuk mereformasi alur kerja korespondensi surat-menyurat dan disposisi dokumen dinas yang sebelumnya berbasis kertas manual.
+
+Sebelum inisiatif ini dijalankan, seluruh surat dinas masuk, persetujuan disposisi jajaran direksi, serta nota dinas antar-divisi di 15 unit operasional sepenuhnya bergantung pada lembaran kertas fisik, kurir antar-lantai, dan tanda tangan pena basah. Proses manual ini kerap menimbulkan hambatan di meja manajerial, dengan rata-rata waktu penyelesaian disposisi mencapai beberapa hari kerja per dokumen.
+
+Kendala operasional tersebut mendorong perancangan dan pembangunan SIPASI (Sistem Informasi Pengelolaan Arsip & Surat Internal). Dirancang sebagai platform web korporat terpusat dan 100% bebas kertas (paperless), SIPASI mempercepat throughput surat, menjamin auditabilitas multi-peran, dan memverifikasi keaslian dokumen secara kriptografis melalui tanda tangan digital QR Code pada setiap berkas PDF yang diekspor.
+
+
+## Identifikasi Masalah
+
+Berdasarkan analisis alur kerja dan observasi operasional di lapangan, tantangan pokok dan kendala utama yang berhasil diidentifikasi meliputi:
+
+- Distribusi surat manual yang terfragmentasi menyebabkan waktu perputaran disposisi antar-divisi memakan waktu lebih dari 48 hingga 72 jam kerja.
+- Tingginya risiko kehilangan dokumen dinas serta kebocoran informasi sensitif akibat belum adanya sistem pelacakan status terpusat secara real-time.
+- Tanda tangan pena konvensional tidak memiliki mekanisme verifikasi kriptografis, sehingga rentan terhadap pemalsuan maupun modifikasi tanpa izin.
+- Ketiadaan rekam jejak audit (audit trail) permanen menyulitkan akuntabilitas saat inspeksi regulasi maupun audit kepatuhan internal berlangsung.
+
+
+## Tujuan & Sasaran
+
+> **Tujuan Utama:** Merancang, membangun, dan menggelar SIPASI sebagai Single Source of Truth (SSOT) korespondensi korporat, mengotomatisasi siklus hidup disposisi dokumen dengan jaminan integritas digital ketat bagi PDAM Tirta Makmur Surakarta.
+
+**Sasaran Strategis & Tolok Ukur Keberhasilan:**
+
+- Mendigitalkan 100% korespondensi fisik ke dalam alur kerja disposisi dan persetujuan multi-peran yang otomatis.
+- Membangun mesin pembubuhan stempel PDF sisi server berkecepatan sub-detik dengan kode verifikasi QR SHA-256 dinamis.
+- Mengintegrasikan basis data PostgreSQL dan Prisma ORM untuk merekam log audit permanen bertanda waktu bagi setiap aksi pengguna.
+- Memangkas rata-rata waktu perputaran dokumen dari 48 jam menjadi di bawah 5 menit secara langsung (real-time).
+
+
+## Peran & Tanggung Jawab
+
+Sebagai **Fullstack Developer Intern**, saya memegang kepemilikan teknis penuh pada perancangan dan implementasi fitur:
+
+- Melakukan wawancara kebutuhan mendalam bersama Sekretariat Perusahaan dan pimpinan IT untuk memodelkan hierarki disposisi ke dalam state machine digital.
+- Merancang skema relasional basis data PostgreSQL ternormalisasi menggunakan Prisma ORM dengan kontrol akses berbasis peran (RBAC) yang ketat.
+- Membangun antarmuka dashboard responsif berkinerja tinggi menggunakan Next.js 16 App Router, React 19, dan Tailwind CSS.
+- Mengembangkan generator stempel digital QR Code dinamis yang langsung dibubuhkan ke dalam dokumen PDF dinas secara otomatis.
+- Menerapkan sistem pencatatan log audit forensik permanen untuk merekam riwayat pembuatan, disposisi, pengunduhan, dan pembacaan surat.
+- Memimpin User Acceptance Testing (UAT) bersama para kepala seksi dan menuntaskan iterasi perbaikan operasional secara berkala.
+
+
+## Proses & Eksekusi
+
+Pengembangan sistem dieksekusi secara iteratif dan terstruktur melalui tiga tahapan utama untuk menjamin stabilitas arsitektur serta keselarasan kebutuhan pengguna:
+
+### 1. Riset Kebutuhan & Kelaikan Teknis
+
+Membedah alur tata persuratan dinas eksisting dan mengevaluasi batasan teknis guna menentukan arsitektur sistem yang andal.
+
+- Menganalisis matriks hierarki persetujuan dan aturan delegasi disposisi direksi di 15 unit kerja PDAM.
+- Membuat prototipe mesin pembubuhan stempel QR PDF di lingkungan server guna memastikan latensi pemrosesan di bawah 1 detik.
+- Merancang skema kontrol akses (RBAC) dengan pemisahan wewenang ketat antara Administrator, Pengagendakan, Direksi, dan Staf.
+
+### 2. Kick-Off Proyek & Penyelarasan Alur Disposisi
+
+Membangun konsensus antardivisi mengenai transisi dari dokumen fisik ke sistem persetujuan digital nir-kertas.
+
+- Menyepakati alur status disposisi surat dinas (Draf, Diterima, Disposisi Direksi, Diteruskan Kabag, Selesai/Diarsipkan).
+- Merumuskan format metadata surat, penomoran otomatis sesuai klasifikasi kode arsip resmi, dan struktur penamaan berkas.
+- Menyiapkan lingkungan pengembangan lokal terisolasi serta repositori Git dengan pedoman kode etik arsitektur bersih.
+
+### 3. Pengembangan Iteratif & Peluncuran Produksi
+
+Mengeksekusi sprint pengembangan perangkat lunak secara tangkas, pengujian komprehensif, dan peluncuran bertahap ke server produksi.
+
+- Mengimplementasikan autentikasi sesi aman, manajemen peran berlapis, dan proteksi rute middleware Next.js.
+- Menghubungkan Prisma ORM dengan PostgreSQL terkelola serta menerapkan indeks komposit guna akselerasi kueri filter surat.
+- Menjalankan User Acceptance Testing (UAT) komprehensif, pelatihan staf sekretariat, dan pengawalan transisi data arsip aktif.
+
+
+## Hasil & Arsitektur
+
+SIPASI berhasil diluncurkan ke lingkungan produksi PDAM Tirta Makmur Surakarta dengan modul-modul fungsional berstandar korporat:
+
+### Dashboard Korespondensi & Pelacak Disposisi Multi-Peran
+
+Antarmuka terpadu yang menyajikan alur disposisi hierarkis secara real-time sesuai hak akses pengguna masing-masing.
+
+- Tampilan status dinamis: Baru, Menunggu Disposisi Direksi, Didisposisikan, dan Diarsipkan.
+- Formulir registrasi surat masuk/keluar cerdas dengan penomoran otomatis berbasis klasifikasi kode arsip.
+- Penyaringan instan berdasarkan tanggal, tingkat urgensi (Biasa, Segera, Rahasia), dan asal instansi.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Waktu Proses** | `< 5 Menit` |
+| **Unit Kerja Terlayani** | `15 Divisi` |
+
+### Mesin Tanda Tangan Digital & Verifikasi QR PDF
+
+Generator stempel digital sisi server yang menyematkan kode verifikasi SHA-256 langsung ke lembar disposisi PDF resmi.
+
+- Penyematan QR Code dinamis otomatis pada sudut lembar disposisi tanpa mengubah tata letak dokumen asli.
+- Halaman portal verifikasi publik mandiri untuk memvalidasi otentisitas dokumen dengan memindai QR Code.
+- Validasi sidik jari kriptografis guna mencegah pemalsuan tanda tangan manual dan manipulasi isi surat.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Throughput Stempel** | `Sub-detik` |
+| **Tingkat Keaslian** | `Kriptografis Terverifikasi` |
+
+
+## Dampak & Pencapaian
+
+### Dampak Bagi Instansi / Organisasi
+
+- Mengeliminasi 100% konsumsi kertas untuk sirkulasi disposisi nota dinas internal di 15 divisi operasional.
+- Mencegah kebuntuan alur disposisi antar-lantai dengan sistem notifikasi dan eskalasi status dokumen secara instan.
+- Menjamin kepatuhan standar audit BPKP melalui penyimpanan rekam jejak digital bertanda waktu yang tidak dapat dimanipulasi.
+
+### Dampak Bagi Pertumbuhan Pribadi
+
+- Memperdalam penguasaan arsitektur aplikasi skala enterprise dengan Next.js 16, React 19, dan relasi kompleks PostgreSQL.
+- Mengasah keahlian rekayasa sistem pemrosesan berkas PDF dan kriptografi stempel digital QR Code langsung di sisi server.
+- Mengembangkan kompetensi komunikasi lintas disiplin dalam menerjemahkan kebutuhan birokrasi pemerintahan ke dalam kode perangkat lunak yang tangguh.
+
+
+## Tim & Apresiasi
+
+Inisiatif transformasi digital ini terwujud berkat bimbingan, sinergi, dan dedikasi rekan-rekan di PDAM Tirta Makmur Surakarta:
+
+- Bapak/Ibu Pembimbing Lapangan Divisi IT PDAM Tirta Makmur Surakarta atas arahan arsitektur server, keamanan jaringan, dan fasilitas riset yang diberikan.
+- Jajaran Sekretariat Perusahaan atas masukan kritis serta keterbukaan dalam menyelaraskan alur kerja birokrasi persuratan.
+- Rekan Mahasiswa Magang Seperjuangan atas kolaborasi harian, diskusi teknis, dan dukungan moral sepanjang periode magang.

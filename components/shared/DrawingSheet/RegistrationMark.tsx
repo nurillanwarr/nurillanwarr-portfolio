@@ -6,10 +6,10 @@ import React from "react"
 type Corner = "top-left" | "top-right" | "bottom-left" | "bottom-right"
 
 const POSITION: Record<Corner, string> = {
-  "top-left": "-top-[23px] -left-[23px]",
-  "top-right": "-top-[23px] -right-[23px]",
-  "bottom-left": "-bottom-[23px] -left-[23px]",
-  "bottom-right": "-bottom-[23px] -right-[23px]",
+  "top-left": "-top-[13px] -left-[13px]",
+  "top-right": "-top-[13px] -right-[13px]",
+  "bottom-left": "-bottom-[13px] -left-[13px]",
+  "bottom-right": "-bottom-[13px] -right-[13px]",
 }
 
 /**
@@ -26,12 +26,12 @@ export const RegistrationMark: React.FC<{ corner: Corner }> = ({ corner }) => {
   return (
     <svg
       viewBox="-9 -9 18 18"
-      className={`pointer-events-none absolute z-20 h-[45px] w-[45px] text-[#1C1C1A] ${POSITION[corner]}`}
+      className={`pointer-events-none absolute z-20 h-[25px] w-[25px] text-[#1C1C1A] ${POSITION[corner]}`}
       aria-hidden="true"
     >
-      <circle cx="0" cy="0" r="4.5" fill="#EBE3D7" stroke="currentColor" strokeWidth="1" />
       <line x1="-9" y1="0" x2="9" y2="0" stroke="currentColor" strokeWidth="1" />
       <line x1="0" y1="-9" x2="0" y2="9" stroke="currentColor" strokeWidth="1" />
+      <circle cx="0" cy="0" r="4.5" fill="#EBE3D7" stroke="currentColor" strokeWidth="1" />
     </svg>
   )
 }

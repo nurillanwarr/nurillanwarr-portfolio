@@ -5,7 +5,8 @@ import { Link } from "@/i18n/navigation"
 import { motion } from "framer-motion"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ABOUT_CONTENT, HIGHLIGHT_KEYWORDS } from "./constants"
+import { useTranslations } from "next-intl"
+import { HIGHLIGHT_KEYWORDS } from "./constants"
 
 /**
  * Komponen AboutManifesto Terpadu
@@ -13,6 +14,7 @@ import { ABOUT_CONTENT, HIGHLIGHT_KEYWORDS } from "./constants"
  * (kata demi kata menyala mengikuti scroll + tombol eksplorasi /about).
  */
 export const AboutManifesto: React.FC = () => {
+  const t = useTranslations("about")
   const containerRef = useRef<HTMLDivElement>(null)
   const leadRef = useRef<HTMLParagraphElement>(null)
   const paragraphRef = useRef<HTMLParagraphElement>(null)
@@ -79,7 +81,8 @@ export const AboutManifesto: React.FC = () => {
     return () => ctx.revert()
   }, [])
 
-  const words = ABOUT_CONTENT.description.split(" ")
+  const description = t("description")
+  const words = description.split(" ")
 
   return (
     <div ref={containerRef} className="relative z-10 lg:col-span-10">
@@ -89,11 +92,11 @@ export const AboutManifesto: React.FC = () => {
           ref={leadRef}
           className="text-2xl font-normal leading-[1.32] tracking-[-0.025em] text-[#1C1C1A] md:text-4xl lg:text-[40px]"
         >
-          {ABOUT_CONTENT.leadPrefix}{" "}
+          {t("leadPrefix")}{" "}
           <span className="font-serif italic text-[#A3724B]">
-            {ABOUT_CONTENT.leadHighlight}
+            {t("leadHighlight")}
           </span>
-          {ABOUT_CONTENT.leadSuffix}
+          {t("leadSuffix")}
         </p>
         <motion.div
           initial={{ scaleX: 0 }}
@@ -133,7 +136,7 @@ export const AboutManifesto: React.FC = () => {
       {/* Baris Stempel Kredensial Monospace + Tombol Pill Eksplorasi */}
       <div className="mt-7 flex flex-col items-start justify-between gap-5 border-t border-[#1C1C1A]/10 pt-5 md:flex-row md:items-center">
         <p className="font-mono text-[11px] tracking-wider text-[#1C1C1A]/60 md:text-xs">
-          {ABOUT_CONTENT.caption}
+          {t("caption")}
         </p>
 
         <motion.div
@@ -144,10 +147,10 @@ export const AboutManifesto: React.FC = () => {
           className="shrink-0"
         >
           <Link
-            href={ABOUT_CONTENT.button.href}
+            href="/about"
             className="group relative inline-flex items-center gap-4 overflow-hidden rounded-full border border-[#1C1C1A] bg-[#1C1C1A] py-2 pr-2 pl-6 font-mono text-xs font-medium uppercase tracking-wider text-[#FAF8F5] transition-all duration-300 hover:border-[#8C5E38] hover:bg-[#8C5E38] hover:shadow-md"
           >
-            <span>{ABOUT_CONTENT.button.label}</span>
+            <span>{t("cta")}</span>
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FAF8F5] text-[#1C1C1A] transition-transform duration-300 ease-out group-hover:-rotate-45">
               →
             </span>

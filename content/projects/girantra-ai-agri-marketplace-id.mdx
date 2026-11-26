@@ -1,0 +1,121 @@
+## Latar Belakang
+
+Dirancang sebagai solusi komprehensif agritech untuk para petani lokal Indonesia, Girantra memadukan pasar hasil tani langsung (direct marketplace) dengan asisten kecerdasan buatan multimodal pendeteksi hama dan penyakit tanaman.
+
+Rantai distribusi komoditas pertanian konvensional kerap merugikan petani akibat rantai tengkulak yang terlalu panjang, sehingga margin keuntungan petani tergerus sementara harga di tingkat konsumen tetap tinggi. Selain itu, keterbatasan akses ke penyuluh pertanian membuat penanganan hama sering kali terlambat dan merusak hasil panen.
+
+Girantra memberdayakan para petani dengan aplikasi web progresif (PWA) yang tetap berfungsi saat sinyal internet lemah (offline-first). Petani cukup memotret daun tanaman yang terserang hama, dan model kecerdasan buatan Google Gemini Vision akan mendiagnosis jenis penyakit serta memberikan resep penanganan organik dalam hitungan detik.
+
+
+## Identifikasi Masalah
+
+Berdasarkan analisis alur kerja dan observasi operasional di lapangan, tantangan pokok dan kendala utama yang berhasil diidentifikasi meliputi:
+
+- Panjangnya rantai perantara tengkulak yang memotong pendapatan bersih petani produsen secara drastis.
+- Keterlambatan penanganan hama dan penyakit tanaman akibat minimnya jumlah penyuluh pertanian lapangan di daerah terpencil.
+- Kondisi sinyal internet di area persawahan yang sering kali tidak stabil atau bahkan tidak memiliki sinyal sama sekali (blank spot).
+- Ketergantungan berlebihan pada pestisida kimia berbahaya akibat minimnya panduan penanganan tanaman secara ramah lingkungan.
+
+
+## Tujuan & Sasaran
+
+> **Tujuan Utama:** Membangun platform agritech terpadu yang memotong rantai tengkulak dan menyediakan konsultasi dokter tanaman berbasis AI multimodal yang dapat diakses petani dalam kondisi minim sinyal.
+
+**Sasaran Strategis & Tolok Ukur Keberhasilan:**
+
+- Mengintegrasikan Gemini Vision API untuk mendiagnosis puluhan jenis penyakit tanaman pangan tropis melalui foto kamera.
+- Merancang marketplace hasil bumi langsung dari petani ke konsumen akhir (D2C) dengan skema pembayaran aman.
+- Menerapkan arsitektur Progressive Web App (PWA) offline-first sehingga modul panduan pertanian tetap bisa dibaca tanpa internet.
+- Membantu meningkatkan margin keuntungan petani mitra minimal 25% dibandingkan penjualan melalui tengkulak konvensional.
+
+
+## Peran & Tanggung Jawab
+
+Sebagai **Lead Fullstack & Applied AI Engineer**, saya memegang kepemilikan teknis penuh pada perancangan dan implementasi fitur:
+
+- Membangun integrasi Gemini Vision API dengan rekayasa prompt agrikultur untuk mengenali pola kerusakan daun dan batang tanaman.
+- Merancang sistem inventaris hasil panen dan transaksi pasar online menggunakan Supabase dan Next.js.
+- Menerapkan Service Worker caching dan IndexedDB untuk menjamin aplikasi tetap dapat diakses di zona minim sinyal sawah.
+- Melakukan uji lapangan langsung bersama kelompok tani binaan di pedesaan Surakarta untuk memvalidasi kemudahan pemakaian.
+
+
+## Proses & Eksekusi
+
+Pengembangan sistem dieksekusi secara iteratif dan terstruktur melalui tiga tahapan utama untuk menjamin stabilitas arsitektur serta keselarasan kebutuhan pengguna:
+
+### 1. Riset Lapangan Bersama Petani & Kurasi Dataset Hama
+
+Mengumpulkan foto tanaman sakit langsung dari lahan pertanian dan berdiskusi dengan penyuluh lapangan.
+
+- Mendokumentasikan ratusan foto gejala penyakit umum pada padi, cabai, jagung, dan bawang merah.
+- Menyusun basis pengetahuan penanganan hama berbasis bahan nabati dan biologis ramah lingkungan.
+- Merancang antarmuka berbasis ikon visual besar yang sangat mudah dipahami oleh petani dari berbagai latar belakang usia.
+
+### 2. Integrasi AI Gemini Vision & Desain Marketplace
+
+Membangun endpoint analisis gambar cerdas dan modul etalase penjualan hasil panen.
+
+- Mengoptimalkan kompresi gambar sisi klien sebelum pengiriman ke Gemini API agar hemat kuota internet petani.
+- Membangun alur katalog produk hasil bumi dengan estimasi waktu panen dan ketersediaan stok.
+- Menyediakan sistem verifikasi rekening bank petani untuk memastikan pencairan dana penjualan tepat sasaran.
+
+### 3. Uji Coba Offline PWA & Validasi Petani Mitra
+
+Menguji ketahanan aplikasi di area sawah minim koneksi dan menyempurnakan fitur marketplace.
+
+- Melakukan uji coba pemindaian daun di tengah sawah dengan mode pesawat (airplane mode) aktif.
+- Menyelaraskan buku saku penanganan hama agar tersimpan otomatis di memori lokal peramban (browser storage).
+- Membantu puluhan transaksi penjualan beras dan sayuran organik pertama petani langsung ke konsumen perkotaan.
+
+
+## Hasil & Arsitektur
+
+Girantra berhasil dihadirkan sebagai jembatan teknologi pertanian yang nyata, terjangkau, dan berdampak langsung bagi peningkatan kesejahteraan petani lokal:
+
+### Dokter Tanaman AI Multimodal Gemini Vision
+
+Asisten cerdas pendeteksi penyakit tanaman yang menganalisis foto daun secara instan dan memberikan solusi penanganan berbasis organik.
+
+- Diagnosis akurat untuk penyakit hawar daun, bercak cokelat, antraknosa, dan busuk batang.
+- Resep pestisida nabati buatan sendiri menggunakan bahan alami yang mudah ditemukan di sekitar pekarangan.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Kecepatan Analisis** | `< 3 Detik` |
+| **Cakupan Tanaman** | `15+ Komoditas` |
+
+### Marketplace Hasil Bumi Langsung Petani (D2C)
+
+Pasar jual-beli komoditas pertanian tanpa perantara yang menghubungkan petani dengan konsumen rumah tangga dan restoran.
+
+- Pencairan dana langsung ke rekening petani tanpa potongan komisi yang memberatkan.
+- Transparansi harga pasar acuan daerah untuk mencegah perang harga komoditas.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Kenaikan Margin Petani** | `+ 30%` |
+| **Keamanan Transaksi** | `Escrow Terverifikasi` |
+
+
+## Dampak & Pencapaian
+
+### Dampak Bagi Instansi / Organisasi
+
+- Membantu puluhan keluarga petani lokal menekan risiko gagal panen dini melalui deteksi penyakit yang cepat dan tepat.
+- Meningkatkan pendapatan bersih petani mitra dengan memotong rantai perantara tengkulak yang merugikan.
+- Mendorong praktik pertanian berkelanjutan dengan memprioritaskan rekomendasi perawatan tanaman secara hayati dan ramah lingkungan.
+
+### Dampak Bagi Pertumbuhan Pribadi
+
+- Mengembangkan keahlian rekayasa sistem AI multimodal mutakhir memanfaatkan Google Gemini 1.5 Flash API.
+- Mengasah kemahiran dalam membangun aplikasi web progresif (PWA) offline-first di bawah tantangan infrastruktur riil lapangan.
+- Mendapatkan kepuasan batin yang mendalam dalam menciptakan perangkat lunak yang memberi manfaat nyata bagi kehidupan masyarakat akar rumput.
+
+
+## Tim & Apresiasi
+
+Inisiatif agritech ini dapat terwujud berkat kolaborasi erat dengan para petani dan mitra pendamping lapangan:
+
+- Kelompok Tani Makmur Surakarta atas sambutan hangat, antusiasme, dan kerja sama selama uji coba lapangan.
+- Penyuluh Pertanian Lapangan (PPL) independen atas konsultasi agronomi dan validasi resep penanganan hama.
+- Rekan-rekan pengembang atas bantuan penyempurnaan alur pembayaran aman dan integrasi gateway logistik.

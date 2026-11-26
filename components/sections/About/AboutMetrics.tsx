@@ -3,14 +3,15 @@
 import React, { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ABOUT_CONTENT } from "./constants"
+import { useTranslations } from "next-intl"
 
 /**
  * Komponen AboutMetrics (Versi Compact CAD Spec Strip)
  * Menampilkan 4 spesifikasi inti dalam format bar tabel arsitektur yang ringkas,
- * satu baris per item, sehingga proporsional dan tidak menutupi watermark latar belakang.
+ * dengan dukungan multi-bahasa next-intl.
  */
 export const AboutMetrics: React.FC = () => {
+  const t = useTranslations("about.metrics")
   const gridRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -44,12 +45,35 @@ export const AboutMetrics: React.FC = () => {
     return () => ctx.revert()
   }, [])
 
+  const metricsData = [
+    {
+      label: t("origin.label"),
+      value: t("origin.value"),
+      desc: t("origin.desc"),
+    },
+    {
+      label: t("core.label"),
+      value: t("core.value"),
+      desc: t("core.desc"),
+    },
+    {
+      label: t("ai.label"),
+      value: t("ai.value"),
+      desc: t("ai.desc"),
+    },
+    {
+      label: t("credential.label"),
+      value: t("credential.value"),
+      desc: t("credential.desc"),
+    },
+  ]
+
   return (
     <div
       ref={gridRef}
       className="mt-8 grid grid-cols-2 gap-3 border-t border-[#1C1C1A]/15 pt-5 md:grid-cols-4 md:gap-4"
     >
-      {ABOUT_CONTENT.highlights.map((item, idx) => (
+      {metricsData.map((item, idx) => (
         <div
           key={idx}
           className="metric-card group relative flex items-center justify-between rounded-lg border border-[#1C1C1A]/12 bg-[#EBE3D7]/55 px-3.5 py-2.5 transition-colors duration-300 hover:border-[#A3724B]/60 hover:bg-[#F5F2EB]"

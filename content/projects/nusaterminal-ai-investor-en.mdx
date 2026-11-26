@@ -1,0 +1,121 @@
+## Background
+
+Selected as a National Finalist in Hackathon X Digdaya in the Applied AI & FinTech track, our team architected and developed NusaTerminal to democratize institutional-grade market data for millions of Indonesian retail investors.
+
+Historically, institutional terminals such as Bloomberg and FactSet remain locked behind prohibitively expensive subscriptions exceeding $24,000 annually. Consequently, domestic retail traders are forced to manually comb through hundreds of pages of quarterly filings or navigate noisy social channels saturated with unverified rumors.
+
+NusaTerminal levels the playing field by pairing Google Gemini 1.5 Flash LLM orchestration with a specialized Retrieval-Augmented Generation (RAG) pipeline over indexed IDX corporate filings, integrated with a fine-tuned IndoFinBERT news sentiment classifier tailored to the linguistic subtleties of Indonesian financial markets.
+
+
+## Problem Identification
+
+Based on operational workflow discovery and field observations, the primary challenges and core bottlenecks identified were as follows:
+
+- Retail investors struggle to digest dense, multi-hundred-page quarterly PDF disclosures across 800+ tickers on the Indonesia Stock Exchange (IDX).
+- Prohibitive licensing costs of institutional market terminals leave retail participants structurally disadvantaged with delayed data.
+- Unregulated social media stock manipulation ('pom-pom' schemes) frequently misleads nascent retail market participants.
+- General-purpose LLMs consistently suffer from numerical hallucinations when queried on historical valuation multiples and balance sheet figures.
+
+
+## Goals & Objectives
+
+> **Primary Objective:** Build a zero-cost, hallucination-resistant RAG financial terminal delivering institutional-grade synthesis of IDX corporate disclosures directly to Indonesian retail investors.
+
+**Key Objectives & Measurable Milestones:**
+
+- Automate the ingestion and vector indexing of official IDX corporate filings using ChromaDB.
+- Deploy a fine-tuned IndoFinBERT classifier to quantify macroeconomic news risk across domestic equities.
+- Engineer an ultra-responsive, low-latency streaming terminal interface replicating Bloomberg-grade aesthetics.
+- Achieve >95% extraction accuracy on structured financial metrics backed by direct page-number citations.
+
+
+## Roles & Responsibilities
+
+Serving as **Lead Fullstack & AI Engineer**, I maintained direct technical ownership across architectural design and implementation:
+
+- Architected the multi-stage RAG ingestion pipeline combining layout-aware PDF extraction, semantic chunking, and ChromaDB embeddings.
+- Integrated Google Gemini 1.5 Flash via structured prompt contracts to extract income statements, cash flows, and balance sheets reliably.
+- Engineered a high-concurrency FastAPI streaming service serving real-time IDX market feeds and technical trading signals.
+- Trained and evaluated the IndoFinBERT sentiment classifier to categorize local financial headlines into Bullish, Bearish, or High Risk.
+
+
+## Process & Execution
+
+Engineering execution followed an iterative three-stage model to ensure architectural resilience and precise user alignment:
+
+### 1. Financial RAG Architecture & Vector Indexing
+
+Engineered robust document extraction pipelines capable of processing complex nested financial tables without data loss.
+
+- Evaluated recursive character and table-aware chunking strategies to preserve context across multi-page financial statements.
+- Constructed vector embedding spaces in ChromaDB using domain-adapted multilingual embeddings.
+- Designed verifiable Chain-of-Thought prompts enforcing mandatory page-number source citations.
+
+### 2. IndoFinBERT Fine-Tuning & Streaming API
+
+Fine-tuned local NLP transformers on Indonesian financial news and established low-latency SSE communication.
+
+- Curated and labeled a dataset of Indonesian corporate disclosures and financial news articles.
+- Fine-tuned IndoFinBERT achieving an 89.4% F1-score on three-class financial sentiment classification.
+- Implemented Server-Sent Events (SSE) in FastAPI to stream LLM responses with sub-second time-to-first-token.
+
+### 3. Terminal UX Design & National Finals Presentation
+
+Polished the high-density terminal interface and pitched the working product to hackathon judges.
+
+- Built a high-performance dark-theme web terminal featuring real-time candlestick charts and sentiment meters.
+- Implemented client-side PDF export allowing investors to generate comprehensive stock research dossiers in seconds.
+- Secured top evaluation honors and National Finalist recognition at Hackathon X Digdaya.
+
+
+## Results & Architecture
+
+NusaTerminal was successfully demonstrated as a cutting-edge retail intelligence platform with sub-second RAG response times:
+
+### IDX Corporate Disclosure RAG Pipeline
+
+An automated document intelligence engine indexing hundreds of pages of quarterly filings across IDX issuers.
+
+- High-precision extraction of revenue, net profit, debt obligations, and executive management commentary.
+- Strict citation linking providing clickable references directly to page numbers in official issuer filings.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **Extraction Accuracy** | `> 95%` |
+| **Query Latency** | `< 2.5 Seconds` |
+
+### IndoFinBERT Weighted Sentiment Engine
+
+A specialized NLP model contextualizing Indonesian macroeconomic headlines into actionable sentiment scores.
+
+- Filters speculative rumors and detects coordinated social media hype patterns.
+- Aggregates daily sentiment momentum indicators directly into ticker summary cards.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **Model F1-Score** | `89.4%` |
+| **Analysis Throughput** | `Real-Time` |
+
+
+## Impact & Achievements
+
+### Impact on the Organization / Ecosystem
+
+- Awarded National Finalist honors at Hackathon X Digdaya among hundreds of collegiate teams across Indonesia.
+- Demonstrated the viability of combining open-source local NLP models with hosted generative LLMs for regulated financial data.
+- Empowered retail trading communities with access to objective, data-backed financial research previously out of reach.
+
+### Impact on Personal Engineering Growth
+
+- Mastered production deployment of vector databases (ChromaDB), RAG architectures, and Google Gemini API integration.
+- Gained deep domain knowledge in capital market mechanics, corporate accounting, and quantitative financial analysis.
+- Sharpened technical leadership, agile sprint management, and live product pitching skills under competition pressure.
+
+
+## Team & Appreciation
+
+NusaTerminal's recognition as a National Finalist was made possible through dedicated teamwork and mentor support:
+
+- My engineering teammates for their tireless work ethic during intensive hackathon development sprints.
+- The Hackathon X Digdaya judges and industry mentors for their incisive architectural feedback and product validation.
+- The Indonesian retail investor community members who participated enthusiastically in beta testing sessions.

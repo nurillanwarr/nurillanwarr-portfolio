@@ -31,7 +31,7 @@ export const AboutMarquee: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="relative z-10 -mx-5 mt-12 overflow-hidden border-y border-[#1C1C1A]/20 bg-[#1C1C1A]/[0.04] py-3.5 md:-mx-8 lg:-mx-12"
+      className="relative z-10 -mx-5 my-10 overflow-hidden border-y border-[#1C1C1A]/20 bg-[#1C1C1A]/[0.04] py-3.5 md:-mx-8 lg:-mx-12"
     >
       {/* Gradasi pemudar tepi kiri & kanan menyatu dengan warna vellum #F2ECE1 */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#F2ECE1] to-transparent md:w-20" />

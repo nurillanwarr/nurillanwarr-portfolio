@@ -1,7 +1,8 @@
 "use client"
 
 import React, { useState } from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
 import { ACHIEVEMENTS, Achievement } from "@/data/achievements"
 import { AchievementCard } from "./AchievementCard"
 import { AchievementModal } from "./AchievementModal"
@@ -9,13 +10,11 @@ import { AchievementModal } from "./AchievementModal"
 /**
  * Komponen AchievementsPage
  * Menampilkan halaman katalog seluruh sertifikasi, kompetensi, dan penghargaan Nuril Anwar
- * dengan tema kertas vellum arsitektur portofolio (#EBE3D7 & #FAF6F0):
- * - Header editorial arsitektural bernuansa kertas sketsa
- * - Filter kategori interaktif (All, Courses, Awards)
- * - Grid kartu sertifikat responsif
- * - Pop-up modal interaktif berfitur zoom & kredensial resmi sesuai Gambar 2
+ * dengan tema kertas vellum arsitektur portofolio (#EBE3D7 & #FAF6F0) dan dukungan dwibahasa penuh.
  */
 export const AchievementsPage: React.FC = () => {
+  const locale = useLocale()
+  const isId = locale === "id"
   const [selectedAchievement, setSelectedAchievement] =
     useState<Achievement | null>(null)
   const [filterType, setFilterType] = useState<string>("all")
@@ -37,7 +36,7 @@ export const AchievementsPage: React.FC = () => {
             <span className="transition-transform duration-300 group-hover:-translate-x-1">
               ←
             </span>
-            <span>Return to Portfolio</span>
+            <span>{isId ? "Kembali ke Portofolio" : "Return to Portfolio"}</span>
           </Link>
         </div>
 
@@ -45,31 +44,32 @@ export const AchievementsPage: React.FC = () => {
         <div className="border-b border-[#1C1C1A]/20 pb-8 sm:flex sm:items-end sm:justify-between sm:gap-8">
           <div>
             <div className="flex items-center gap-2 font-mono text-[10.5px] tracking-[0.24em] text-[#8C5E38] uppercase">
-              <span>(ACHIEVEMENTS)</span>
-              <span>VERIFIED COMPETENCY // ARCHIVE</span>
+              <span>({isId ? "PRESTASI" : "ACHIEVEMENTS"})</span>
+              <span>{isId ? "KOMPETENSI TERVERIFIKASI // ARSIP" : "VERIFIED COMPETENCY // ARCHIVE"}</span>
             </div>
             <h1 className="mt-3 font-serif text-4xl font-normal tracking-tight text-[#1C1C1A] sm:text-6xl md:text-7xl">
-              Certifications &amp; Awards
+              {isId ? "Sertifikasi & Penghargaan" : "Certifications & Awards"}
             </h1>
           </div>
           <p className="mt-4 max-w-md font-mono text-xs leading-relaxed text-[#55534E] sm:mt-0 sm:text-right">
-            Verified credentials, expert bootcamps, and national innovation awards
-            demonstrating technical rigor and engineering excellence.
+            {isId
+              ? "Kredensial terverifikasi, bootcamp keahlian, dan penghargaan inovasi tingkat nasional yang membuktikan dedikasi dan keunggulan rekayasa perangkat lunak."
+              : "Verified credentials, expert bootcamps, and national innovation awards demonstrating technical rigor and engineering excellence."}
           </p>
         </div>
 
         {/* Filter Tabs */}
         <div className="my-8 flex flex-wrap items-center gap-2">
           {[
-            { id: "all", label: "ALL CREDENTIALS" },
-            { id: "course", label: "BOOTCAMPS & COURSES" },
-            { id: "award", label: "AWARDS & COMPETITIONS" },
+            { id: "all", label: isId ? "SEMUA KREDENSIAL" : "ALL CREDENTIALS" },
+            { id: "course", label: isId ? "BOOTCAMP & KURSUS" : "BOOTCAMPS & COURSES" },
+            { id: "award", label: isId ? "PENGHARGAAN & LOMBA" : "AWARDS & COMPETITIONS" },
           ].map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => setFilterType(tab.id)}
-              className={`rounded-full px-4 py-2 font-mono text-xs font-semibold tracking-wider transition-all duration-200 ${
+              className={`rounded-full px-4 py-2 font-mono text-xs font-semibold tracking-wider transition-all duration-200 cursor-pointer ${
                 filterType === tab.id
                   ? "bg-[#1C1C1A] text-[#FAF6F0] shadow-xs font-bold"
                   : "border border-[#1C1C1A]/20 bg-[#FAF6F0] text-[#55534E] hover:border-[#8C5E38] hover:text-[#1C1C1A]"
@@ -91,7 +91,7 @@ export const AchievementsPage: React.FC = () => {
           ))}
         </div>
 
-        {/* Interactive Modal Pop-Up (Gambar 2) */}
+        {/* Interactive Modal Pop-Up */}
         <AchievementModal
           isOpen={selectedAchievement !== null}
           onClose={() => setSelectedAchievement(null)}

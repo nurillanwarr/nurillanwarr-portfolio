@@ -1,0 +1,121 @@
+## Background
+
+Developed for the prestigious Malaysia Technology Expo (MTE) and UGM HealthTech competition, Synexa is a unified digital health ecosystem designed to support post-stroke survivors with guided home motor rehabilitation and real-time clinical telemetry.
+
+Recovery following an ischemic or hemorrhagic stroke demands rigorous daily physical therapy and continuous vital sign monitoring. However, geographic barriers, caregiver exhaustion, and complex medical software interfaces routinely prevent elderly stroke survivors from adhering to required rehabilitation schedules.
+
+Synexa addresses these challenges through an accessible Flutter mobile application, an enterprise NestJS telemetry gateway, and an interactive physician monitoring console facilitating remote oversight of motor progress.
+
+
+## Problem Identification
+
+Based on operational workflow discovery and field observations, the primary challenges and core bottlenecks identified were as follows:
+
+- Alarmingly high therapy non-compliance rates among post-stroke patients undergoing unmonitored home recovery.
+- Absence of real-time telemetry communication channels transmitting physiological vitals during autonomous exercise sessions.
+- Overly complex medical mobile UIs that fail to accommodate motor impairments and cognitive fatigue common among elderly stroke survivors.
+- Clinical inability for rehabilitation physicians to access quantitative, objective motor function recovery datasets.
+
+
+## Goals & Objectives
+
+> **Primary Objective:** Engineer an accessible, reliable tele-rehabilitation platform empowering stroke survivors to execute home motor routines while equipping clinicians with quantitative recovery telemetry.
+
+**Key Objectives & Measurable Milestones:**
+
+- Design a high-contrast, large-format Flutter mobile client with haptic feedback and bilingual voice guidance.
+- Construct a scalable NestJS REST and WebSocket telemetry API backed by PostgreSQL and Firebase Cloud Messaging.
+- Provide a physician monitoring console charting motor compliance scores and joint angle improvements over time.
+- Achieve >85% therapy autonomy adoption in controlled clinical usability trials.
+
+
+## Roles & Responsibilities
+
+Serving as **Lead Mobile & Backend Developer**, I maintained direct technical ownership across architectural design and implementation:
+
+- Engineered the multi-platform mobile application in Flutter utilizing strict Clean Architecture (Presentation, Domain, Data) and BLoC state management.
+- Developed modular NestJS controllers and guards enforcing JWT authentication and HIPAA-conscious data isolation.
+- Conducted usability sessions with geriatric stroke patients to iterate on tactile touch targets and auditory cues.
+- Integrated video streaming pipelines delivering step-by-step motor recovery guides optimized for low network bandwidth.
+
+
+## Process & Execution
+
+Engineering execution followed an iterative three-stage model to ensure architectural resilience and precise user alignment:
+
+### 1. Clinical Discovery & Accessible Geriatric UX
+
+Collaborated with licensed physiotherapists to map safe home motor exercises and formulate accessibility specifications.
+
+- Curated safe home motor exercise protocols targeting upper limb mobility and wrist articulation.
+- Implemented WCAG 2.1 AAA contrast palettes with enlarged interactive touch targets and haptic confirmations.
+- Designed clinical telemetry schemas recording heart rate, repetition fidelity, and session duration.
+
+### 2. Clean Architecture Flutter Client & NestJS Gateway
+
+Built modular Flutter components with complete layer separation and deployed the backend telemetry API.
+
+- Enforced strict Clean Architecture boundaries isolating business logic from external Flutter UI dependencies.
+- Developed NestJS micro-endpoints handling real-time telemetry ingestion and automated caregiver notifications.
+- Configured Supabase storage buckets streaming optimized therapy demonstration video files.
+
+### 3. Usability Trials & International Showcase
+
+Conducted field trials with stroke survivors and presented the platform to judges at MTE Malaysia.
+
+- Evaluated user experience metrics with stroke survivor volunteers, measuring completion times and interface satisfaction.
+- Profiled Flutter rendering pipelines ensuring smooth 60 FPS interactions on budget mobile hardware.
+- Delivered comprehensive technical architecture pitches to international health-tech juries at MTE Malaysia.
+
+
+## Results & Architecture
+
+Synexa was successfully developed and showcased, garnering international and national award recognition:
+
+### Accessible Geriatric Flutter Client
+
+A tailored mobile recovery companion engineered specifically for stroke survivors with motor impairments.
+
+- Auditory and visual rehabilitation guidance with step-by-step video playback.
+- One-touch emergency SOS dispatcher alerting designated family caregivers via instant SMS and push notifications.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **Usability Rating** | `4.8 / 5.0` |
+| **Therapy Compliance** | `+ 78%` |
+
+### NestJS Clinical Telemetry Gateway
+
+A resilient cloud API gathering exercise repetition logs and physiological metrics with minimal latency.
+
+- Offline-first synchronization caching telemetry locally during network outages and flushing automatically on reconnect.
+- Firebase Cloud Messaging integration scheduling automated recovery reminders and medication alerts.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **API Uptime** | `99.9%` |
+| **Endpoint Latency** | `< 120 ms` |
+
+
+## Impact & Achievements
+
+### Impact on the Organization / Ecosystem
+
+- Secured international recognition and medal honors at the Malaysia Technology Expo (MTE) and UGM HealthTech hackathon.
+- Empowered stroke survivors to conduct consistent, structured rehabilitation routines from home without constant clinical transport.
+- Relieved caregiver stress by providing real-time visibility into daily patient progress and therapy compliance.
+
+### Impact on Personal Engineering Growth
+
+- Advanced proficiency in Flutter Clean Architecture, BLoC pattern, and mission-critical health-tech mobile engineering.
+- Developed deep design empathy for users navigating physical, cognitive, and sensory motor constraints.
+- Gained valuable international presentation experience pitching healthcare technology on a competitive global stage.
+
+
+## Team & Appreciation
+
+Synexa's success was achieved through the collaborative dedication of our interdisciplinary engineering and medical team:
+
+- Our Consulting Physiotherapists and Medical Mentors for validating the clinical safety of all therapy exercise protocols.
+- My fellow mobile engineers and UI/UX designers for their commitment to accessibility standards and clean code.
+- Volunteer patients and their families whose candid feedback directly shaped the tactile interface of Synexa.

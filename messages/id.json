@@ -1,1 +1,155 @@
-{}
+{
+  "navbar": {
+    "brandSubtitle": "Portofolio",
+    "nav": {
+      "home": "Beranda",
+      "about": "Tentang",
+      "projects": "Proyek",
+      "process": "Proses",
+      "achievements": "Prestasi",
+      "contact": "Kontak"
+    },
+    "status": {
+      "city": "Surakarta",
+      "live": "Langsung",
+      "updating": "Memperbarui..."
+    }
+  },
+  "hero": {
+    "badge": "NURIL ANWAR — FULLSTACK DEVELOPER, SURAKARTA",
+    "greeting": "Halo, saya",
+    "name": "Nuril",
+    "roles": [
+      "Pengembang Web Full-Stack",
+      "Pengembang Applied AI",
+      "Informatika @UMS",
+      "Alumni Dicoding Bootcamp"
+    ],
+    "locationStatus": "JAWA TENGAH, INDONESIA • TERSEDIA UNTUK BEKERJA",
+    "actions": {
+      "resume": "Resume",
+      "contact": "Diskusikan Ide Anda"
+    },
+    "portrait": {
+      "fig": "FIG. 01 — POTRET",
+      "name": "Nuril Anwar",
+      "role": "Pengembang Full-Stack & AI",
+      "status": "Tersedia untuk kerja",
+      "photoPrompt": "Letakkan foto di /public/profile.jpg"
+    },
+    "footer": {
+      "scroll": "Gulir"
+    }
+  },
+  "about": {
+    "sheetCode": "LEMBAR A-102",
+    "sectionIndex": "(02)",
+    "sectionLabel": "SPESIFIKASI // TENTANG & FOKUS APPLIED AI",
+    "tags": ["UMS", "INFORMATIKA", "ALUMNI DICODING"],
+    "watermark": "TENTANG",
+    "leadPrefix": "Mahasiswa Teknik Informatika Universitas Muhammadiyah Surakarta, berdedikasi merancang",
+    "leadHighlight": "aplikasi full-stack yang andal serta produk applied AI",
+    "leadSuffix": ".",
+    "description": "Pengalaman lintas pengembangan web dan mobile — merancang antarmuka pengguna yang responsif, membangun arsitektur RESTful API yang kokoh, dan mengintegrasikan Large Language Model seperti Google Gemini ke dalam ekosistem digital berperforma tinggi.",
+    "caption": "[ ALUMNI BOOTCAMP DICODING • INTEGRASI SISTEM • KONTRIBUTOR TIM TEKNOLOGI ]",
+    "cta": "Pelajari Lebih Lanjut",
+    "metrics": {
+      "origin": { "label": "ASAL // UMS", "value": "Surakarta", "desc": "Teknik Informatika" },
+      "core": { "label": "ARSITEKTUR UTAMA", "value": "Pengembang Full-Stack", "desc": "Web & Mobile" },
+      "ai": { "label": "APPLIED AI", "value": "Gemini LLM", "desc": "Sistem Cerdas" },
+      "credential": { "label": "KREDENSIAL", "value": "Alumni Dicoding", "desc": "Teknisi Tersertifikasi" }
+    },
+    "lanyard": {
+      "title": "ARSITEK // 2026",
+      "status": "TERVERIFIKASI",
+      "role": "FULL-STACK & APPLIED AI",
+      "affiliation": "UMS // TEKNIK INFORMATIKA",
+      "code": "ID: N28-SURAKARTA"
+    }
+  },
+  "projects": {
+    "backToProjects": "Kembali ke Proyek",
+    "breadcrumbHome": "Beranda",
+    "breadcrumbProjects": "Proyek",
+    "sectionIndex": "(03)",
+    "sectionLabel": "PROSES & CETAK BIRU // DALAM PENGEMBANGAN",
+    "sheetCode": "LEMBAR A-301",
+    "heading": "Enam sistem dalam proses aktif.",
+    "introDesc": "Seluruh karya di bawah ini berstatus dalam proses pengembangan aktif — mencakup magang industri (internship), kompetisi nasional (lomba), riset tugas akhir (skripsi), dan proyek tugas kuliah.",
+    "statusBadge": "STATUS: DALAM PENGEMBANGAN",
+    "filterAll": "Semua Proyek",
+    "progressBar": "GULIR UNTUK MEMBUKA LEMBAR",
+    "status": {
+      "internship": "MAGANG // DALAM PROSES",
+      "competition": "LOMBA // DALAM PROSES",
+      "thesis": "SKRIPSI // DALAM PROSES",
+      "coursework": "TUGAS KULIAH // AKTIF",
+      "completed": "SELESAI // DIARSIPKAN"
+    },
+    "tableColumns": {
+      "project": "PROYEK",
+      "techStack": "TECH STACK",
+      "year": "TAHUN",
+      "role": "PERAN",
+      "status": "STATUS"
+    },
+    "actions": {
+      "viewDetails": "Buka Lembar",
+      "visitSite": "Kunjungi Web",
+      "viewCode": "Lihat Kode"
+    }
+  },
+  "contact": {
+    "sectionIndex": "(04)",
+    "sectionLabel": "KONTAK // ARSIP CETAK BIRU",
+    "sheetCode": "LEMBAR A-900",
+    "subheading": "HUBUNGI SAYA",
+    "headline": "MARI BEKERJA SAMA",
+    "description": "Terbuka untuk peran software engineering, konsultasi fullstack, dan pengembangan produk applied AI. Kotak masuk saya selalu terbuka.",
+    "status": "TERSEDIA UNTUK FULL-TIME / FREELANCE",
+    "actions": {
+      "copyEmail": "Salin Email",
+      "copied": "Email Disalin!",
+      "resume": "Unduh Resume (PDF)"
+    },
+    "github": {
+      "title": "Aktivitas GitHub Langsung",
+      "subtitle": "Telemetri komit sumber terbuka, pull request, dan riwayat aktivitas kode berkesinambungan di seluruh repositori web, mobile, dan AI.",
+      "lastYear": "kontribusi dalam setahun terakhir",
+      "less": "Sedikit",
+      "more": "Banyak"
+    },
+    "colophon": {
+      "coordinates": "7.56° LS, 110.82° BT",
+      "location": "Surakarta, Jawa Tengah, Indonesia",
+      "legal": "© 2026 M. Nuril Anwar. Seluruh hak cipta dilindungi.",
+      "returnTop": "Kembali ke Atas",
+      "office": "KANTOR",
+      "studio": "STUDIO",
+      "contact": "KONTAK",
+      "sheet": "LEMBAR",
+      "scale": "SKALA",
+      "revision": "REVISI",
+      "index": "INDEKS",
+      "elsewhere": "TAUTAN LAIN",
+      "drawn": "DIGAMBAR",
+      "checked": "DIPERIKSA"
+    }
+  },
+  "aboutPage": {
+    "backToOverview": "KEMBALI KE RINGKASAN",
+    "dossier": "DOKUMEN // BIOGRAFI & KREDENSIAL",
+    "title": "Tentang Saya",
+    "intro": "Pengantar singkat perjalanan saya sebagai Full-Stack & Applied AI Developer — memadukan rekayasa antarmuka bersih dengan integrasi sistem cerdas.",
+    "scrollForDossier": "Gulir Untuk Dokumen"
+  },
+  "components": {
+    "header": {
+      "toggle": {
+        "ariaLabel": {
+          "language": "Ganti bahasa"
+        }
+      }
+    }
+  }
+}

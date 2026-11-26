@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import { useLocale } from "next-intl"
 import { Achievement } from "@/data/achievements"
 import { CertificateVisual } from "./CertificateVisual"
 
@@ -12,24 +13,17 @@ interface AchievementModalProps {
 
 /**
  * Komponen AchievementModal
- * Menampilkan jendela modal pop-up "Detail Achievement" sama persis seperti Gambar 2,
- * diselaraskan dengan estetika kertas vellum arsitektur portofolio (#FAF6F0 & #EBE3D7):
- * - Header modal dengan judul "Detail Achievement" dan tombol silang (✕)
- * - Sisi Kiri: Tampilan visual sertifikat beresolusi tinggi dengan kontrol zoom melayang (- 100% +)
- * - Sisi Kanan: Panel spesifikasi kredensial mendalam:
- *   * Logo & Nama Penerbit (Dicoding, Samsung, MTE, UMS)
- *   * CREDENTIAL ID + Tombol Salin
- *   * TYPE (Course / Award)
- *   * LEVEL (👑 Expert / Winner)
- *   * ISSUE DATE & EXPIRATION DATE
- *   * CATEGORIES tags
- *   * Tombol "View credential!" untuk verifikasi resmi
+ * Menampilkan jendela modal pop-up "Detail Achievement",
+ * diselaraskan dengan estetika kertas vellum arsitektur portofolio (#FAF6F0 & #EBE3D7)
+ * dan dukungan dwibahasa penuh.
  */
 export const AchievementModal: React.FC<AchievementModalProps> = ({
   isOpen,
   onClose,
   achievement,
 }) => {
+  const locale = useLocale()
+  const isId = locale === "id"
   const [zoomScale, setZoomScale] = useState<number>(1)
   const [copiedId, setCopiedId] = useState<boolean>(false)
 
@@ -86,12 +80,12 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
             id="modal-achievement-title"
             className="font-sans text-sm font-semibold tracking-wide text-[#1C1C1A] sm:text-base"
           >
-            Detail Achievement
+            {isId ? "Detail Kredensial" : "Detail Achievement"}
           </h3>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Tutup modal"
+            aria-label={isId ? "Tutup modal" : "Close modal"}
             className="flex h-8 w-8 items-center justify-center rounded-full text-[#736E65] transition-colors hover:bg-[#EBE3D7] hover:text-[#1C1C1A]"
           >
             ✕
@@ -112,13 +106,13 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
               />
             </div>
 
-            {/* Floating Zoom Controls Bar (Sama persis Gambar 2) */}
+            {/* Floating Zoom Controls Bar */}
             <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-[#1C1C1A]/20 bg-[#FAF6F0]/95 px-3 py-1.5 shadow-lg backdrop-blur-md">
               <button
                 type="button"
                 onClick={() => setZoomScale((prev) => Math.max(0.75, prev - 0.25))}
                 disabled={zoomScale <= 0.75}
-                className="flex h-6 w-6 items-center justify-center rounded-full text-sm font-bold text-[#1C1C1A] transition-colors hover:bg-[#EBE3D7] disabled:opacity-30"
+                className="flex h-6 w-6 items-center justify-center rounded-full text-sm font-bold text-[#1C1C1A] transition-colors hover:bg-[#EBE3D7] disabled:opacity-30 cursor-pointer"
                 aria-label="Zoom out"
               >
                 −
@@ -130,7 +124,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
                 type="button"
                 onClick={() => setZoomScale((prev) => Math.min(2.5, prev + 0.25))}
                 disabled={zoomScale >= 2.5}
-                className="flex h-6 w-6 items-center justify-center rounded-full text-sm font-bold text-[#1C1C1A] transition-colors hover:bg-[#EBE3D7] disabled:opacity-30"
+                className="flex h-6 w-6 items-center justify-center rounded-full text-sm font-bold text-[#1C1C1A] transition-colors hover:bg-[#EBE3D7] disabled:opacity-30 cursor-pointer"
                 aria-label="Zoom in"
               >
                 +
@@ -151,7 +145,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
                     {achievement.issuing_organization}
                   </h4>
                   <p className="font-mono text-[11px] text-[#736E65]">
-                    Verified Issuing Authority
+                    {isId ? "Otoritas Penerbit Terverifikasi" : "Verified Issuing Authority"}
                   </p>
                 </div>
               </div>
@@ -159,7 +153,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
               {/* Credential ID Bar */}
               <div>
                 <p className="font-mono text-[10px] font-semibold tracking-wider text-[#736E65] uppercase">
-                  CREDENTIAL ID
+                  {isId ? "ID KREDENSIAL" : "CREDENTIAL ID"}
                 </p>
                 <div className="mt-1.5 flex items-center justify-between rounded-lg border border-[#1C1C1A]/15 bg-[#EFE9DF] px-3 py-2 font-mono text-xs text-[#1C1C1A]">
                   <span className="truncate">{achievement.credential_id}</span>
@@ -167,9 +161,9 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
                     type="button"
                     onClick={handleCopyId}
                     aria-label="Salin ID Kredensial"
-                    className="ml-2 flex items-center gap-1 rounded bg-[#FAF6F0] border border-[#1C1C1A]/15 px-2 py-0.5 text-[10px] font-bold text-[#55534E] transition-colors hover:bg-[#EBE3D7] hover:text-[#1C1C1A]"
+                    className="ml-2 flex items-center gap-1 rounded bg-[#FAF6F0] border border-[#1C1C1A]/15 px-2 py-0.5 text-[10px] font-bold text-[#55534E] transition-colors hover:bg-[#EBE3D7] hover:text-[#1C1C1A] cursor-pointer"
                   >
-                    {copiedId ? "Copied!" : "Copy"}
+                    {copiedId ? (isId ? "Tersalin!" : "Copied!") : (isId ? "Salin" : "Copy")}
                   </button>
                 </div>
               </div>
@@ -178,7 +172,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <p className="font-mono text-[10px] font-semibold tracking-wider text-[#736E65] uppercase">
-                    TYPE
+                    {isId ? "TIPE" : "TYPE"}
                   </p>
                   <div className="mt-1.5">
                     <span className="inline-block rounded-md bg-[#EBE3D7] border border-[#1C1C1A]/15 px-2.5 py-1 font-mono text-xs font-semibold text-[#1C1C1A] capitalize">
@@ -189,7 +183,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
 
                 <div>
                   <p className="font-mono text-[10px] font-semibold tracking-wider text-[#736E65] uppercase">
-                    LEVEL
+                    {isId ? "TINGKAT" : "LEVEL"}
                   </p>
                   <div className="mt-1.5">
                     <span className="inline-flex items-center gap-1 rounded-md bg-[#8C5E38]/12 border border-[#8C5E38]/30 px-2.5 py-1 font-mono text-xs font-bold text-[#8C5E38]">
@@ -204,7 +198,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
               <div className="grid grid-cols-2 gap-3 border-t border-[#1C1C1A]/10 pt-4">
                 <div>
                   <p className="font-mono text-[10px] font-semibold tracking-wider text-[#736E65] uppercase">
-                    ISSUE DATE
+                    {isId ? "TANGGAL TERBIT" : "ISSUE DATE"}
                   </p>
                   <p className="mt-1 font-mono text-xs font-semibold text-[#1C1C1A]">
                     {achievement.issue_date}
@@ -213,10 +207,10 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
 
                 <div>
                   <p className="font-mono text-[10px] font-semibold tracking-wider text-[#736E65] uppercase">
-                    EXPIRATION DATE
+                    {isId ? "KEDALUWARSA" : "EXPIRATION DATE"}
                   </p>
                   <p className="mt-1 font-mono text-xs font-semibold text-[#1C1C1A]">
-                    {achievement.expiration_date || "No Expiration"}
+                    {achievement.expiration_date || (isId ? "Tanpa Kedaluwarsa" : "No Expiration")}
                   </p>
                 </div>
               </div>
@@ -224,7 +218,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
               {/* Categories Pills */}
               <div className="border-t border-[#1C1C1A]/10 pt-4">
                 <p className="font-mono text-[10px] font-semibold tracking-wider text-[#736E65] uppercase">
-                  CATEGORIES
+                  {isId ? "KATEGORI" : "CATEGORIES"}
                 </p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {achievement.categories.map((cat, idx) => (
@@ -239,7 +233,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
               </div>
             </div>
 
-            {/* Bottom Action: View Credential External Link (Sesuai Gambar 2) */}
+            {/* Bottom Action: View Credential External Link */}
             <div className="mt-6 border-t border-[#1C1C1A]/10 pt-4">
               <a
                 href={achievement.credential_url}
@@ -248,7 +242,7 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1C1C1A] py-3 text-center font-mono text-xs font-bold tracking-wider text-[#FAF6F0] uppercase transition-all hover:bg-[#8C5E38] shadow-md active:scale-[0.99]"
               >
                 <span>📜</span>
-                <span>View credential!</span>
+                <span>{isId ? "Lihat Kredensial Resmi!" : "View credential!"}</span>
               </a>
             </div>
           </div>

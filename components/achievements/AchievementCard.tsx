@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { useLocale } from "next-intl"
 import { Achievement } from "@/data/achievements"
 import { CertificateVisual } from "./CertificateVisual"
 
@@ -22,6 +23,9 @@ export const AchievementCard: React.FC<AchievementCardProps> = ({
   achievement,
   onSelect,
 }) => {
+  const locale = useLocale()
+  const isId = locale === "id"
+
   return (
     <div
       onClick={() => onSelect(achievement)}
@@ -34,7 +38,7 @@ export const AchievementCard: React.FC<AchievementCardProps> = ({
           onSelect(achievement)
         }
       }}
-      aria-label={`Lihat detail sertifikat ${achievement.name}`}
+      aria-label={`${isId ? "Lihat detail sertifikat" : "Inspect certificate"} ${achievement.name}`}
     >
       {/* Thumbnail Certificate Preview */}
       <div className="relative overflow-hidden bg-[#EFE9DF] p-3.5 border-b border-[#1C1C1A]/10 transition-transform duration-500 ease-out sm:p-4 group-hover:scale-[1.01]">
@@ -46,7 +50,7 @@ export const AchievementCard: React.FC<AchievementCardProps> = ({
         {/* Hover overlay hint */}
         <div className="absolute inset-0 flex items-center justify-center bg-[#1C1C1A]/40 opacity-0 backdrop-blur-xs transition-opacity duration-300 group-hover:opacity-100">
           <span className="rounded-full bg-[#FAF6F0] px-4 py-2 font-mono text-xs font-bold text-[#1C1C1A] shadow-lg border border-[#1C1C1A]/20">
-            Inspect Certificate ↗
+            {isId ? "Buka Sertifikat ↗" : "Inspect Certificate ↗"}
           </span>
         </div>
       </div>

@@ -8,17 +8,19 @@ import { Navbar } from "@/components/layout/Navbar"
 import SmoothScroll from "@/components/layout/SmoothScroll"
 import PageTransition from "@/components/layout/PageTransition"
 import BackToTop from "@/components/BackToTop"
+import TopProgressBar from "@/components/ui/TopProgressBar"
+import LanguageTransitionOverlay from "@/components/shared/LanguageTransitionOverlay"
 
 export const metadata: Metadata = {
   title: "Nuril Anwar | Full-Stack & Applied AI Developer",
   description:
-    "Architectural portfolio of Nuril Anwar — Informatics Engineering student at UMS, Dicoding Bootcamp graduate, and Full-Stack & Applied AI Developer.",
+    "Architectural portfolio of Nuril Anwar — Informatics Engineering student at Muhammadiyah University of Surakarta (UMS), Dicoding Bootcamp graduate, and Full-Stack & Applied AI Developer.",
 }
 
 /**
  * Komponen RootLayout Multi-Bahasa
  * Menampilkan tata letak utama (root layout) aplikasi untuk setiap lokal bahasa:
- * - Memvalidasi parameter `locale` terhadap daftar bahasa yang didukung (`en`, `id`, `zh`)
+ * - Memvalidasi parameter `locale` terhadap daftar bahasa yang didukung (`en`, `id`) dengan default `en`
  * - Memuat berkas gaya global (Tailwind CSS dan CSS custom)
  * - Mengambil pesan terjemahan bahasa (`messages`) di tingkat server via `getMessages()`
  * - Menyematkan latar belakang bertekstur kertas (paper texture) yang elegan
@@ -53,6 +55,8 @@ export default async function RootLayout({
           aria-hidden="true"
         />
         <div className="relative z-10">
+          <TopProgressBar />
+          <LanguageTransitionOverlay />
           <Providers locale={locale} messages={messages}>
             <SmoothScroll>
               <PageTransition>

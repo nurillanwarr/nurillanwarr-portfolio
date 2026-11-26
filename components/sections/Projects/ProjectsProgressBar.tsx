@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react"
+import { useTranslations } from "next-intl"
 
 interface ProjectsProgressBarProps {
   progressFillRef: React.RefObject<HTMLDivElement | null>
@@ -8,8 +11,8 @@ interface ProjectsProgressBarProps {
 
 /**
  * Komponen ProjectsProgressBar
- * Menampilkan baris indikator garis kemajuan di bagian bawah seksi Projects (Gambar 1 & 2):
- * - Label "SCROLL TO LEAF THROUGH" di sisi kiri
+ * Menampilkan baris indikator garis kemajuan di bagian bawah seksi Projects:
+ * - Label "SCROLL TO LEAF THROUGH" / "GULIR UNTUK MEMBUKA LEMBAR" di sisi kiri
  * - Garis indikator horizontal yang memanjang mengikuti progress scroll
  * - Nomor lembar aktif "01 / 06" di sisi kanan
  */
@@ -18,9 +21,11 @@ export const ProjectsProgressBar: React.FC<ProjectsProgressBarProps> = ({
   activeIndex,
   totalSheets,
 }) => {
+  const t = useTranslations("projects")
+
   return (
     <div className="mt-6 flex items-center gap-4 pt-2 font-mono text-[10px] tracking-[0.16em] uppercase text-[#55534E]">
-      <span className="shrink-0">SCROLL TO LEAF THROUGH</span>
+      <span className="shrink-0">{t("progressBar")}</span>
 
       {/* Garis Indikator Progress */}
       <div className="relative h-[1px] flex-1 bg-[#1C1C1A]/18">

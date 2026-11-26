@@ -8,6 +8,7 @@ import { NavbarNav } from "./NavbarNav"
 import { NavbarStatus } from "./NavbarStatus"
 import { NavItem } from "./types"
 import { useLiveWeatherClock } from "./useLiveWeatherClock"
+import { LanguageSwitcher } from "./LanguageSwitcher"
 
 /**
  * Properti untuk komponen MenuHeader
@@ -17,6 +18,8 @@ interface MenuHeaderProps {
   visible: boolean
   /** Status menu mobile apakah sedang terbuka */
   open: boolean
+  /** Menentukan apakah header sedang berada di atas seksi bertema gelap */
+  isDark?: boolean
   /** URL gambar logo kustom jika ada */
   logoUrl?: string
   /** Teks nama brand/logo (default: N28/Labs) */
@@ -56,6 +59,7 @@ interface MenuHeaderProps {
 export const MenuHeader: React.FC<MenuHeaderProps> = ({
   visible,
   open,
+  isDark = false,
   logoUrl,
   logoText = DEFAULT_LOGO_TEXT,
   brandSubtitle = DEFAULT_BRAND_SUBTITLE,
@@ -80,28 +84,35 @@ export const MenuHeader: React.FC<MenuHeaderProps> = ({
         }`}
         aria-label="Main architectural navigation header"
       >
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 rounded-2xl border border-[#D5CBB9] bg-[#EBE3D7]/80 px-4 py-3 shadow-[0_4px_16px_rgba(28,28,26,0.04)] backdrop-blur-md md:px-6 md:py-3.5">
+        <div
+          className={`mx-auto flex max-w-[2800px] items-center justify-between gap-4 rounded-2xl border px-4 py-3 backdrop-blur-md transition-colors duration-500 md:px-6 md:py-3.5 ${
+            isDark
+              ? "border-[#FAF6F0]/20 bg-[#1F1E1B]/85 shadow-[0_4px_20px_rgba(0,0,0,0.35)]"
+              : "border-[#D5CBB9] bg-[#EBE3D7]/80 shadow-[0_4px_16px_rgba(28,28,26,0.04)]"
+          }`}
+        >
           <NavbarBrand
             logoUrl={logoUrl}
             logoText={logoText}
             brandSubtitle={brandSubtitle}
             handleItemClick={handleItemClick}
-            isDark={false}
+            isDark={isDark}
           />
 
           <NavbarNav
             items={items}
             handleItemClick={handleItemClick}
-            isDark={false}
+            isDark={isDark}
           />
 
           <div className="flex items-center gap-3 sm:gap-5">
+            <LanguageSwitcher isDark={isDark} />
             <NavbarStatus
               city={city}
               time={time}
               weather={weather}
               isLoading={isLoading}
-              isDark={false}
+              isDark={isDark}
             />
             {/* Ruang penahan agar posisi tombol =/× yang stay tepat di sisi kanan kapsul */}
             <div className="h-10 w-10 shrink-0 sm:h-11 sm:w-11 lg:hidden" aria-hidden="true" />

@@ -26,7 +26,7 @@ interface PaperTextureProps {
  */
 export const PaperTexture: React.FC<PaperTextureProps> = ({
   src = "/paper-texture.jpg",
-  opacity = 0.45,
+  opacity = 0.25,
   withGrid = true,
   className = "",
 }) => {
@@ -39,7 +39,7 @@ export const PaperTexture: React.FC<PaperTextureProps> = ({
           opacity,
         }}
       />
-      {withGrid && <div className="oda-mm-grid absolute inset-0 opacity-60" />}
+      {withGrid && <div className="oda-mm-grid absolute inset-0 opacity-30" />}
     </div>
   )
 }

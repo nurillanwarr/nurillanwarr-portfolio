@@ -24,7 +24,7 @@ interface NavbarBrandProps {
 /**
  * Komponen NavbarBrand
  * Menampilkan identitas visual brand pada sisi kiri bilah navigasi:
- * - Merender ikon grafis rumah blueprint arsitektural (vektor SVG) atau gambar logo kustom
+ * - Merender ikon grafis lingkaran origami N atau gambar logo kustom
  * - Menampilkan nama brand utama ("N28/Labs") dan subjudul monospaced ("Portfolio")
  * - Berfungsi sebagai tombol tautan pintas menuju bagian awal halaman (`/#home`) dengan dukungan lokalisasi next-intl
  */
@@ -38,11 +38,10 @@ export const NavbarBrand: React.FC<NavbarBrandProps> = ({
   return (
     <Link
       href="/#home"
-      className={`group flex items-center gap-3 select-none focus:outline-none ${
-        isDark ? "text-white" : "text-[#1C1C1A]"
-      }`}
+      className={`group flex items-center gap-3 select-none focus:outline-none ${isDark ? "text-white" : "text-[#1C1C1A]"
+        }`}
       onClick={(event) => handleItemClick(event, "/#home")}
-      aria-label="01 Home - N28/Labs Portfolio"
+      aria-label="01 Home - Nuril Portfolio"
     >
       {logoUrl ? (
         <Image
@@ -55,34 +54,32 @@ export const NavbarBrand: React.FC<NavbarBrandProps> = ({
         />
       ) : (
         <svg
-          viewBox="0 0 28 28"
-          className={`h-8 w-8 shrink-0 fill-none transition-transform duration-300 group-hover:scale-[1.04] ${
-            isDark ? "stroke-white" : "stroke-[#1C1C1A]"
-          }`}
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          viewBox="0 0 100 100"
+          className="h-7 w-7 sm:h-8 sm:w-8 shrink-0 fill-none transition-transform duration-300 group-hover:scale-[1.05]"
           aria-hidden="true"
         >
-          <path d="M4 11.5L14 3.5l10 8" />
-          <path d="M6.5 10v13.5h15V10" />
-          <path d="M11 23.5v-7h6v7" />
+          {/* Lingkaran Hitam */}
+          <circle cx="50" cy="50" r="50" fill="#111111" />
+          {/* Kaki Kiri Putih */}
+          <polygon points="33.3,26 44.8,26 34.6,74 23.1,74" fill="#FFFFFF" />
+          {/* Kaki Kanan Putih */}
+          <polygon points="65.4,26 76.9,26 66.7,74 55.2,74" fill="#FFFFFF" />
+          {/* Lipatan Origami Diagonal Teal */}
+          <polygon points="44.8,26 58.7,56.5 55.2,74 41.3,43.5" fill="#FFFFFF" />
         </svg>
       )}
 
-      <div className="flex flex-col leading-none">
+      <div className="flex flex-col leading-none italic">
         <span
-          className={`font-mono text-[16px] font-semibold tracking-[-0.03em] ${
-            isDark ? "text-white" : "text-[#1C1C1A]"
-          }`}
+          className={`font-mono text-[20px] font-semibold tracking-[-0.03em] ${isDark ? "text-white" : "text-[#1C1C1A]"
+            }`}
         >
           {logoText}
         </span>
         {brandSubtitle && (
           <span
-            className={`font-mono text-[9px] font-medium uppercase tracking-[0.16em] ${
-              isDark ? "text-zinc-400" : "text-[#8B8983]"
-            }`}
+            className={`font-mono text-[9px] font-medium uppercase tracking-[0.16em] ${isDark ? "text-zinc-400" : "text-[#8B8983]"
+              }`}
           >
             {brandSubtitle}
           </span>

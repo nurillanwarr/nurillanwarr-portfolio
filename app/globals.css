@@ -176,19 +176,41 @@ html.lenis body {
   animation-play-state: paused;
 }
 
-/* Scrollbar Kustom Halus dengan Palet Kertas & Tembaga Oda */
-::-webkit-scrollbar {
-  width: 10px;
+/* Sembunyikan scrollbar kanan default browser secara universal, scrolling tetap aktif */
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
 }
-::-webkit-scrollbar-track {
-  background: #EBE3D7;
-  border-left: 1px solid rgba(28, 28, 26, 0.2);
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+  width: 0px !important;
+  height: 0px !important;
+  background: transparent !important;
 }
-::-webkit-scrollbar-thumb {
-  background: #B7835A;
-  border: 2px solid #EBE3D7;
-  border-radius: 9999px;
+
+/* ========================================================
+   5. PAGE EXIT & ENTER TRANSITIONS (LANGUAGE SWITCH & NAVIGATION)
+   ======================================================== */
+.page-loading-dimmed {
+  opacity: 0.55 !important;
+  transition: opacity 180ms ease !important;
+  pointer-events: none !important;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #8C5E38;
+
+@keyframes pageEnterFadeIn {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
 }
+
+main {
+  animation: pageEnterFadeIn 250ms ease-out backwards;
+}
+

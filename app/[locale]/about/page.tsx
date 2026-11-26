@@ -10,7 +10,11 @@ import AboutQuote from "./components/AboutQuote"
 export const metadata: Metadata = {
   title: "About | Nuril Anwar — Full-Stack & Applied AI Developer",
   description:
-    "Learn more about Nuril Anwar's journey as an Informatics Engineering student at UMS, Dicoding Bootcamp graduate, and Full-Stack & Applied AI Developer.",
+    "Learn more about Nuril Anwar's journey as an Informatics Engineering student at Muhammadiyah University of Surakarta (UMS), Dicoding Bootcamp graduate, and Full-Stack & Applied AI Developer.",
+}
+
+interface AboutPageProps {
+  params: Promise<{ locale: string }>
 }
 
 /**
@@ -24,28 +28,30 @@ export const metadata: Metadata = {
  * - 05. AboutEducation ("Education & Credentials"): Profil akademik S1 Teknik Informatika UMS (galeri 3-panel akordion) & daftar sertifikasi
  * - 06. AboutQuote ("Epilogue"): Kutipan penutup dengan animasi kata blur-to-sharp
  *
- * @returns {JSX.Element} Halaman lengkap About Me
+ * @returns {Promise<JSX.Element>} Halaman lengkap About Me dwibahasa
  */
-export default function AboutPage() {
+export default async function AboutPage({ params }: AboutPageProps) {
+  const { locale } = await params
+
   return (
     <main className="min-h-screen overflow-hidden bg-transparent text-[#1C1C1A]">
       {/* 01. Hero Section */}
-      <AboutHero />
+      <AboutHero locale={locale} />
 
       {/* 02. Who Am I? (3-Photo Collage + Full Narrative + Active Focus Card) */}
-      <AboutDetails />
+      <AboutDetails locale={locale} />
 
       {/* 03. Interactive Skills & Expertise Matrix */}
-      <AboutSkills />
+      <AboutSkills locale={locale} />
 
       {/* 04. Alternating Experience Timeline */}
-      <AboutExperience />
+      <AboutExperience locale={locale} />
 
       {/* 05. Education (UMS Accordion Gallery) & Certifications */}
-      <AboutEducation />
+      <AboutEducation locale={locale} />
 
       {/* 06. Closing Blur-to-Sharp Quote */}
-      <AboutQuote />
+      <AboutQuote locale={locale} />
     </main>
   )
 }

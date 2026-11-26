@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useLocale } from "next-intl"
 import { SKILL_DOMAIN_CARDS, type SkillDomainCardData } from "./constants"
 
 function CrownIcon() {
@@ -23,7 +24,67 @@ function CrownIcon() {
 
 const SMOOTH_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
-function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
+const LOCALIZED_SKILLS: Record<
+  string,
+  {
+    title: { en: string; id: string }
+    level: { en: string; id: string }
+    description: { en: string; id: string }
+  }
+> = {
+  web: {
+    title: {
+      en: "Front-End & Web Development",
+      id: "Pengembangan Front-End & Web",
+    },
+    level: { en: "Expert", id: "Mahir" },
+    description: {
+      en: "Crafting intuitive, responsive, and high-performance web interfaces using modern React and Next.js architectures.",
+      id: "Merancang antarmuka web yang intuitif, responsif, dan berkinerja tinggi menggunakan arsitektur modern React dan Next.js.",
+    },
+  },
+  api: {
+    title: {
+      en: "Back-End & API Architecture",
+      id: "Arsitektur Back-End & API",
+    },
+    level: { en: "Expert", id: "Mahir" },
+    description: {
+      en: "Developing robust, secure, and scalable server-side RESTful APIs, real-time cloud backends, and relational database schemas.",
+      id: "Membangun RESTful API sisi server yang tangguh, aman, dan terukur, backend cloud real-time, serta skema basis data relasional.",
+    },
+  },
+  mobile: {
+    title: {
+      en: "Mobile App Development",
+      id: "Pengembangan Aplikasi Mobile",
+    },
+    level: { en: "Expert", id: "Mahir" },
+    description: {
+      en: "Engineering cross-platform mobile applications with Clean Architecture, real-time health/agri monitoring, and cloud notifications.",
+      id: "Merekayasa aplikasi mobile lintas platform dengan Clean Architecture, pemantauan real-time, dan notifikasi cloud.",
+    },
+  },
+  ai: {
+    title: {
+      en: "Applied AI & LLM Integration",
+      id: "Integrasi Applied AI & LLM",
+    },
+    level: { en: "Core Focus", id: "Fokus Utama" },
+    description: {
+      en: "Embedding Large Language Models and intelligent recommendation pipelines directly into web and mobile product ecosystems.",
+      id: "Mengintegrasikan Large Language Models dan pipeline rekomendasi cerdas langsung ke dalam ekosistem produk web dan mobile.",
+    },
+  },
+}
+
+function SkillDomainCard({
+  item,
+  isId,
+}: {
+  item: SkillDomainCardData
+  isId: boolean
+}) {
   const [expanded, setExpanded] = useState(false)
   const [isCollapsing, setIsCollapsing] = useState(false)
   const [isElevated, setIsElevated] = useState(false)
@@ -35,6 +96,11 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
   const cardRef = useRef<HTMLElement>(null)
   const sizerRef = useRef<HTMLDivElement>(null)
   const Illustration = item.illustration
+
+  const loc = LOCALIZED_SKILLS[item.id]
+  const cardTitle = isId && loc ? loc.title.id : item.title
+  const cardLevel = isId && loc ? loc.level.id : item.level
+  const cardDesc = isId && loc ? loc.description.id : item.description
 
   const initialTags = item.tags.slice(0, item.initialVisibleCount)
   const extraTags = item.tags.slice(item.initialVisibleCount)
@@ -93,19 +159,20 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
 
   return (
     <div
-      className="relative w-full"
+      className="relative flex h-full w-full flex-col"
       style={{
-        height: isElevated && collapsedCardHeight ? collapsedCardHeight : "auto",
+        height: isElevated && collapsedCardHeight ? collapsedCardHeight : "100%",
       }}
     >
       <article
         ref={cardRef}
-        className={`group flex w-full flex-col justify-between rounded-2xl border bg-[#F5F2EB] p-5 transition-[border-color,box-shadow] duration-300 ${isElevated
-          ? "absolute inset-x-0 top-0 z-30 border-[#1C1C1A] shadow-[0_20px_48px_rgba(28,28,26,0.14)]"
-          : "relative z-10 border-[#1C1C1A]/20 shadow-[0_6px_24px_rgba(28,28,26,0.04)] hover:border-[#1C1C1A]"
-          }`}
+        className={`group flex w-full flex-col justify-between rounded-2xl border bg-[#F5F2EB] p-5 transition-[border-color,box-shadow] duration-300 ${
+          isElevated
+            ? "absolute inset-x-0 top-0 z-30 h-auto min-h-full border-[#1C1C1A] shadow-[0_20px_48px_rgba(28,28,26,0.14)]"
+            : "relative z-10 h-full border-[#1C1C1A]/20 shadow-[0_6px_24px_rgba(28,28,26,0.04)] hover:border-[#1C1C1A]"
+        }`}
       >
-        <div>
+        <div className="flex flex-1 flex-col">
           {/* 1. Area Ilustrasi Miniatur Atas (Tinggi Seragam h-44) */}
           <Illustration />
 
@@ -114,12 +181,12 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
             {item.levelVariant === "expert" ? (
               <span className="inline-flex items-center gap-1.5 rounded-md border border-[#A3724B]/40 bg-[#A3724B]/15 px-2.5 py-0.5 font-mono text-[10.5px] font-semibold text-[#8C5E38]">
                 <CrownIcon />
-                <span>{item.level}</span>
+                <span>{cardLevel}</span>
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 rounded-md border border-[#1C1C1A]/25 bg-[#1C1C1A] px-2.5 py-0.5 font-mono text-[10.5px] font-semibold text-[#F5F2EB]">
                 <span className="text-[#D49B6A]">✦</span>
-                <span>{item.level}</span>
+                <span>{cardLevel}</span>
               </span>
             )}
 
@@ -129,16 +196,16 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
           </div>
 
           {/* 3. Judul & Deskripsi (Tinggi Terkunci Sejajar Antar 4 Kartu) */}
-          <h3 className="mt-3 flex min-h-[2.75rem] items-start text-lg font-semibold leading-snug tracking-tight text-[#1C1C1A] xl:min-h-[1.75rem] xl:text-xl">
-            {item.title}
+          <h3 className="mt-3 flex min-h-[3rem] items-start text-lg font-semibold leading-snug tracking-tight text-[#1C1C1A] xl:text-xl">
+            {cardTitle}
           </h3>
-          <p className="mt-2 min-h-[60px] text-xs leading-relaxed text-[#55534E] xl:text-[13px]">
-            {item.description}
+          <p className="mt-2 min-h-[64px] text-xs leading-relaxed text-[#55534E] xl:text-[13px]">
+            {cardDesc}
           </p>
         </div>
 
-        {/* 4. Daftar Pil Teknologi + Tombol +N / Less − */}
-        <div className="relative mt-3.5 border-t border-[#1C1C1A]/10 pt-3.5">
+        {/* 4. Daftar Pil Teknologi + Tombol +N / Less − (Terkunci di Bagian Bawah Seragam) */}
+        <div className="relative mt-auto border-t border-[#1C1C1A]/10 pt-3.5">
           {/* Sizer Tak Terlihat untuk Mengukur Target Tinggi Secara Instan Saat Expand / Collapse */}
           <div
             ref={sizerRef}
@@ -156,7 +223,7 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
             ))}
             {hiddenCount > 0 && (
               <span className="inline-flex items-center rounded-md border px-2.5 py-1 font-mono text-[11px] font-medium">
-                {expanded ? "Less −" : `+${hiddenCount}`}
+                {expanded ? (isId ? "Tutup −" : "Less −") : `+${hiddenCount}`}
               </span>
             )}
           </div>
@@ -184,14 +251,16 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
               {initialTags.map((tag) => (
                 <span
                   key={tag.name}
-                  className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-1 font-mono text-[11px] transition-colors ${tag.featured
-                    ? "border-[#1C1C1A]/25 bg-[#EBE3D7] font-medium text-[#1C1C1A] hover:border-[#A3724B]"
-                    : "border-[#1C1C1A]/15 bg-[#EBE3D7]/55 text-[#55534E] hover:border-[#1C1C1A]/35 hover:text-[#1C1C1A]"
-                    }`}
+                  className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-1 font-mono text-[11px] transition-colors ${
+                    tag.featured
+                      ? "border-[#1C1C1A]/25 bg-[#EBE3D7] font-medium text-[#1C1C1A] hover:border-[#A3724B]"
+                      : "border-[#1C1C1A]/15 bg-[#EBE3D7]/55 text-[#55534E] hover:border-[#1C1C1A]/35 hover:text-[#1C1C1A]"
+                  }`}
                 >
                   <span
-                    className={`h-1.5 w-1.5 rounded-full ${tag.featured ? "bg-[#A3724B]" : "bg-[#1C1C1A]/35"
-                      }`}
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      tag.featured ? "bg-[#A3724B]" : "bg-[#1C1C1A]/35"
+                    }`}
                   />
                   <span>{tag.name}</span>
                 </span>
@@ -221,7 +290,11 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
                     whileTap={{ scale: 0.94 }}
                     className="inline-flex cursor-pointer items-center rounded-md border border-[#1C1C1A] bg-[#1C1C1A] px-2.5 py-1 font-mono text-[11px] font-medium text-[#F5F2EB] transition-colors duration-200 hover:border-[#8C5E38] hover:bg-[#8C5E38]"
                     aria-expanded={false}
-                    aria-label={`Show ${hiddenCount} more skills`}
+                    aria-label={
+                      isId
+                        ? `Tampilkan ${hiddenCount} keahlian lainnya`
+                        : `Show ${hiddenCount} more skills`
+                    }
                   >
                     +{hiddenCount}
                   </motion.button>
@@ -267,14 +340,16 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
                             ease: [0.4, 0, 0.2, 1],
                           },
                         }}
-                        className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-1 font-mono text-[11px] transition-colors ${tag.featured
-                          ? "border-[#1C1C1A]/25 bg-[#EBE3D7] font-medium text-[#1C1C1A] hover:border-[#A3724B]"
-                          : "border-[#1C1C1A]/15 bg-[#EBE3D7]/55 text-[#55534E] hover:border-[#1C1C1A]/35 hover:text-[#1C1C1A]"
-                          }`}
+                        className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-1 font-mono text-[11px] transition-colors ${
+                          tag.featured
+                            ? "border-[#1C1C1A]/25 bg-[#EBE3D7] font-medium text-[#1C1C1A] hover:border-[#A3724B]"
+                            : "border-[#1C1C1A]/15 bg-[#EBE3D7]/55 text-[#55534E] hover:border-[#1C1C1A]/35 hover:text-[#1C1C1A]"
+                        }`}
                       >
                         <span
-                          className={`h-1.5 w-1.5 rounded-full ${tag.featured ? "bg-[#A3724B]" : "bg-[#1C1C1A]/35"
-                            }`}
+                          className={`h-1.5 w-1.5 rounded-full ${
+                            tag.featured ? "bg-[#A3724B]" : "bg-[#1C1C1A]/35"
+                          }`}
                         />
                         <span>{tag.name}</span>
                       </motion.span>
@@ -318,9 +393,11 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
                     whileTap={{ scale: 0.94 }}
                     className="inline-flex cursor-pointer items-center rounded-md border border-[#8C5E38] bg-[#8C5E38] px-2.5 py-1 font-mono text-[11px] font-medium text-[#F5F2EB] transition-colors duration-200 hover:border-[#1C1C1A] hover:bg-[#1C1C1A]"
                     aria-expanded={true}
-                    aria-label="Show fewer skills"
+                    aria-label={
+                      isId ? "Tampilkan lebih sedikit" : "Show fewer skills"
+                    }
                   >
-                    Less −
+                    {isId ? "Tutup −" : "Less −"}
                   </motion.button>
                 )}
               </AnimatePresence>
@@ -332,20 +409,30 @@ function SkillDomainCard({ item }: { item: SkillDomainCardData }) {
   )
 }
 
-export default function AboutSkills() {
+interface AboutSkillsProps {
+  locale?: string
+}
+
+export default function AboutSkills({ locale: localeProp }: AboutSkillsProps) {
+  const hookLocale = useLocale()
+  const locale = localeProp || hookLocale || "en"
+  const isId = locale === "id"
+
   return (
     <section
       id="skills"
-      className="relative z-20 mx-auto w-full max-w-[1440px] px-4 pt-16 pb-16 md:px-8 md:pt-24 md:pb-20 lg:px-12"
+      className="relative z-20 mx-auto w-full max-w-[1440px] px-4 pt-16 pb-10 md:px-8 md:pt-24 md:pb-12 lg:px-12"
     >
       {/* Garis Pembatas CAD Atas */}
       <div className="mb-12 flex items-center justify-between border-t border-[#1C1C1A] pt-3 font-mono text-[11px] tracking-[0.16em] uppercase text-[#736E65]">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-[#A3724B]">(03)</span>
-          <span>TECHNICAL CAPABILITIES</span>
+          <span>{isId ? "KAPABILITAS TEKNIS" : "TECHNICAL CAPABILITIES"}</span>
         </div>
         <div className="hidden md:block text-[10px] text-[#736E65]/80">
-          ON WEB, BACKEND, MOBILE &amp; APPLIED AI ARCHITECTURE
+          {isId
+            ? "ARSITEKTUR WEB, BACKEND, MOBILE & APPLIED AI"
+            : "ON WEB, BACKEND, MOBILE & APPLIED AI ARCHITECTURE"}
         </div>
         <div>
           <span>SHEET A-203</span>
@@ -362,32 +449,34 @@ export default function AboutSkills() {
       >
         <div>
           <div className="mb-2 font-mono text-[11px] tracking-widest text-[#A3724B]">
-            / / / / / / / SPECIFICATION MATRIX
+            / / / / / / / {isId ? "MATRIKS SPESIFIKASI" : "SPECIFICATION MATRIX"}
           </div>
           <h2 className="text-3xl font-medium tracking-[-0.03em] text-[#1C1C1A] md:text-5xl">
-            Skills &amp;{" "}
+            {isId ? "Keahlian & " : "Skills & "}
             <span className="font-serif italic font-normal text-[#A3724B]">
-              Expertise
+              {isId ? "Kompetensi" : "Expertise"}
             </span>
           </h2>
         </div>
         <p className="max-w-md font-mono text-xs leading-relaxed text-[#55534E] md:text-right">
-          ARCHITECTURAL BREAKDOWN ACROSS FULL-STACK WEB, SCALABLE BACKEND APIs,
-          FLUTTER MOBILE APPS, AND APPLIED GEMINI AI.
+          {isId
+            ? "RINCIAN ARSITEKTUR LINTAS WEB FULL-STACK, API BACKEND TERUKUR, APLIKASI FLUTTER, SERTA APPLIED GEMINI AI."
+            : "ARCHITECTURAL BREAKDOWN ACROSS FULL-STACK WEB, SCALABLE BACKEND APIs, FLUTTER MOBILE APPS, AND APPLIED GEMINI AI."}
         </p>
       </motion.div>
 
-      {/* Grid 4 Kolom Sejajar pada Layar Besar (lg:grid-cols-4) */}
-      <div className="mb-8 grid grid-cols-1 items-start gap-5 md:mb-10 md:grid-cols-2 lg:grid-cols-4">
+      {/* Grid 4 Kolom Sejajar pada Layar Besar (lg:grid-cols-4) — items-stretch untuk ketinggian seragam */}
+      <div className="mb-4 grid grid-cols-1 items-stretch gap-5 md:grid-cols-2 lg:grid-cols-4">
         {SKILL_DOMAIN_CARDS.map((item, idx) => (
           <motion.div
             key={item.id}
+            className="flex h-full flex-col"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: idx * 0.08, duration: 0.5 }}
           >
-            <SkillDomainCard item={item} />
+            <SkillDomainCard item={item} isId={isId} />
           </motion.div>
         ))}
       </div>

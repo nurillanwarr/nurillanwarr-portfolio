@@ -1,0 +1,123 @@
+## Background
+
+As a Fullstack Web Developer Intern at PDAM Tirta Makmur Surakarta, I collaborated directly with the Corporate Secretariat and IT Division to overhaul the organization's legacy paper-based correspondence and document disposition workflows.
+
+Prior to this initiative, all incoming official mail, directorate disposition approvals, and inter-divisional memos across 15 operational units relied on physical paper sheets, multi-floor messenger deliveries, and manual ink signatures. This manual routing routinely bottlenecked at managerial desks, causing average disposition lead times of several business days per file.
+
+This operational inertia prompted the development of SIPASI (Sistem Informasi Pengelolaan Arsip & Surat Internal). Designed as a centralized, 100% paperless enterprise web platform, SIPASI accelerates correspondence throughput, guarantees multi-role auditability, and verifies document authenticity with cryptographic QR digital signatures on every exported PDF.
+
+
+## Problem Identification
+
+Based on operational workflow discovery and field observations, the primary challenges and core bottlenecks identified were as follows:
+
+- Fragmented manual mail distribution resulted in inter-divisional disposition turnaround times exceeding 48 to 72 business hours.
+- High risk of document misplacement and information leakage due to the lack of centralized, real-time status tracking.
+- Physical pen-and-paper signatures lacked cryptographic verification, leaving official documents vulnerable to tampering or unauthorized alterations.
+- Absence of an immutable audit trail complicated accountability during internal compliance audits and regulatory inspections.
+
+
+## Goals & Objectives
+
+> **Primary Objective:** Architect and deploy SIPASI as the Single Source of Truth (SSOT) for enterprise correspondence, automating the document disposition lifecycle while ensuring strict digital integrity for PDAM Tirta Makmur Surakarta.
+
+**Key Objectives & Measurable Milestones:**
+
+- Digitize 100% of physical correspondence into an automated multi-role approval and disposition workflow.
+- Develop a sub-second server-side PDF stamping engine embedding cryptographic SHA-256 QR verification codes.
+- Integrate PostgreSQL and Prisma ORM to record immutable, time-stamped audit logs for all user actions.
+- Reduce average document turnaround cycles from 48 hours to under 5 minutes in real time.
+
+
+## Roles & Responsibilities
+
+Serving as **Fullstack Developer Intern**, I maintained direct technical ownership across architectural design and implementation:
+
+- Conducted business process discovery with the Corporate Secretariat and IT leadership to model hierarchical routing into a digital state machine.
+- Engineered a normalized PostgreSQL database schema using Prisma ORM with fine-grained Role-Based Access Control (RBAC).
+- Developed responsive, role-isolated web dashboards using Next.js 16, React 19, TypeScript, and Tailwind CSS for 4 organizational tiers.
+- Constructed an automated backend pipeline that injects cryptographic SHA-256 QR validation stamps directly into exported PDF files.
+- Led User Acceptance Testing (UAT) sessions with division heads and iterated on operational feedback throughout the deployment.
+
+
+## Process & Execution
+
+Engineering execution followed an iterative three-stage model to ensure architectural resilience and precise user alignment:
+
+### 1. Requirements Discovery & Technical Feasibility
+
+Analyzed municipal public utility document governance standards and prototyped low-latency PDF manipulation inside Next.js 16 Server Actions.
+
+- Mapped standard municipal disposition sheets and inter-divisional memo formats used across PDAM Tirta Makmur Surakarta.
+- Benchmarked PDF processing libraries (pdf-lib, node-qrcode) to achieve sub-second stamping without exhausting memory limits.
+- Designed JWT session management and RBAC middleware to enforce strict data isolation across confidential documents.
+
+### 2. Project Kick-off & Disposition Workflow Alignment
+
+Conducted alignment workshops with the President Director, Head of General Affairs, and IT Lead to formalize the digital routing matrix.
+
+- Formalized the multi-tier disposition cascade: Receiving Secretariat → President Director → Technical/General Directors → Division Heads → Execution Staff.
+- Designed parallel routing workflows allowing concurrent multi-department reviews on joint initiatives.
+- Established digital archive retention policies and automated PostgreSQL backup schedules.
+
+### 3. Iterative Development & Production Rollout
+
+Executed bi-weekly development sprints with continuous integration, self-directed code reviews, and reliability testing.
+
+- Sprint 1: Schema design, database migrations, and encrypted session-based authentication.
+- Sprint 2: Secretariat dashboard UI, document ingestion pipelines, and interactive digital disposition forms.
+- Sprint 3: Cryptographic QR signature injection engine and public token verification endpoint.
+- Sprint 4: Multi-parameter archive search, load testing, and staff training prior to formal handoff.
+
+
+## Results & Architecture
+
+SIPASI was successfully launched and adopted across the headquarters of PDAM Tirta Makmur Surakarta, delivering 3 robust core modules:
+
+### Multi-Role Dashboard & Disposition Tracker
+
+An intelligent multi-role console isolating workspaces for Admin, Directors, Department Heads, and Staff, complete with real-time SLA metrics.
+
+- Dynamic status lifecycle (Awaiting Review, Disposed, In Progress, Completed, Archived).
+- Instant full-text archive indexing by agenda number, sender, date, and division.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **Connected Divisions** | `15 Units` |
+| **API Latency** | `< 200ms` |
+
+### QR Signature & Cryptographic Verification Engine
+
+An automated PDF stamping service embedding tamper-evident QR codes linked to secure cryptographic validation tokens.
+
+- Automated bottom-right QR token placement compliant with municipal archiving standards.
+- Public-facing verification URL confirming document authenticity without exposing internal credentials.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **PDF Stamp Speed** | `0.8 Seconds` |
+| **Security Standard** | `SHA-256 Verified` |
+
+
+## Impact & Achievements
+
+### Impact on the Organization / Ecosystem
+
+- Eliminated 100% of paper consumption for internal inter-divisional disposition memos across 15 operating units.
+- Prevented document processing bottlenecks with real-time routing notifications and SLA milestone escalation.
+- Ensured full compliance with municipal audit standards through tamper-evident, cryptographic timestamped audit trails.
+
+### Impact on Personal Engineering Growth
+
+- Deepened engineering mastery of enterprise-scale Next.js 16, React 19, and complex relational PostgreSQL schemas.
+- Honed specialized skills in low-latency server-side PDF rendering, streaming, and cryptographic verification pipelines.
+- Cultivated strong cross-functional communication abilities by translating public sector administrative protocols into resilient software.
+
+
+## Team & Appreciation
+
+This digital transformation initiative was realized through the generous mentorship and collaboration of our PDAM colleagues:
+
+- IT Division Mentors at PDAM Tirta Makmur Surakarta for architectural guidance, network provisioning, and development servers.
+- The Corporate Secretariat Team for their invaluable feedback, patience, and transparency during workflow modeling sessions.
+- Fellow Intern Developers for their camaraderie, vigorous technical brainstorms, and mutual support throughout the term.

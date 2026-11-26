@@ -1,11 +1,11 @@
 "use client"
 
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useTranslations } from "next-intl"
 import {
-  DEFAULT_BRAND_SUBTITLE,
-  DEFAULT_DRAWER_ITEMS,
   DEFAULT_LOGO_TEXT,
-  DEFAULT_NAV_ITEMS,
   DEFAULT_PALETTE,
   DEFAULT_SOCIAL_ITEMS,
 } from "./constants"
@@ -13,7 +13,7 @@ import { MenuBackdrop } from "./MenuBackdrop"
 import { MenuHeader } from "./MenuHeader"
 import { MenuPanel } from "./MenuPanel"
 import { MenuStyle } from "./MenuStyle"
-import { NavbarProps } from "./types"
+import { NavbarProps, NavItem } from "./types"
 import { useMenuAnimations } from "./useMenuAnimations"
 
 /**
@@ -22,22 +22,35 @@ import { useMenuAnimations } from "./useMenuAnimations"
  * - Mengintegrasikan header floating berkapsul dengan identitas brand, navigasi desktop, jam & cuaca real-time Surakarta
  * - Menyediakan drawer menu responsif untuk perangkat mobile dengan animasi tirai berlapis (prelayers) berbasis GSAP
  * - Menangani interaksi buka/tutup menu, transisi ikon hamburger (= ke ×), dan pengguliran halus menuju anchor section
- *
- * @param {NavbarProps} props Konfigurasi navigasi, logo, warna tombol, dan tautan sosial
- * @returns {JSX.Element} Elemen pembungkus navigasi utama
+ * - Terintegrasi penuh dengan multi-bahasa next-intl (English & Indonesian)
  */
 export const Navbar: React.FC<NavbarProps> = (props) => {
+  const t = useTranslations("navbar")
+
+  const localizedNavItems: NavItem[] = [
+    { num: "02", label: t("nav.about"), ariaLabel: "About", link: "/#about" },
+    { num: "03", label: t("nav.projects"), ariaLabel: "Projects", link: "/#projects" },
+    { num: "04", label: t("nav.process"), ariaLabel: "Process", link: "/#process" },
+    { num: "05", label: t("nav.achievements"), ariaLabel: "Achievements", link: "/achievements" },
+    { num: "06", label: t("nav.contact"), ariaLabel: "Contact", link: "/#contact" },
+  ]
+
+  const localizedDrawerItems: NavItem[] = [
+    { num: "01", label: t("nav.home"), ariaLabel: "Home", link: "/#home" },
+    ...localizedNavItems,
+  ]
+
   const {
     position = "right",
     colors = DEFAULT_PALETTE,
-    items = DEFAULT_NAV_ITEMS,
+    items = localizedNavItems,
     socialItems = DEFAULT_SOCIAL_ITEMS,
     displaySocials = true,
     displayItemNumbering = true,
     className = "",
     logoUrl,
     logoText = DEFAULT_LOGO_TEXT,
-    brandSubtitle = DEFAULT_BRAND_SUBTITLE,
+    brandSubtitle = t("brandSubtitle"),
     menuButtonColor = "#1C1C1A",
     openMenuButtonColor = "#F2EFE8",
     accentColor = "#B7835A",
@@ -108,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
         panelRef={panelRef}
         open={open}
         position={position}
-        items={DEFAULT_DRAWER_ITEMS}
+        items={localizedDrawerItems}
         socialItems={socialItems}
         displaySocials={displaySocials}
         displayItemNumbering={displayItemNumbering}

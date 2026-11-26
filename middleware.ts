@@ -5,7 +5,7 @@ import { routing } from "./i18n/routing"
  * Modul Middleware Internasionalisasi (next-intl)
  * Menjalankan penanganan pengalihan bahasa dan routing multi-bahasa:
  * - Mendeteksi preferensi bahasa pengguna (locale negotiation)
- * - Mengarahkan rute sesuai konfigurasi lokal yang didukung ('id', 'en', 'zh')
+ * - Mengarahkan rute sesuai konfigurasi lokal yang didukung ('en', 'id') dengan default 'en'
  * - Mempertahankan prefix lokal pada URL secara konsisten
  *
  * @returns {Function} Handler middleware Next.js untuk internasionalisasi

@@ -1,0 +1,61 @@
+[
+  {
+    "id": "sipasi-pdam-sukoharjo",
+    "number": "01",
+    "name": "SIPASI PDAM",
+    "role": "Fullstack Developer Intern",
+    "category": "fullstack",
+    "featured": true,
+    "experienceId": "pdam-tirta-makmur",
+    "experienceLabel": "As a Full-Stack Web Developer Intern at PDAM Tirta Makmur Surakarta, I collaborated directly with the Corporate Secretariat and IT Division to transform correspondence and official document disposition workflows, which were previously handled through manual, paper-based processes.",
+    "contributions": [
+      "Conducted in-depth requirements interviews with the Corporate Secretariat and IT leadership to model hierarchical document disposition workflows using a digital state machine.",
+      "Designed a normalized PostgreSQL relational database schema using Prisma ORM, implementing strict Role-Based Access Control (RBAC).",
+      "Built a high-performance, responsive dashboard interface using Next.js 16 App Router, React 19, and Tailwind CSS.",
+      "Developed a dynamic QR code digital stamping generator that automatically embeds digital stamps into official PDF documents.",
+      "Implemented a permanent forensic audit logging system to track document creation, disposition, downloads, and access history.",
+      "Led User Acceptance Testing (UAT) sessions with department heads and continuously refined the system through iterative operational improvements."
+    ],
+    "impactSummary": "Reduced document disposition turnaround time from 48–72 hours to an average of under 5 minutes through digital workflow automation.",
+    "impactStats": [
+      {
+        "value": "100%",
+        "label": "Papperless Correspondence"
+      },
+      {
+        "value": "15",
+        "label": "Internal Divisions"
+      },
+      {
+        "value": "0s",
+        "label": "Physical Mail Bottleneck"
+      }
+    ],
+    "impacts": [
+      "Reduced document disposition turnaround time from 48–72 hours to an average of under 5 minutes through digital workflow automation.",
+      "Eliminated 100% of physical photocopy paper consumption for disposition memos across all 15 operational divisions of PDAM Tirta Makmur Surakarta.",
+      "Prevented potential loss of critical documents through transparent, real-time tracking of document status and assigned responsibilities.",
+      "Improved internal audit compliance through cryptographically secured digital audit trails for every document export."
+    ],
+    "highlights": [
+      "Dynamic Status Tracking: Displays real-time document statuses, including New, Awaiting Executive Disposition, Disposition Completed, and Archived.",
+      "Smart Incoming/Outgoing Mail Registration: Intelligent registration forms with automated numbering based on archival classification codes.",
+      "Instant Filtering: Enables quick document filtering by date, urgency level (Normal, Urgent, Confidential), and originating institution.",
+      "Automated Dynamic QR Code Integration: Automatically embeds dynamic QR codes in the corner of disposition sheets without altering the original document layout."
+    ],
+    "images": [
+      {
+        "src": "/projects/sipasi-pdam/dashboard-overview.jpg",
+        "alt": "SIPASI PDAM dashboard overview",
+        "label": "Dashboard Overview",
+        "description": "Unified interface for managing incoming correspondence, outgoing correspondence, active dispositions, and digital archives."
+      },
+      {
+        "src": "/projects/sipasi-pdam/qr-pdf-stamping.jpg",
+        "alt": "SIPASI PDAM stamp QR & verification PDF",
+        "label": "Stamp QR & Verification PDF",
+        "description": "Unified interface for managing incoming correspondence, outgoing correspondence, active dispositions, and digital archives."
+      }
+    ]
+  }
+]

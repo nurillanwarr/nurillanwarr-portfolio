@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+import { useLocale } from "next-intl"
 
 interface TOCItem {
   id: string
@@ -11,6 +12,7 @@ interface TOCItem {
 interface TableOfContentsProps {
   title?: string
   className?: string
+  locale?: string
 }
 
 /**
@@ -23,9 +25,14 @@ interface TableOfContentsProps {
  * - Pengguliran halus (smooth scroll) saat tautan diklik dengan penyesuaian offset navbar
  */
 export const TableOfContents: React.FC<TableOfContentsProps> = ({
-  title = "ON THIS PAGE",
+  title,
   className = "",
+  locale: localeProp,
 }) => {
+  const hookLocale = useLocale()
+  const locale = localeProp || hookLocale || "en"
+  const isId = locale === "id"
+  const displayTitle = title ?? (isId ? "DI HALAMAN INI" : "ON THIS PAGE")
   const [headings, setHeadings] = useState<TOCItem[]>([])
   const [activeId, setActiveId] = useState<string>("")
 
@@ -33,12 +40,18 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
     const scanHeadings = () => {
       const articleEl = document.querySelector("article") || document
       const elements = Array.from(
-        articleEl.querySelectorAll("h2[id], h3[id]")
-      ).map((elem) => ({
-        id: elem.id,
-        text: (elem as HTMLElement).innerText || "",
-        level: Number(elem.tagName.substring(1)),
-      }))
+        articleEl.querySelectorAll("h1[id], h2[id], h3[id]")
+      ).map((elem) => {
+        const clone = elem.cloneNode(true) as HTMLElement
+        // Strip out anchor link symbol # or hidden text
+        clone.querySelectorAll("a, span[aria-hidden]").forEach((el) => el.remove())
+        const text = clone.innerText.replace(/#\s*$/, "").trim()
+        return {
+          id: elem.id,
+          text: text || (elem as HTMLElement).innerText.replace(/#\s*$/, "").trim(),
+          level: Number(elem.tagName.substring(1)),
+        }
+      })
       setHeadings(elements)
       return elements
     }
@@ -110,26 +123,29 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
   return (
     <nav
       aria-label="Table of contents"
-      className={`sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 ${className}`}
+      className={`flex max-h-[calc(100vh-9rem)] w-full flex-col ${className}`}
     >
       <div className="border-b border-[#1C1C1A]/15 pb-2.5 font-mono text-[11px] font-bold tracking-[0.2em] text-[#8C5E38] uppercase">
-        {title}
+        {displayTitle}
       </div>
 
-      <ul className="mt-4 space-y-1.5 border-l border-[#1C1C1A]/15 font-sans text-xs">
+      <ul className="mt-3 space-y-1 overflow-y-auto pr-2 text-xs border-l border-[#1C1C1A]/15 scrollbar-thin scrollbar-thumb-[#1C1C1A]/20">
         {headings.map((item) => {
           const isActive = activeId === item.id
+          const isLvl3 = item.level === 3
+          const isLvl1 = item.level === 1
+
           return (
             <li
               key={item.id}
               className={`${
-                item.level === 3 ? "pl-5 text-[11.5px]" : "font-medium"
+                isLvl3 ? "pl-4 text-[11px]" : isLvl1 ? "font-semibold text-xs" : "font-medium"
               }`}
             >
               <a
                 href={`#${item.id}`}
                 onClick={(e) => handleClick(e, item.id)}
-                className={`block py-1 transition-all duration-200 ${
+                className={`block py-1.5 transition-all duration-200 leading-snug ${
                   isActive
                     ? "font-semibold text-[#8C5E38] border-l-2 border-[#8C5E38] pl-3 -ml-[1px]"
                     : "text-[#736E65] hover:text-[#1C1C1A] border-l-2 border-transparent pl-3 -ml-[1px]"

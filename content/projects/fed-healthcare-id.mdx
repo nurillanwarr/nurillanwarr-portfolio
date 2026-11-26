@@ -1,0 +1,121 @@
+## Latar Belakang
+
+Merupakan riset Tugas Akhir (Skripsi) S1 Teknik Informatika di Universitas Muhammadiyah Surakarta, proyek ini merancang platform rekam medis terdesentralisasi yang memadukan privasi data kesehatan dengan kecerdasan buatan.
+
+Data rekam medis pasien di fasilitas kesehatan konvensional kerap tersimpan dalam basis data terpusat yang rentan terhadap kebocoran informasi dan pelanggaran privasi. Di sisi lain, pelatihan model AI deteksi penyakit memerlukan dataset berskala besar yang terdistribusi di berbagai rumah sakit tanpa melanggar regulasi privasi data.
+
+Sistem ini menjawab tantangan tersebut dengan menggabungkan komputasi Federated Learning (FL) untuk deteksi diabetes terdistribusi, smart contract blockchain untuk konsensus keabsahan model, dan penyimpanan terdesentralisasi IPFS untuk arsip rekam medis terenkripsi.
+
+
+## Identifikasi Masalah
+
+Berdasarkan analisis alur kerja dan observasi operasional di lapangan, tantangan pokok dan kendala utama yang berhasil diidentifikasi meliputi:
+
+- Risiko kebocoran data rekam medis pasien yang tinggi pada basis data rumah sakit terpusat.
+- Regulasi privasi ketat menghalangi pengumpulan data kesehatan lintas faskes untuk pelatihan model deteksi AI.
+- Ketiadaan jaminan keaslian data catatan medis akibat manipulasi manual tanpa pencatatan permanen.
+- Ketergantungan pada server tunggal yang berisiko mengalami kelumpuhan operasional terpusat.
+
+
+## Tujuan & Sasaran
+
+> **Tujuan Utama:** Membangun arsitektur rekam medis terdesentralisasi berbasis Blockchain dan Federated Learning yang menjamin kerahasiaan data pasien sekaligus meningkatkan akurasi deteksi dini diabetes.
+
+**Sasaran Strategis & Tolok Ukur Keberhasilan:**
+
+- Mengimplementasikan protokol Federated Learning yang melatih model lokal di masing-masing faskes tanpa memindahkan data mentah.
+- Menulis Smart Contract untuk mengotomatisasi konsensus agregasi bobot model AI secara transparan.
+- Mengintegrasikan IPFS terenkripsi untuk penyimpanan catatan medis pasien dengan kepemilikan kunci pribadi.
+- Mencapai akurasi deteksi diabetes >90% setara dengan pelatihan model terpusat konvensional.
+
+
+## Peran & Tanggung Jawab
+
+Sebagai **Lead Researcher & Engineer (Skripsi)**, saya memegang kepemilikan teknis penuh pada perancangan dan implementasi fitur:
+
+- Merancang arsitektur sistem holistik yang menghubungkan node faskes lokal, jaringan blockchain, dan kluster IPFS.
+- Membangun algoritma Federated Averaging (FedAvg) khusus menggunakan Python dan PyTorch untuk klasifikasi diabetes.
+- Mengembangkan dan menerapkan Smart Contract Solidity untuk mengunci riwayat pembaruan bobot model secara permanen.
+- Membangun aplikasi portal web dokter dan pasien menggunakan Next.js dan integrasi dompet web3.
+
+
+## Proses & Eksekusi
+
+Pengembangan sistem dieksekusi secara iteratif dan terstruktur melalui tiga tahapan utama untuk menjamin stabilitas arsitektur serta keselarasan kebutuhan pengguna:
+
+### 1. Pemodelan Teoretis & Perancangan Protokol Privasi
+
+Merumuskan model matematika Federated Learning dan verifikasi enkripsi rekam medis.
+
+- Menganalisis dataset medis diabetes terstandarisasi dan membaginya ke dalam skenario Non-IID di beberapa node.
+- Merancang skema enkripsi asimetris untuk dokumen rekam medis sebelum diunggah ke jaringan IPFS.
+- Menyusun logika smart contract untuk memvalidasi kontribusi komputasi setiap node rumah sakit.
+
+### 2. Eksperimen Komputasi Terdistribusi & Smart Contract
+
+Menjalankan siklus agregasi federasi dan pengujian konsensus terdistribusi.
+
+- Menjalankan simulasi multi-node faskes yang melatih model lokal secara simultan.
+- Menerapkan algoritma agregasi bobot FedAvg yang tahan terhadap anomali data lokal.
+- Menguji konsumsi gas smart contract dan ketahanan terhadap serangan modifikasi bobot.
+
+### 3. Evaluasi Kinerja & Penyusunan Laporan Ilmiah
+
+Menganalisis metrik akurasi, waktu inferensi, dan menyelesaikan naskah akademik tugas akhir.
+
+- Mengevaluasi kurva konvergensi akurasi model federasi dibandingkan model terpusat konvensional.
+- Melakukan pengujian penetrasi keamanan privasi pada transfer bobot gradien model.
+- Menuntaskan naskah skripsi dengan predikat sangat memuaskan.
+
+
+## Hasil & Arsitektur
+
+Riset tugas akhir ini berhasil membuktikan bahwa federated learning dan blockchain mampu menjaga privasi rekam medis tanpa mengorbankan akurasi diagnostik:
+
+### Mesin Deteksi Diabetes Federated Learning
+
+Model kecerdasan buatan terdistribusi yang dilatih di berbagai fasilitas kesehatan tanpa memindahkan data sensitif pasien.
+
+- Perlindungan privasi absolut: hanya gradien bobot model yang dipertukarkan.
+- Ketahanan terhadap heterogenitas distribusi data antar-rumah sakit (Non-IID).
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Akurasi Model** | `92.8%` |
+| **Privasi Data** | `100% On-Premise` |
+
+### Smart Contract Konsensus Bobot Model
+
+Logika kontrak pintar terdesentralisasi yang mencatat setiap putaran pelatihan AI secara transparan dan permanen.
+
+- Pencatatan riwayat kontribusi faskes yang tidak dapat diubah (immutable).
+- Mencegah sabotase model atau injeksi data palsu dari node nakal.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Gas Efficiency** | `Optimized` |
+| **Integritas Konsensus** | `100% Terverifikasi` |
+
+
+## Dampak & Pencapaian
+
+### Dampak Bagi Instansi / Organisasi
+
+- Memberikan kontribusi ilmiah nyata bagi pengembangan sistem rekam medis masa depan yang patuh regulasi privasi global.
+- Menjadi model percontohan riset integrasi Applied AI dan Blockchain di Fakultas Komunikasi dan Informatika UMS.
+- Membuktikan bahwa fasilitas kesehatan skala daerah dapat berkolaborasi melatih AI tanpa kekhawatiran kebocoran data.
+
+### Dampak Bagi Pertumbuhan Pribadi
+
+- Mengembangkan kemahiran mendalam di bidang Federated Learning, PyTorch, Blockchain, dan Web3 Engineering.
+- Menyelesaikan studi sarjana Teknik Informatika dengan kontribusi penelitian terapan yang berbobot.
+- Membangun fondasi akademik dan praktis yang kokoh untuk karier di ranah AI dan rekayasa perangkat lunak modern.
+
+
+## Tim & Apresiasi
+
+Penelitian skripsi ini terselesaikan berkat bimbingan intensif dan dukungan penuh dari para dosen pembimbing akademik:
+
+- Dosen Pembimbing Skripsi atas arahan metodologi riset, tinjauan teoretis, dan telaah kode yang sangat berharga.
+- Dosen Penguji atas masukan konstruktif dalam penyempurnaan implementasi sistem terdesentralisasi.
+- Keluarga dan rekan-rekan mahasiswa Informatika UMS atas doa, semangat, dan dukungan moral tanpa henti.

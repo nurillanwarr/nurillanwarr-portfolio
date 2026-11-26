@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useTranslations } from "next-intl"
 import { CONTACT_METADATA } from "./constants"
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -13,12 +14,13 @@ gsap.registerPlugin(ScrollTrigger, useGSAP)
  * Menampilkan seksi Call-to-Action utama yang terinspirasi dari referensi Iqmal & Oda:
  * - Live ticking WIB Clock untuk Surakarta, Indonesia
  * - Background watermark "COLLABORATE" dengan efek parallax subtil
- * - Headline monumental "LET'S WORK TOGETHER" dengan animasi reveal kata per kata (GSAP)
+ * - Headline monumental "LET'S WORK TOGETHER" / "MARI BEKERJA SAMA" dengan animasi reveal kata per kata (GSAP)
  * - Subtitle pengantar ketersediaan kolaborasi engineering
  * - Tombol interaktif Salin Email dengan tooltip "Email Copied! ✓"
  * - Tombol unduh Resume / CV
  */
 export const ContactCta: React.FC = () => {
+  const t = useTranslations("contact")
   const containerRef = useRef<HTMLDivElement>(null)
   const [timeString, setTimeString] = useState<string>("--:--:-- WIB")
   const [copied, setCopied] = useState<boolean>(false)
@@ -66,7 +68,7 @@ export const ContactCta: React.FC = () => {
     () => {
       if (!containerRef.current) return
 
-      // Word reveal animation untuk "LET'S WORK TOGETHER"
+      // Word reveal animation untuk headline
       gsap.from(".unified-hero-word", {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -96,6 +98,9 @@ export const ContactCta: React.FC = () => {
     { scope: containerRef }
   )
 
+  const headline = t("headline")
+  const words = headline.split(" ")
+
   return (
     <div
       ref={containerRef}
@@ -119,7 +124,7 @@ export const ContactCta: React.FC = () => {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-[#8C5E38]" />
           </span>
           <span className="font-mono text-[11px] font-semibold tracking-[0.26em] text-[#8C5E38] uppercase sm:text-xs">
-            {CONTACT_METADATA.subheading}
+            {t("subheading")}
           </span>
         </div>
 
@@ -132,9 +137,9 @@ export const ContactCta: React.FC = () => {
         </div>
       </div>
 
-      {/* Bold Editorial Headline "LET'S WORK TOGETHER" */}
+      {/* Bold Editorial Headline */}
       <h2 className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 font-serif text-5xl font-normal tracking-tight text-[#1C1C1A] sm:text-7xl md:mt-12 md:text-8xl lg:text-9xl">
-        {CONTACT_METADATA.headlineWords.map((word, idx) => (
+        {words.map((word, idx) => (
           <span
             key={idx}
             className="unified-hero-word inline-block will-change-transform"
@@ -146,8 +151,7 @@ export const ContactCta: React.FC = () => {
 
       {/* Subtitle statement */}
       <p className="relative z-10 mt-4 max-w-xl font-mono text-xs leading-relaxed text-[#55534E] sm:text-sm">
-        Open for software engineering roles, fullstack consulting, and applied AI
-        product development.
+        {t("description")}
       </p>
 
       {/* Interactive Action Buttons: Email Copy Pill & Download CV */}
@@ -156,7 +160,7 @@ export const ContactCta: React.FC = () => {
         <button
           type="button"
           onClick={handleCopyEmail}
-          className="group relative inline-flex items-center gap-3.5 rounded-full bg-[#1C1C1A] py-3 pr-3 pl-6 text-[#F2ECE1] shadow-md transition-all duration-300 hover:bg-[#8C5E38] hover:shadow-lg active:scale-95 sm:py-3.5 sm:pr-3.5 sm:pl-7"
+          className="group relative inline-flex items-center gap-3.5 rounded-full bg-[#1C1C1A] py-3 pr-3 pl-6 text-[#F2ECE1] shadow-md transition-all duration-300 hover:bg-[#8C5E38] hover:shadow-lg active:scale-95 sm:py-3.5 sm:pr-3.5 sm:pl-7 cursor-pointer"
           aria-label={`Copy email address ${CONTACT_METADATA.email}`}
         >
           <span className="font-mono text-xs tracking-tight sm:text-sm md:text-base">
@@ -185,7 +189,7 @@ export const ContactCta: React.FC = () => {
                 : "pointer-events-none scale-90 opacity-0"
             }`}
           >
-            Email Copied! ✓
+            {t("actions.copied")} ✓
           </span>
         </button>
 
@@ -196,7 +200,7 @@ export const ContactCta: React.FC = () => {
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-2 rounded-full border border-[#1C1C1A]/30 bg-[#FAF6F0] px-5 py-3 font-mono text-xs font-semibold tracking-wider text-[#1C1C1A] uppercase transition-all duration-300 hover:border-[#8C5E38] hover:bg-[#EBE3D7] hover:text-[#8C5E38] sm:px-6 sm:py-3.5 sm:text-sm"
         >
-          <span>Resume / CV</span>
+          <span>{t("actions.resume")}</span>
           <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
             ↗
           </span>

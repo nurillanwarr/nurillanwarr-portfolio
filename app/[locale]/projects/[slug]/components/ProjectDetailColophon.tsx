@@ -1,23 +1,50 @@
+"use client"
+
 import React from "react"
 import { Link } from "@/i18n/navigation"
+import { useTranslations, useLocale } from "next-intl"
+
+interface ProjectDetailColophonProps {
+  locale?: string
+}
 
 /**
  * Komponen ProjectDetailColophon (Bagian 3 — Footer Identitas & Kontak Nuril Anwar)
  * Menampilkan footer kolofon bergaya blueprint dengan palet kertas vellum portofolio:
  * - Garis ukur horizontal dengan tanda miring (/) di kedua ujung
  * - Tipografi studio ("N28") beserta identitas Universitas Muhammadiyah Surakarta
- * - Tabel Kolofon 12-Kotak (2 baris x 6 kolom) berisi email, telepon, GitHub, LinkedIn, & Resume PDF
+ * - Tabel Kolofon 12-Kotak (2 baris x 6 kolom) dwibahasa (EN & ID)
  */
-export const ProjectDetailColophon: React.FC = () => {
+export const ProjectDetailColophon: React.FC<ProjectDetailColophonProps> = ({
+  locale: localeProp,
+}) => {
+  const t = useTranslations("projects")
+  const hookLocale = useLocale()
+  const locale = localeProp || hookLocale || "en"
+  const isId = locale === "id"
+
   return (
     <footer className="mt-20 md:mt-28">
+      {/* Tombol Back to Projects Penutup */}
+      <div className="mb-14 flex justify-center">
+        <Link
+          href="/#projects"
+          className="group inline-flex items-center gap-3 rounded-full border border-[#1C1C1A]/20 bg-[#FAF6F0] px-6 py-3 font-mono text-xs font-semibold tracking-wider text-[#1C1C1A] uppercase transition-all duration-300 hover:border-[#8C5E38] hover:bg-[#8C5E38] hover:text-[#FAF8F5] hover:shadow-lg active:scale-95 shadow-2xs"
+        >
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1C1C1A]/10 text-[#1C1C1A] transition-all duration-300 group-hover:bg-white group-hover:text-[#8C5E38] group-hover:-translate-x-1">
+            ←
+          </span>
+          <span>{t("backToProjects")}</span>
+        </Link>
+      </div>
+
       {/* Garis Dimensi Atas dengan Tanda Slash (/) di Ujung Kiri & Kanan */}
       <div className="relative flex items-center justify-center">
         <div className="relative h-[1px] flex-1 bg-[#1C1C1A]/20">
           <span className="absolute -top-1.5 left-0 h-3 w-[1.2px] rotate-35 bg-[#1C1C1A]/40" />
         </div>
         <span className="px-4 font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#736E65]">
-          NURIL ANWAR · FULL-STACK &amp; APPLIED AI DEVELOPER · UMS
+          NURIL ANWAR · {isId ? "PENGEMBANG FULL-STACK & APPLIED AI" : "FULL-STACK & APPLIED AI DEVELOPER"} · UMS
         </span>
         <div className="relative h-[1px] flex-1 bg-[#1C1C1A]/20">
           <span className="absolute -top-1.5 right-0 h-3 w-[1.2px] rotate-35 bg-[#1C1C1A]/40" />
@@ -31,9 +58,9 @@ export const ProjectDetailColophon: React.FC = () => {
         </div>
 
         <div className="font-mono text-[10.5px] leading-relaxed tracking-[0.12em] uppercase text-[#55534E] md:pb-3 md:text-right">
-          <div>FULL-STACK WEB, MOBILE &amp; AI ENGINEER</div>
-          <div>SURAKARTA, CENTRAL JAVA</div>
-          <div>UNIVERSITAS MUHAMMADIYAH SURAKARTA</div>
+          <div>{isId ? "PENGEMBANG WEB, MOBILE & APPLIED AI" : "FULL-STACK WEB, MOBILE & AI ENGINEER"}</div>
+          <div>{isId ? "SURAKARTA, JAWA TENGAH" : "SURAKARTA, CENTRAL JAVA"}</div>
+          <div>{isId ? "UNIVERSITAS MUHAMMADIYAH SURAKARTA" : "MUHAMMADIYAH UNIVERSITY OF SURAKARTA"}</div>
         </div>
       </div>
 
@@ -42,7 +69,7 @@ export const ProjectDetailColophon: React.FC = () => {
         {/* Baris 1 */}
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            DEVELOPER
+            {isId ? "PENGEMBANG" : "DEVELOPER"}
           </div>
           <div className="mt-2 flex items-center gap-2 text-sm font-medium text-[#1C1C1A]">
             <span className="inline-flex h-5 w-5 items-center justify-center border border-[#1C1C1A]/30 bg-[#EBE3D7] font-mono text-[9px] text-[#1C1C1A]">
@@ -54,18 +81,18 @@ export const ProjectDetailColophon: React.FC = () => {
 
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            EDUCATION
+            {isId ? "PENDIDIKAN" : "EDUCATION"}
           </div>
           <div className="mt-2 text-xs leading-relaxed text-[#3D3A35]">
-            Informatics Engineering
+            {isId ? "Teknik Informatika" : "Informatics Engineering"}
             <br />
-            UMS Surakarta (2023–Now)
+            {isId ? "UMS Surakarta (2023–Sekarang)" : "UMS Surakarta (2023–Present)"}
           </div>
         </div>
 
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            CONTACT
+            {isId ? "KONTAK" : "CONTACT"}
           </div>
           <div className="mt-2 space-y-1 text-xs text-[#3D3A35]">
             <a
@@ -82,7 +109,7 @@ export const ProjectDetailColophon: React.FC = () => {
 
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            CORE FOCUS
+            {isId ? "FOKUS UTAMA" : "CORE FOCUS"}
           </div>
           <div className="mt-2 font-mono text-xs text-[#3D3A35]">
             Web · Mobile · LLM
@@ -100,7 +127,7 @@ export const ProjectDetailColophon: React.FC = () => {
 
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            LOCATION
+            {isId ? "LOKASI" : "LOCATION"}
           </div>
           <div className="mt-2 font-mono text-xs text-[#3D3A35]">
             Surakarta, Indonesia
@@ -110,7 +137,7 @@ export const ProjectDetailColophon: React.FC = () => {
         {/* Baris 2 */}
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            LEGAL
+            {isId ? "HUKUM" : "LEGAL"}
           </div>
           <div className="mt-2 font-mono text-[11px] text-[#55534E]">
             &copy; 2026 M. Nuril Anwar
@@ -119,21 +146,21 @@ export const ProjectDetailColophon: React.FC = () => {
 
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            INDEX
+            {isId ? "INDEKS" : "INDEX"}
           </div>
           <div className="mt-2 flex flex-col gap-1 font-mono text-xs text-[#55534E]">
             <Link href="/" className="hover:text-[#1C1C1A]">
-              01 Home
+              01 {isId ? "Beranda" : "Home"}
             </Link>
             <Link href="/#projects" className="hover:text-[#1C1C1A]">
-              03 Projects
+              03 {isId ? "Proyek" : "Projects"}
             </Link>
           </div>
         </div>
 
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            SOCIAL
+            {isId ? "SOSIAL" : "SOCIAL"}
           </div>
           <div className="mt-2 flex flex-col gap-1 font-mono text-xs text-[#55534E]">
             <a
@@ -166,7 +193,7 @@ export const ProjectDetailColophon: React.FC = () => {
               rel="noopener noreferrer"
               className="text-[#8C5E38] hover:text-[#A3724B] hover:underline font-semibold"
             >
-              Download PDF ↗
+              {isId ? "Unduh PDF ↗" : "Download PDF ↗"}
             </a>
           </div>
         </div>
@@ -177,16 +204,16 @@ export const ProjectDetailColophon: React.FC = () => {
           </div>
           <div className="mt-2 flex items-center gap-1.5 font-mono text-xs text-[#8C5E38]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#8C5E38] animate-pulse" />
-            <span>Open for Work</span>
+            <span>{isId ? "Tersedia Bekerja" : "Open for Work"}</span>
           </div>
         </div>
 
         <div className="border-r border-b border-[#1C1C1A]/20 p-3.5 md:p-4">
           <div className="font-mono text-[9px] tracking-[0.14em] uppercase text-[#736E65]">
-            REVISION
+            {isId ? "REVISI" : "REVISION"}
           </div>
           <div className="mt-2 font-mono text-xs text-[#736E65]">
-            v2.6 · Production
+            v2.6 · {isId ? "Produksi" : "Production"}
           </div>
         </div>
       </div>

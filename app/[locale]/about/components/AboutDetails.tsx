@@ -5,9 +5,14 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useLocale } from "next-intl"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
+}
+
+interface AboutDetailsProps {
+  locale?: string
 }
 
 /**
@@ -19,7 +24,10 @@ if (typeof window !== "undefined") {
  *
  * @returns {JSX.Element} Elemen seksi rincian "Who Am I?"
  */
-export default function AboutDetails() {
+export default function AboutDetails({ locale: localeProp }: AboutDetailsProps) {
+  const hookLocale = useLocale()
+  const locale = localeProp || hookLocale || "en"
+  const isId = locale === "id"
   const collageRef = useRef<HTMLDivElement>(null)
   const card1Ref = useRef<HTMLDivElement>(null)
   const card2Ref = useRef<HTMLDivElement>(null)
@@ -85,10 +93,10 @@ export default function AboutDetails() {
       <div className="mb-12 flex items-center justify-between border-t border-[#1C1C1A] pt-3 font-mono text-[11px] tracking-[0.16em] uppercase text-[#736E65]">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-[#A3724B]">(02)</span>
-          <span>IDENTITY &amp; BACKGROUND</span>
+          <span>{isId ? "IDENTITAS & LATAR BELAKANG" : "IDENTITY & BACKGROUND"}</span>
         </div>
         <div className="hidden md:block text-[10px] text-[#736E65]/80">
-          WHO AM I • FULL-STACK, MOBILE &amp; APPLIED AI
+          {isId ? "SIAPA SAYA • FULL-STACK, MOBILE & APPLIED AI" : "WHO AM I • FULL-STACK, MOBILE & APPLIED AI"}
         </div>
         <div>
           <span>SHEET A-202</span>
@@ -98,7 +106,7 @@ export default function AboutDetails() {
       {/* Judul Seksi Kombinasi Oda x Alvalens */}
       <div className="mb-12">
         <div className="mb-2 font-mono text-[11px] tracking-widest text-[#A3724B]">
-          / / / / / / / ARCHITECTURAL PROFILE
+          / / / / / / / {isId ? "PROFIL ARSITEKTUR" : "ARCHITECTURAL PROFILE"}
         </div>
         <motion.h2
           initial={{ opacity: 0, y: 18 }}
@@ -107,9 +115,9 @@ export default function AboutDetails() {
           transition={{ duration: 0.6 }}
           className="text-3xl font-medium tracking-[-0.03em] text-[#1C1C1A] md:text-5xl"
         >
-          Who Am{" "}
+          {isId ? "Siapa " : "Who Am "}
           <span className="font-serif italic font-normal text-[#A3724B]">
-            I?
+            {isId ? "Saya?" : "I?"}
           </span>
         </motion.h2>
       </div>
@@ -244,57 +252,111 @@ export default function AboutDetails() {
           </h3>
 
           <div className="space-y-4 text-justify text-base leading-relaxed text-[#4A4742] md:text-lg">
-            <p>
-              I am an{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                Informatics Engineering student at Universitas Muhammadiyah
-                Surakarta (UMS)
-              </span>{" "}
-              focusing on building reliable{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                Full-stack Developer
-              </span>{" "}
-              mobile and web software, as well as{" "}
-              <span className="font-medium text-[#A3724B]">
-                applied AI products
-              </span>
-              . Experienced in both frontend and backend web and mobile
-              development, including building responsive interfaces,{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                RESTful APIs, and system integration
-              </span>
-              .
-            </p>
+            {isId ? (
+              <>
+                <p>
+                  Saya adalah{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    mahasiswa Teknik Informatika di Universitas Muhammadiyah Surakarta (UMS)
+                  </span>{" "}
+                  yang berdedikasi membangun perangkat lunak web dan mobile{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Full-stack Developer
+                  </span>{" "}
+                  yang andal, serta{" "}
+                  <span className="font-medium text-[#A3724B]">
+                    produk applied AI
+                  </span>
+                  . Berpengalaman dalam rekayasa frontend dan backend, termasuk perancangan antarmuka responsif,{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    RESTful API, dan integrasi sistem berskala korporat
+                  </span>
+                  .
+                </p>
 
-            <p>
-              Passionate about exploring emerging technologies, specifically
-              integrating{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                Large Language Models (such as Gemini)
-              </span>{" "}
-              into mobile and web ecosystems to deliver real, positive impact —
-              demonstrated through competition projects like{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                Smart Stroke &quot;Synexa&quot; (MTE Malaysia &amp; I2ASPO)
-              </span>
-              ,{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                Girantra AI Agri Marketplace
-              </span>
-              , and the{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                ASEAN Challenge
-              </span>
-              . Equipped with full-stack development skills gained through{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                Dicoding Bootcamp (Frontend &amp; Backend Development)
-              </span>{" "}
-              and practical project experiences, I am ready to contribute to an{" "}
-              <span className="font-medium text-[#1C1C1A]">
-                innovative, collaborative, and solution-oriented tech team
-              </span>
-              .
-            </p>
+                <p>
+                  Sangat antusias mengeksplorasi teknologi mutakhir, khususnya pengintegrasian{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Large Language Models (seperti Google Gemini)
+                  </span>{" "}
+                  ke dalam ekosistem aplikasi nyata untuk memberikan dampak positif berkelanjutan — terbukti melalui proyek kompetisi seperti{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Smart Stroke &quot;Synexa&quot; (MTE Malaysia &amp; I2ASPO)
+                  </span>
+                  ,{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Girantra AI Agri Marketplace
+                  </span>
+                  , dan ajang{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    ASEAN Challenge
+                  </span>
+                  . Berbekal keterampilan pengembangan yang diasah lewat{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Dicoding Bootcamp (Frontend &amp; Backend Development)
+                  </span>{" "}
+                  serta pengalaman magang industri di PDAM, saya siap berkontribusi pada{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    tim teknologi yang inovatif, kolaboratif, dan berorientasi solusi
+                  </span>
+                  .
+                </p>
+              </>
+            ) : (
+              <>
+                <p>
+                  I am an{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Informatics Engineering student at Muhammadiyah University of
+                    Surakarta (UMS)
+                  </span>{" "}
+                  focusing on building reliable{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Full-stack Developer
+                  </span>{" "}
+                  mobile and web software, as well as{" "}
+                  <span className="font-medium text-[#A3724B]">
+                    applied AI products
+                  </span>
+                  . Experienced in both frontend and backend web and mobile
+                  development, including building responsive interfaces,{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    RESTful APIs, and system integration
+                  </span>
+                  .
+                </p>
+
+                <p>
+                  Passionate about exploring emerging technologies, specifically
+                  integrating{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Large Language Models (such as Gemini)
+                  </span>{" "}
+                  into mobile and web ecosystems to deliver real, positive impact —
+                  demonstrated through competition projects like{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Smart Stroke &quot;Synexa&quot; (MTE Malaysia &amp; I2ASPO)
+                  </span>
+                  ,{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Girantra AI Agri Marketplace
+                  </span>
+                  , and the{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    ASEAN Challenge
+                  </span>
+                  . Equipped with full-stack development skills gained through{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    Dicoding Bootcamp (Frontend &amp; Backend Development)
+                  </span>{" "}
+                  and practical project experiences, I am ready to contribute to an{" "}
+                  <span className="font-medium text-[#1C1C1A]">
+                    innovative, collaborative, and solution-oriented tech team
+                  </span>
+                  .
+                </p>
+              </>
+            )}
           </div>
 
           {/* Kartu Status Aktif — Gaya Lembar Spesifikasi Oda */}
@@ -310,7 +372,7 @@ export default function AboutDetails() {
                 </div>
                 <div>
                   <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#A3724B]">
-                    CURRENT TECH ECOSYSTEM
+                    {isId ? "EKOSISTEM TEKNOLOGI AKTIF" : "CURRENT TECH ECOSYSTEM"}
                   </div>
                   <div className="text-sm font-medium text-[#1C1C1A] md:text-base">
                     Flutter • Next.js &amp; NestJS • Supabase • Gemini 2.0 Flash

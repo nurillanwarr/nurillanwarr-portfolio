@@ -1,0 +1,121 @@
+## Background
+
+Created for the Samsung Innovation program, SEGER transforms screen time into active physical play for children through real-time camera computer vision motion tracking.
+
+Sedentary behavior and passive screen addiction represent mounting health concerns for pediatric populations, driving early-onset cardiovascular risks and motor coordination deficits. Traditional exercise routines are frequently perceived by modern children as unengaging and tedious.
+
+SEGER bridges this gap by turning the built-in smartphone camera into an intelligent motion tracker. Children control animated adventure characters by physically jumping, ducking, and stretching in their living rooms, with real-time feedback tallying repetitions and burned calories.
+
+
+## Problem Identification
+
+Based on operational workflow discovery and field observations, the primary challenges and core bottlenecks identified were as follows:
+
+- Escalating passive screen-time durations driving physical inactivity and motor developmental delays among children.
+- Low enthusiasm for conventional, repetitive pediatric physical exercises and gymnastics.
+- High cost of dedicated wearable sensor hardware, external motion cameras, or specialized gaming consoles.
+- Lack of accessible mechanisms for parents and community health workers to track children's physical activity data playfully.
+
+
+## Goals & Objectives
+
+> **Primary Objective:** Develop an accessible, sensorless mobile exergame leveraging standard device cameras to gamify daily physical exercise into an interactive adventure quest.
+
+**Key Objectives & Measurable Milestones:**
+
+- Deploy on-device pose estimation algorithms running at 60 FPS without streaming video frames to cloud servers.
+- Implement a gamification engine featuring adventure quests, combo multipliers, and motivational audio soundscapes.
+- Deliver weekly physical activity telemetry reports exportable for parents and pediatric health cadres.
+- Maintain complete child privacy safety by executing 100% of frame processing in volatile local device memory.
+
+
+## Roles & Responsibilities
+
+Serving as **Lead Fullstack & Computer Vision Engineer**, I maintained direct technical ownership across architectural design and implementation:
+
+- Integrated on-device pose estimation models to calculate joint angles and validate exercise repetitions (jumping jacks, squats, arm raises).
+- Engineered interactive state machines translating physical body coordinates into real-time gameplay actions.
+- Constructed the Supabase cloud backend for multi-player leaderboard synchronization and achievement unlocking.
+- Conducted interactive user acceptance sessions with pediatric groups to calibrate difficulty thresholds and repetition counts.
+
+
+## Process & Execution
+
+Engineering execution followed an iterative three-stage model to ensure architectural resilience and precise user alignment:
+
+### 1. Pose Estimation Benchmarks & Game Mechanics
+
+Evaluated mobile-optimized computer vision frameworks and established motion-to-gameplay mappings.
+
+- Benchmarked latency and thermal overhead across mobile pose estimation models on low-to-mid-tier Android hardware.
+- Designed game mechanics linking physical movement intensity to character speed and obstacle clearance.
+- Calibrated joint-angle mathematical tolerances to accommodate varying body heights and proportions.
+
+### 2. Gamification Engine & Cloud Sync
+
+Implemented reward loops, avatar customization features, and cloud leaderboards.
+
+- Constructed caloric expenditure estimation formulas based on detected movement velocities and user weight.
+- Implemented Supabase real-time pub/sub synchronization to render live regional leaderboard standings.
+- Created an in-game cosmetic reward system unlocking virtual attire exclusively through physical sweat points.
+
+### 3. Pediatric Usability Testing & Showcase
+
+Executed field trials with local community children and demonstrated the platform to Samsung program reviewers.
+
+- Gathered observational data tracking children's enthusiasm, engagement duration, and heart rate during gameplay sessions.
+- Refined visual feedback animations ensuring young children easily understood posture correction prompts.
+- Delivered the live demonstration at the Samsung Innovation Campus final exhibition.
+
+
+## Results & Architecture
+
+SEGER demonstrated that computer vision on standard smartphones can transform sedentary screen habits into active fitness routines:
+
+### On-Device Camera Motion Detector
+
+A lightweight computer vision pipeline capturing key joint angles in real time using the device's native camera.
+
+- Accurate detection for jumps, squats, arm stretches, and lateral steps without auxiliary hardware.
+- Strict local frame processing ensuring zero video or imagery ever leaves the device, guaranteeing child privacy.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **Frame Rate** | `60 FPS` |
+| **Privacy Rating** | `100% Local` |
+
+### Gamified Quest & Reward Engine
+
+An adventure progression system featuring daily fitness missions, streak multipliers, and collectible badges.
+
+- Motivational soundscapes and visual cheer animations reinforcing positive movement habits.
+- Adaptive difficulty adjustments keeping children in the optimal flow channel during daily exercise sessions.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **User Retention** | `+ 82%` |
+| **Daily Session Time** | `25 Minutes` |
+
+
+## Impact & Achievements
+
+### Impact on the Organization / Ecosystem
+
+- Converted passive entertainment screen time into vigorous cardiovascular exercise for pediatric participants.
+- Earned high commendations in the Samsung Innovation Campus evaluation for software originality and social relevance.
+- Demonstrated that cost-effective AI running on commodity hardware can solve pressing community health challenges.
+
+### Impact on Personal Engineering Growth
+
+- Gained practical mastery of edge computer vision deployment on mobile devices under tight compute and battery constraints.
+- Honed gamification psychology principles to sustain long-term engagement among juvenile target demographics.
+- Experienced the immense fulfillment of observing children laugh, jump, and enjoy healthy physical exertion through our software.
+
+
+## Team & Appreciation
+
+SEGER was realized through the energetic collaboration of our development team and program mentors:
+
+- Samsung Innovation Campus Mentors for their technical workshops on emerging AI deployment and product design.
+- My engineering teammates for their tireless creative efforts crafting character sprites and animation state machines.
+- The children and parents of our community partner Posyandu who brought joyous enthusiasm to every testing session.

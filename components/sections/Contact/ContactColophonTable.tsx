@@ -1,7 +1,8 @@
 "use client"
 
 import React from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useTranslations } from "next-intl"
 import { CONTACT_METADATA } from "./constants"
 
 /**
@@ -11,6 +12,9 @@ import { CONTACT_METADATA } from "./constants"
  * - Baris 2: Legal, Index, Elsewhere, Drawn, Checked, Return (Scroll back to top)
  */
 export const ContactColophonTable: React.FC = () => {
+  const t = useTranslations("contact.colophon")
+  const tNav = useTranslations("navbar.nav")
+
   // Smooth scroll to top via Lenis (atau window.scrollTo fallback)
   const handleScrollToTop = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -28,7 +32,7 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 1: OFFICE (featuring Retro 8-bit Pixel Mascot!) */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            OFFICE
+            {t("office")}
           </span>
           <div className="mt-3 flex items-center gap-2">
             <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[#8C5E38]">
@@ -51,41 +55,36 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 2: STUDIO */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            STUDIO
+            {t("studio")}
           </span>
           <div className="mt-3 font-mono text-xs text-[#3D3B36]">
             <p>{CONTACT_METADATA.studio}</p>
-            <p className="text-[#6B6964]">Surakarta, Jawa Tengah</p>
+            <p className="text-[#6B6964]">{t("location")}</p>
           </div>
         </div>
 
         {/* Cell 3: CONTACT */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            CONTACT
+            {t("contact")}
           </span>
           <div className="mt-3 font-mono text-xs text-[#3D3B36]">
             <a
               href={`mailto:${CONTACT_METADATA.email}`}
-              className="block truncate hover:text-[#8C5E38] hover:underline"
+              className="text-[#8C5E38] hover:underline"
             >
               {CONTACT_METADATA.email}
             </a>
-            <a
-              href={`tel:${CONTACT_METADATA.phone.replace(/[^0-9+]/g, "")}`}
-              className="mt-0.5 block hover:text-[#8C5E38]"
-            >
-              {CONTACT_METADATA.phone}
-            </a>
+            <p className="mt-0.5 text-[#6B6964]">{CONTACT_METADATA.phone}</p>
           </div>
         </div>
 
         {/* Cell 4: SHEET */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            SHEET
+            {t("sheet")}
           </span>
-          <p className="mt-3 font-mono text-sm font-bold text-[#1C1C1A]">
+          <p className="mt-3 font-mono text-xs font-semibold text-[#1C1C1A]">
             {CONTACT_METADATA.sheetCode}
           </p>
         </div>
@@ -93,9 +92,9 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 5: SCALE */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            SCALE
+            {t("scale")}
           </span>
-          <p className="mt-3 font-mono text-sm text-[#3D3B36]">
+          <p className="mt-3 font-mono text-xs text-[#3D3B36]">
             {CONTACT_METADATA.scale}
           </p>
         </div>
@@ -103,7 +102,7 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 6: REVISION */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            REVISION
+            {t("revision")}
           </span>
           <p className="mt-3 font-mono text-xs text-[#3D3B36]">
             {CONTACT_METADATA.revision}
@@ -116,10 +115,10 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 7: LEGAL */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            LEGAL
+            {t("legal")}
           </span>
           <div className="mt-3 font-mono text-[11px] leading-relaxed text-[#6B6964]">
-            <p>{CONTACT_METADATA.legalText}</p>
+            <p>{t("legal")}</p>
             <p className="mt-0.5 text-[10px] text-[#8F8B82]">
               {CONTACT_METADATA.legalNote}
             </p>
@@ -129,29 +128,29 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 8: INDEX */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            INDEX
+            {t("index")}
           </span>
           <div className="mt-3 flex flex-col gap-1 font-mono text-xs text-[#3D3B36]">
             <Link href="/#about" className="hover:text-[#8C5E38] hover:underline">
-              01 About
+              01 {tNav("about")}
             </Link>
             <Link
               href="/#projects"
               className="hover:text-[#8C5E38] hover:underline"
             >
-              02 Projects
+              02 {tNav("projects")}
             </Link>
             <Link
               href="/#process"
               className="hover:text-[#8C5E38] hover:underline"
             >
-              03 Process
+              03 {tNav("process")}
             </Link>
             <Link
               href="/#contact"
               className="hover:text-[#8C5E38] hover:underline"
             >
-              04 Contact
+              04 {tNav("contact")}
             </Link>
           </div>
         </div>
@@ -159,7 +158,7 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 9: ELSEWHERE */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            ELSEWHERE
+            {t("elsewhere")}
           </span>
           <div className="mt-3 flex flex-col gap-1 font-mono text-xs text-[#3D3B36]">
             <a
@@ -192,7 +191,7 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 10: DRAWN */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            DRAWN
+            {t("drawn")}
           </span>
           <p className="mt-3 font-mono text-xs font-semibold text-[#1C1C1A]">
             {CONTACT_METADATA.drawnBy}
@@ -202,7 +201,7 @@ export const ContactColophonTable: React.FC = () => {
         {/* Cell 11: CHECKED */}
         <div className="flex flex-col justify-between p-4 sm:p-5">
           <span className="font-mono text-[10px] font-semibold tracking-widest text-[#8C5E38] uppercase">
-            CHECKED
+            {t("checked")}
           </span>
           <p className="mt-3 font-mono text-xs font-semibold text-[#1C1C1A]">
             {CONTACT_METADATA.checkedBy}
@@ -217,13 +216,13 @@ export const ContactColophonTable: React.FC = () => {
           <button
             type="button"
             onClick={handleScrollToTop}
-            className="group mt-3 flex items-center gap-1.5 font-mono text-xs font-semibold text-[#1C1C1A] transition-colors hover:text-[#8C5E38]"
+            className="group mt-3 flex items-center gap-1.5 font-mono text-xs font-semibold text-[#1C1C1A] transition-colors hover:text-[#8C5E38] cursor-pointer"
             aria-label="Scroll back to top of page"
           >
             <span className="transition-transform duration-300 group-hover:-translate-y-1">
               ↑
             </span>
-            <span>Back to top</span>
+            <span>{t("returnTop")}</span>
           </button>
         </div>
       </div>

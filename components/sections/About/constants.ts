@@ -39,7 +39,7 @@ export const ABOUT_CONTENT = {
   sheetCode: "SHEET A-102",
   watermark: "ABOUT",
   leadPrefix:
-    "Informatics Engineering student at Universitas Muhammadiyah Surakarta, dedicated to architecting",
+    "Informatics Engineering student at Muhammadiyah University of Surakarta, dedicated to architecting",
   leadHighlight: "reliable full-stack applications and applied AI products",
   leadSuffix: ".",
   description:

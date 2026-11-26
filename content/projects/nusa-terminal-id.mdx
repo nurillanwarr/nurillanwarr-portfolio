@@ -1,0 +1,121 @@
+## Latar Belakang
+
+Terpilih sebagai Finalis Tingkat Nasional dalam ajang Hackathon X Digdaya pada kategori Applied AI & Fintech, tim kami merancang dan membangun NusaTerminal guna mendemokratisasi akses data pasar modal bagi jutaan investor ritel Indonesia.
+
+Secara historis, terminal intelijen pasar kelas institusi seperti Bloomberg Terminal atau FactSet terkunci di balik biaya langganan selangit yang melampaui $24.000 per tahun. Akibatnya, investor ritel domestik terpaksa menelaah ratusan lembar laporan keuangan emiten Bursa Efek Indonesia (IDX) secara manual serta terpapar kebisingan berita yang sarat bias dan rumor spekulatif.
+
+NusaTerminal menyetarakan ruang bermain investasi dengan memadukan orkestrasi LLM Google Gemini 1.5 Flash, arsitektur Retrieval-Augmented Generation (RAG) atas berkas keterbukaan informasi IDX terindeks, dan model klasifikasi sentimen pasar IndoFinBERT yang telah dilatih khusus untuk konteks bahasa keuangan Indonesia.
+
+
+## Identifikasi Masalah
+
+Berdasarkan analisis alur kerja dan observasi operasional di lapangan, tantangan pokok dan kendala utama yang berhasil diidentifikasi meliputi:
+
+- Investor ritel kesulitan menelaah laporan keuangan kuartalan ratusan halaman dari 800+ emiten yang tercatat di Bursa Efek Indonesia (IDX).
+- Biaya berlangganan terminal keuangan institusional yang teramat mahal membuat investor ritel terisolasi dari analisis mendalam real-time.
+- Maraknya rumor saham 'pom-pom' dan analisis keuangan tanpa dasar yang kerap merugikan para investor pemula.
+- Model kecerdasan buatan umum kerap mengalami halusinasi numerik saat diminta menghitung rasio valuasi historis tertentu.
+
+
+## Tujuan & Sasaran
+
+> **Tujuan Utama:** Membangun terminal intelijen keuangan bertenaga RAG yang menyajikan ringkasan laporan keuangan emiten IDX secara akurat, bebas halusinasi, dan dapat diakses bebas oleh investor ritel.
+
+**Sasaran Strategis & Tolok Ukur Keberhasilan:**
+
+- Mengotomatisasi pipeline ingesti dokumen PDF laporan keuangan IDX ke dalam basis data vektor ChromaDB.
+- Menerapkan model IndoFinBERT untuk menilai sentimen berita terhadap dimensi risiko pasar modal nyata.
+- Membangun antarmuka terminal interaktif berkinerja tinggi dengan kemampuan respons streaming tanpa jeda.
+- Mencapai akurasi ekstraksi metrik finansial >95% lengkap dengan sitasi langsung ke nomor halaman laporan emiten resmi.
+
+
+## Peran & Tanggung Jawab
+
+Sebagai **Lead Fullstack & AI Engineer**, saya memegang kepemilikan teknis penuh pada perancangan dan implementasi fitur:
+
+- Merancang arsitektur pipeline RAG multi-tahap menggabungkan parsing teks cerdas, pembuatan chunk berbasis konteks, dan ChromaDB vector store.
+- Mengintegrasikan API Google Gemini 1.5 Flash dengan rekayasa prompt khusus untuk mengekstraksi data laba rugi, arus kas, dan neraca emiten.
+- Membangun antarmuka terminal berbasis Next.js App Router dengan dukungan dark-mode estetika Bloomberg, visualisasi grafik, dan respons teks streaming.
+- Mengimplementasikan model IndoFinBERT untuk mengklasifikasikan sentimen berita keuangan Indonesia menjadi positif, netral, atau berisiko tinggi.
+
+
+## Proses & Eksekusi
+
+Pengembangan sistem dieksekusi secara iteratif dan terstruktur melalui tiga tahapan utama untuk menjamin stabilitas arsitektur serta keselarasan kebutuhan pengguna:
+
+### 1. Riset & Arsitektur Pipeline RAG Finansial
+
+Merancang arsitektur ingesti dokumen PDF IDX dan penanganan data numerik sensitif tanpa halusinasi.
+
+- Mengevaluasi teknik chunking rekursif untuk menjaga keterhubungan antar-tabel finansial kompleks.
+- Membangun skema embedding semantik menggunakan basis data vektor ChromaDB.
+- Menyusun strategi prompting berbasis 'Chain-of-Thought' terverifikasi dokumen sumber.
+
+### 2. Pelatihan Sentimen IndoFinBERT & Integrasi API
+
+Melatih model NLP bahasa Indonesia keuangan dan mengintegrasikan orkestrasi model Gemini.
+
+- Melakukan fine-tuning korpus berita pasar modal lokal untuk mendeteksi sentimen volatilitas pasar.
+- Mengintegrasikan streaming server-sent events (SSE) dari LLM langsung ke antarmuka terminal.
+- Menguji ketahanan model terhadap pertanyaan jebakan rasio keuangan yang ambigu.
+
+### 3. Pengembangan Antarmuka & Uji Finalis Nasional
+
+Menyempurnakan UX terminal investor dan mempresentasikan inovasi di hadapan dewan juri Hackathon X Digdaya.
+
+- Membangun UI terminal dark-mode bertingkat dengan grafik pergerakan harga saham interaktif.
+- Menambahkan fitur ekspor ringkasan analisis PDF bagi investor ritel.
+- Mencapai predikat Finalis Nasional dan pengakuan dewan juri di tingkat nasional.
+
+
+## Hasil & Arsitektur
+
+NusaTerminal sukses didemokan sebagai platform intelijen keuangan ritel terdepan dengan kemampuan analisis RAG sub-detik:
+
+### Pipeline RAG Laporan Keuangan IDX
+
+Sistem penelusuran dokumen cerdas yang mengekstrak data dari ratusan halaman PDF laporan keuangan resmi emiten IDX.
+
+- Ekstraksi tabel laba-rugi, liabilitas, dan ekuitas secara presisi.
+- Sitasi langsung nomor halaman dokumen resmi pada setiap jawaban analisis.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Akurasi Ekstraksi** | `> 95%` |
+| **Latensi Jawaban** | `< 2.5 Detik` |
+
+### Mesin Sentimen Terbobot IndoFinBERT
+
+Klasifikasi sentimen berita keuangan berbasis NLP yang memahami konteks emiten bursa efek Indonesia.
+
+- Penyaringan rumor tak berdasar dan sinyal manipulasi harga saham.
+- Indeks skor sentimen pasar harian terintegrasi ke dalam ringkasan emiten.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **F1-Score Model** | `89.4%` |
+| **Analisis Berita** | `Real-Time` |
+
+
+## Dampak & Pencapaian
+
+### Dampak Bagi Instansi / Organisasi
+
+- Mendapat penghargaan Finalis Nasional Hackathon X Digdaya dari ratusan tim lintas universitas se-Indonesia.
+- Membuktikan kelayakan pemanfaatan RAG dan model NLP lokal dalam menganalisis data pasar modal terstruktur.
+- Membuka wawasan baru bagi komunitas investor ritel untuk melakukan riset berbasis data objektif.
+
+### Dampak Bagi Pertumbuhan Pribadi
+
+- Menguasai implementasi praktis RAG, vector database ChromaDB, dan orkestrasi Google Gemini API skala lanjut.
+- Mengasah pemahaman mendalam tentang ekosistem pasar modal dan analisis fundamental keuangan emiten.
+- Memperkuat keterampilan kolaborasi tim dan presentasi pitching teknis di tingkat nasional.
+
+
+## Tim & Apresiasi
+
+Pencapaian NusaTerminal sebagai Finalis Nasional merupakan buah kerja keras kolaboratif rekan satu tim dan mentor:
+
+- Rekan setim pengembang atas dedikasi tanpa henti selama sesi coding maraton hackathon.
+- Dewan juri dan mentor Hackathon X Digdaya atas masukan arsitektur berharga dan validasi produk.
+- Komunitas investor ritel yang berpartisipasi aktif dalam uji coba awal sistem terminal.

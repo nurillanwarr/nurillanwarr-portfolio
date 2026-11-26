@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useLocale } from "next-intl"
 
 export type AchievementIconType = "trophy" | "medal" | "award"
 
@@ -80,6 +81,15 @@ function AchievementBadgeIcon({ type }: { type: AchievementIconType }) {
       <path d="M12 18v-2h-.5" />
     </svg>
   )
+}
+
+function getAchievementSubtitle(ach: AchievementItem, isId: boolean) {
+  if (ach.id === "ach-06") {
+    return isId
+      ? "Himpunan Mahasiswa Teknik Informatika Universitas Muhammadiyah Surakarta"
+      : "Informatics Engineering Student Association — Muhammadiyah University of Surakarta"
+  }
+  return ach.subtitle
 }
 
 /**
@@ -188,7 +198,14 @@ const EDUCATION_PANELS = [
  *
  * @returns {JSX.Element} Elemen seksi Education & Achievements
  */
-export default function AboutEducation() {
+interface AboutEducationProps {
+  locale?: string
+}
+
+export default function AboutEducation({ locale: localeProp }: AboutEducationProps) {
+  const hookLocale = useLocale()
+  const locale = localeProp || hookLocale || "en"
+  const isId = locale === "id"
   const [isExpanded, setIsExpanded] = useState(false)
   const [activePlate, setActivePlate] = useState<number>(0)
 
@@ -205,10 +222,10 @@ export default function AboutEducation() {
       <div className="mb-12 flex items-center justify-between border-t border-[#1C1C1A] pt-3 font-mono text-[11px] tracking-[0.16em] uppercase text-[#736E65]">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-[#A3724B]">(05)</span>
-          <span>ACADEMIC &amp; HONORS RECORD</span>
+          <span>{isId ? "REKAM AKADEMIK & PENGHARGAAN" : "ACADEMIC & HONORS RECORD"}</span>
         </div>
         <div className="hidden md:block text-[10px] text-[#736E65]/80">
-          ON COMPUTER SCIENCE, ORGANIZATIONAL LEADERSHIP &amp; COMPETITIONS
+          {isId ? "ILMU KOMPUTER, KEPEMIMPINAN ORGANISASI & KOMPETISI" : "ON COMPUTER SCIENCE, ORGANIZATIONAL LEADERSHIP & COMPETITIONS"}
         </div>
         <div>
           <span>SHEET A-205</span>
@@ -225,18 +242,19 @@ export default function AboutEducation() {
       >
         <div>
           <div className="mb-2 font-mono text-[11px] tracking-widest text-[#A3724B]">
-            / / / / / / / ACADEMIC ARCHITECTURE
+            / / / / / / / {isId ? "ARSITEKTUR AKADEMIK" : "ACADEMIC ARCHITECTURE"}
           </div>
           <h2 className="text-3xl font-medium tracking-[-0.03em] text-[#1C1C1A] md:text-5xl">
-            Education &amp;{" "}
+            {isId ? "Pendidikan & " : "Education & "}
             <span className="font-serif italic font-normal text-[#A3724B]">
-              Achievements
+              {isId ? "Prestasi" : "Achievements"}
             </span>
           </h2>
         </div>
         <p className="max-w-md font-mono text-xs leading-relaxed text-[#55534E] md:text-right">
-          ACADEMIC FOUNDATION AT UNIVERSITAS MUHAMMADIYAH SURAKARTA (UMS) &amp;
-          INTERNATIONAL / NATIONAL COMPETITION MILESTONES.
+          {isId
+            ? "FONDASI AKADEMIK DI UNIVERSITAS MUHAMMADIYAH SURAKARTA (UMS) & PENCAPAIAN KOMPETISI NASIONAL / INTERNASIONAL."
+            : "ACADEMIC FOUNDATION AT MUHAMMADIYAH UNIVERSITY OF SURAKARTA (UMS) & INTERNATIONAL / NATIONAL COMPETITION MILESTONES."}
         </p>
       </motion.div>
 
@@ -254,20 +272,24 @@ export default function AboutEducation() {
             <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[#1C1C1A]/15 pb-4">
               <div>
                 <div className="flex items-center gap-2 font-mono text-xs font-semibold text-[#A3724B]">
-                  <span>SEP 2023 — PRESENT</span>
+                  <span>{isId ? "SEP 2023 — SEKARANG" : "SEP 2023 — PRESENT"}</span>
                   <span>•</span>
                   <span>SURAKARTA, ID</span>
                 </div>
                 <h3 className="mt-1 text-2xl font-medium tracking-tight text-[#1C1C1A] md:text-3xl">
-                  Universitas Muhammadiyah Surakarta (UMS)
+                  {isId
+                    ? "Universitas Muhammadiyah Surakarta (UMS)"
+                    : "Muhammadiyah University of Surakarta (UMS)"}
                 </h3>
                 <p className="mt-1 font-mono text-xs uppercase tracking-wider text-[#736E65]">
-                  S1 Teknik Informatika | Bachelor of Informatics Engineering
+                  {isId
+                    ? "S1 Teknik Informatika | Fakultas Komunikasi & Informatika"
+                    : "Bachelor of Informatics Engineering | Faculty of Communication & Informatics"}
                 </p>
               </div>
 
               <span className="border border-[#1C1C1A] bg-[#1C1C1A] px-3 py-1 font-mono text-[10px] tracking-widest uppercase text-[#F5F2EB]">
-                GPA 3.24 / 4.00
+                {isId ? "STATUS AKTIF" : "ACTIVE ENROLLMENT"}
               </span>
             </div>
 
@@ -347,64 +369,101 @@ export default function AboutEducation() {
 
             {/* Deskripsi Pendidikan Sesuai CV */}
             <div className="space-y-4 text-justify text-sm leading-relaxed text-[#4A4742] md:text-base">
-              <p>
-                Currently pursuing a Bachelor&apos;s degree in{" "}
-                <span className="font-medium text-[#1C1C1A]">
-                  Informatics Engineering at Universitas Muhammadiyah Surakarta
-                  (UMS)
-                </span>
-                , focusing on building reliable{" "}
-                <span className="font-medium text-[#1C1C1A]">
-                  mobile and web software
-                </span>{" "}
-                as well as{" "}
-                <span className="font-medium text-[#A3724B]">
-                  applied AI products
-                </span>
-                .
-              </p>
-              <p>
-                Actively involved in{" "}
-                <span className="font-medium text-[#1C1C1A]">
-                  Himpunan Mahasiswa Teknik Informatika (HIMATIF) UMS
-                </span>{" "}
-                as Social Community Staff (Dec 2023 – Present), executing
-                organizational work programs and fostering community
-                development. Beyond campus, completed intensive training in{" "}
-                <span className="font-medium text-[#1C1C1A]">
-                  Dicoding Bootcamp (Frontend &amp; Backend Development)
-                </span>{" "}
-                and represented in international &amp; national competitions
-                including{" "}
-                <span className="font-medium text-[#1C1C1A]">
-                  MTE Malaysia, I2ASPO, IT Fest, ASEAN Challenge, and Samsung
-                  Innovation Programs
-                </span>
-                .
-              </p>
+              {isId ? (
+                <>
+                  <p>
+                    Saat ini menempuh studi S1{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      Teknik Informatika di Universitas Muhammadiyah Surakarta (UMS)
+                    </span>
+                    , berfokus merancang perangkat lunak{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      web dan mobile yang andal
+                    </span>{" "}
+                    serta{" "}
+                    <span className="font-medium text-[#A3724B]">
+                      produk applied AI
+                    </span>
+                    .
+                  </p>
+                  <p>
+                    Aktif berkontribusi di{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      Himpunan Mahasiswa Teknik Informatika (HIMATIF) UMS
+                    </span>{" "}
+                    sebagai Staf Ahli Pengabdian Masyarakat (Des 2023 – Sekarang), mengeksekusi program kerja sosial dan pemberdayaan komunitas. Di luar kampus, menyelesaikan pelatihan intensif{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      Dicoding Bootcamp (Frontend &amp; Backend Development)
+                    </span>{" "}
+                    serta mewakili kampus dalam kompetisi inovasi teknologi nasional dan internasional, termasuk{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      MTE Malaysia, I2ASPO, IT Fest, ASEAN Challenge, dan Samsung Innovation Campus
+                    </span>
+                    .
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p>
+                    Currently pursuing a Bachelor&apos;s degree in{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      Informatics Engineering at Muhammadiyah University of Surakarta
+                      (UMS)
+                    </span>
+                    , focusing on building reliable{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      mobile and web software
+                    </span>{" "}
+                    as well as{" "}
+                    <span className="font-medium text-[#A3724B]">
+                      applied AI products
+                    </span>
+                    .
+                  </p>
+                  <p>
+                    Actively involved in{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      Informatics Engineering Student Association (HIMATIF) UMS
+                    </span>{" "}
+                    as Social Community Staff (Dec 2023 – Present), executing
+                    organizational work programs and fostering community
+                    development. Beyond campus, completed intensive training in{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      Dicoding Bootcamp (Frontend &amp; Backend Development)
+                    </span>{" "}
+                    and represented in international &amp; national competitions
+                    including{" "}
+                    <span className="font-medium text-[#1C1C1A]">
+                      MTE Malaysia, I2ASPO, IT Fest, ASEAN Challenge, and Samsung
+                      Innovation Programs
+                    </span>
+                    .
+                  </p>
+                </>
+              )}
             </div>
 
             {/* Baris Spesifikasi Pendidikan (Gaya Oda Metrik) */}
             <div className="mt-6 grid grid-cols-1 gap-3 border-t border-[#1C1C1A]/15 pt-5 sm:grid-cols-3">
               <div className="border border-[#1C1C1A]/15 bg-[#EBE3D7] px-3.5 py-2.5">
                 <div className="font-mono text-[9.5px] uppercase text-[#736E65]">
-                  ACADEMIC STANDING
+                  {isId ? "STATUS AKADEMIK" : "ACADEMIC STANDING"}
                 </div>
                 <div className="mt-0.5 font-mono text-xs font-semibold text-[#1C1C1A]">
-                  Current GPA: 3.24 / 4.00
+                  {isId ? "IPK Saat Ini: 3.24 / 4.00" : "Current GPA: 3.24 / 4.00"}
                 </div>
               </div>
               <div className="border border-[#1C1C1A]/15 bg-[#EBE3D7] px-3.5 py-2.5">
                 <div className="font-mono text-[9.5px] uppercase text-[#736E65]">
-                  ORGANIZATION
+                  {isId ? "ORGANISASI" : "ORGANIZATION"}
                 </div>
                 <div className="mt-0.5 font-mono text-xs font-semibold text-[#1C1C1A]">
-                  HIMATIF UMS Staff
+                  {isId ? "Staf Ahli HIMATIF UMS" : "HIMATIF UMS Staff"}
                 </div>
               </div>
               <div className="border border-[#1C1C1A]/15 bg-[#EBE3D7] px-3.5 py-2.5">
                 <div className="font-mono text-[9.5px] uppercase text-[#736E65]">
-                  PREVIOUS DIPLOMA
+                  {isId ? "SEKOLAH MENENGAH" : "PREVIOUS DIPLOMA"}
                 </div>
                 <div className="mt-0.5 font-mono text-xs font-semibold text-[#1C1C1A]">
                   SMAN 1 Surakarta
@@ -425,10 +484,10 @@ export default function AboutEducation() {
           <div className="mb-5 flex items-end justify-between border-b border-[#1C1C1A]/15 pb-3">
             <div>
               <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[#A3724B]">
-                INDEX // CREDENTIALS
+                {isId ? "INDEKS // KREDENSIAL" : "INDEX // CREDENTIALS"}
               </span>
               <h3 className="text-xl font-medium text-[#1C1C1A] md:text-2xl">
-                Achievements &amp; Certifications
+                {isId ? "Prestasi & Sertifikasi" : "Achievements & Certifications"}
               </h3>
             </div>
             <span className="font-mono text-[10px] text-[#736E65]">
@@ -482,7 +541,7 @@ export default function AboutEducation() {
                             </span>
                           </div>
                           <p className="mt-1 text-xs leading-relaxed text-[#4A4742]">
-                            {achievement.subtitle}
+                            {getAchievementSubtitle(achievement, isId)}
                           </p>
                           <div className="mt-2 font-mono text-[10px] tracking-wider uppercase text-[#736E65]">
                             {achievement.date}
@@ -584,7 +643,7 @@ export default function AboutEducation() {
                                 </span>
                               </div>
                               <p className="mt-1 text-xs leading-relaxed text-[#4A4742]">
-                                {achievement.subtitle}
+                                {getAchievementSubtitle(achievement, isId)}
                               </p>
                               <div className="mt-2 font-mono text-[10px] tracking-wider uppercase text-[#736E65]">
                                 {achievement.date}
@@ -607,7 +666,11 @@ export default function AboutEducation() {
                 >
                   <span>
                     {isExpanded
-                      ? "Show Less"
+                      ? isId
+                        ? "Tampilkan Lebih Sedikit"
+                        : "Show Less"
+                      : isId
+                      ? `Tampilkan ${ACHIEVEMENTS_DATA.length - 4} Lainnya`
                       : `Show ${ACHIEVEMENTS_DATA.length - 4} More`}
                   </span>
                   <svg

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react"
 import { usePathname } from "next/navigation"
-import type LenisInstance from "lenis"
+import Lenis from "lenis"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 declare global {
   interface Window {
-    __lenis?: LenisInstance | null
+    __lenis?: Lenis | null
   }
 }
 
@@ -45,7 +45,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       return
     }
 
-    let lenis: LenisInstance | null = null
+    let lenis: Lenis | null = null
     let cancelled = false
 
     const updateLenis = (time: number) => {
@@ -131,32 +131,34 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       }
     }
 
-    async function setupLenis() {
-      const { default: LenisClass } = await import("lenis")
+    function setupLenis() {
+      try {
+        if (cancelled) return
 
-      if (cancelled) return
+        lenis = new Lenis({
+          duration: 1.15,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: "vertical",
+          gestureOrientation: "vertical",
+          smoothWheel: true,
+          wheelMultiplier: 0.95,
+          touchMultiplier: 1.5,
+        })
 
-      lenis = new LenisClass({
-        duration: 1.15,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: "vertical",
-        gestureOrientation: "vertical",
-        smoothWheel: true,
-        wheelMultiplier: 0.95,
-        touchMultiplier: 1.5,
-      })
+        window.__lenis = lenis
 
-      window.__lenis = lenis
+        lenis.on("scroll", ScrollTrigger.update)
+        gsap.ticker.add(updateLenis)
+        gsap.ticker.lagSmoothing(0)
 
-      lenis.on("scroll", ScrollTrigger.update)
-      gsap.ticker.add(updateLenis)
-      gsap.ticker.lagSmoothing(0)
-
-      // Jika halaman dibuka langsung dengan hash (misal /en#projects), gulir halus ke target
-      if (window.location.hash) {
-        setTimeout(() => {
-          scrollToHashElement(window.location.hash, false)
-        }, 150)
+        // Jika halaman dibuka langsung dengan hash (misal /en#projects), gulir halus ke target
+        if (typeof window !== "undefined" && window.location.hash) {
+          setTimeout(() => {
+            scrollToHashElement(window.location.hash, false)
+          }, 150)
+        }
+      } catch (err) {
+        console.warn("Lenis smooth scroll failed to initialize, using native scroll:", err)
       }
     }
 

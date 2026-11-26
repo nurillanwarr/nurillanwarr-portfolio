@@ -1,0 +1,121 @@
+## Latar Belakang
+
+Dikembangkan untuk kompetisi inovasi kesehatan bergengsi MTE Malaysia dan UGM Health Tech Hackathon, Synexa merupakan ekosistem manajemen dan pemantauan rehabilitasi pasien pasca-stroke terpadu.
+
+Pemulihan pasien pasca-stroke membutuhkan latihan fisik harian yang konsisten serta pemantauan telemetri tanda vital berkesinambungan. Namun, keterbatasan jarak dari klinik spesialis dan rumitnya antarmuka aplikasi kesehatan kerap menyulitkan pasien lanjut usia untuk mematuhi program fisioterapi mereka.
+
+Synexa menghadirkan solusi komprehensif melalui aplikasi mobile Flutter ramah lansia, gerbang telemetri NestJS yang terhubung dengan sensor kesehatan, serta konsol evaluasi dokter untuk memantau kepatuhan latihan motorik pasien secara real-time.
+
+
+## Identifikasi Masalah
+
+Berdasarkan analisis alur kerja dan observasi operasional di lapangan, tantangan pokok dan kendala utama yang berhasil diidentifikasi meliputi:
+
+- Tingkat ketidakpatuhan latihan rehabilitasi pasca-stroke yang tinggi saat pasien menjalani pemulihan mandiri di rumah.
+- Ketiadaan sarana komunikasi real-time yang memantau tanda vital pasien saat melakukan latihan fisioterapi mandiri.
+- Desain antarmuka aplikasi medis yang terlalu rumit dan tidak ramah bagi pasien lansia dengan keterbatasan motorik halus.
+- Dokter spesialis rehabilitasi medik kesulitan mendapatkan data kuantitatif perkembangan kemajuan fisik pasien.
+
+
+## Tujuan & Sasaran
+
+> **Tujuan Utama:** Membangun ekosistem tele-rehabilitasi stroke holistik yang mempermudah pasien lansia menjalankan terapi motorik sekaligus memberi dokter telemetri perkembangan fisik yang akurat.
+
+**Sasaran Strategis & Tolok Ukur Keberhasilan:**
+
+- Merancang antarmuka mobile Flutter ramah lansia dengan tombol kontras tinggi, navigasi intuitif, dan panduan audio.
+- Membangun gerbang backend telemetri NestJS berlatensi rendah untuk menerima data latihan dan tanda vital.
+- Menyediakan dashboard evaluasi klinis dokter dengan analitik visual skor kepatuhan dan grafik perbaikan fungsi gerak.
+- Mencapai adopsi kemandirian terapi pasien di atas 85% dalam uji klinis terbatas.
+
+
+## Peran & Tanggung Jawab
+
+Sebagai **Lead Mobile & Backend Developer**, saya memegang kepemilikan teknis penuh pada perancangan dan implementasi fitur:
+
+- Membangun aplikasi mobile multi-platform menggunakan Flutter dengan arsitektur Clean Architecture dan BLoC state management.
+- Merancang API gateway NestJS terukur dengan integrasi basis data PostgreSQL dan notifikasi push Firebase FCM.
+- Melakukan uji kegunaan (usability testing) langsung bersama pasien lansia untuk mengoptimalkan aksesibilitas antarmuka.
+- Mengintegrasikan video panduan latihan fisioterapi interaktif dengan pelacak repetisi otomatis.
+
+
+## Proses & Eksekusi
+
+Pengembangan sistem dieksekusi secara iteratif dan terstruktur melalui tiga tahapan utama untuk menjamin stabilitas arsitektur serta keselarasan kebutuhan pengguna:
+
+### 1. Riset Klinis & Desain Khusus Lansia
+
+Mempelajari protokol fisioterapi stroke dan merancang UX yang nyaman untuk lansia.
+
+- Berkonsultasi dengan terapis fisioterapi untuk memetakan gerakan latihan motorik dasar yang aman di rumah.
+- Menerapkan standar aksesibilitas visual WCAG dengan teks ukuran besar dan skema warna kontras lembut.
+- Menyusun skema arsitektur data tanda vital (detak jantung, saturasi oksigen, durasi latihan).
+
+### 2. Implementasi Flutter & Backend NestJS
+
+Mengeksekusi Clean Architecture pada aplikasi mobile dan membangun gateway data telemetri.
+
+- Menyusun kode Flutter modular yang memisahkan lapisan Domain, Data, dan Presentation secara ketat.
+- Mengembangkan RESTful endpoints dan WebSocket server NestJS untuk sinkronisasi latihan real-time.
+- Menghubungkan layanan cloud storage untuk streaming video panduan fisioterapi beresolusi optimal.
+
+### 3. Pengujian Usabilitas & Kompetisi Internasional
+
+Melakukan validasi lapangan dan mempresentasikan Synexa pada ajang inovasi MTE Malaysia.
+
+- Menjalankan uji coba terbatas bersama pasien stroke dampingan untuk mengukur kemudahan pemakaian aplikasi.
+- Mengoptimalkan performa rendering Flutter agar berjalan mulus pada smartphone berspesifikasi rendah.
+- Mempresentasikan demo fungsional lengkap di hadapan juri internasional ajang MTE Malaysia.
+
+
+## Hasil & Arsitektur
+
+Synexa berhasil dikembangkan sebagai platform tele-rehabilitasi stroke terpadu yang memenangkan pengakuan di kompetisi nasional dan internasional:
+
+### Aplikasi Mobile Flutter Ramah Lansia
+
+Aplikasi pendamping rehabilitasi stroke mandiri dengan antarmuka yang sangat mudah dipahami oleh pengguna lanjut usia.
+
+- Instruksi suara dwibahasa dan animasi visual panduan gerakan fisioterapi.
+- Tombol darurat satu sentuhan (SOS Emergency) langsung ke kontak keluarga terdaftar.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Skor Kepuasan Lansia** | `4.8 / 5.0` |
+| **Kepatuhan Latihan** | `+ 78%` |
+
+### Gateway Telemetri & API NestJS
+
+Layanan server tangguh yang mengumpulkan catatan repetisi latihan dan data vital pasien secara aman dan berlatensi rendah.
+
+- Sinkronisasi offline-to-online otomatis saat koneksi internet pasien kembali pulih.
+- Integrasi notifikasi pengingat jadwal terapi berbasis Firebase Cloud Messaging (FCM).
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Uptime Server** | `99.9%` |
+| **Respon API** | `< 120 ms` |
+
+
+## Dampak & Pencapaian
+
+### Dampak Bagi Instansi / Organisasi
+
+- Meraih apresiasi dan penghargaan pada kompetisi teknologi kesehatan tingkat internasional MTE Malaysia dan UGM.
+- Membantu pasien stroke menjalani pemulihan mandiri dengan panduan yang benar tanpa harus selalu datang ke rumah sakit.
+- Meringankan beban psikologis keluarga pasien melalui pelacakan jadwal terapi yang terstruktur dan terukur.
+
+### Dampak Bagi Pertumbuhan Pribadi
+
+- Memperdalam keahlian Clean Architecture Flutter dan manajemen state BLoC pada kasus aplikasi kritis.
+- Mengembangkan pemahaman empati mendalam dalam merancang antarmuka khusus untuk pengguna lansia.
+- Memperoleh pengalaman berharga dalam mempresentasikan inovasi kesehatan teknologi di panggung kompetisi global.
+
+
+## Tim & Apresiasi
+
+Inovasi Synexa lahir dari sinergi multidisiplin antara pengembang teknologi, tenaga medis, dan mentor inspiratif:
+
+- Terapis Fisioterapi dan Dokter Pembimbing atas validasi ilmiah protokol gerakan terapi.
+- Rekan tim pengembang mobile dan desainer UI/UX atas kerja keras menyempurnakan setiap detail interaksi.
+- Para pasien relawan dan keluarga yang dengan tulus memberikan masukan berharga selama proses perancangan.

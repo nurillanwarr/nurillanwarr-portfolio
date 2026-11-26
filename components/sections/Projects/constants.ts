@@ -401,7 +401,7 @@ export const PROJECTS: ProjectData[] = [
     description:
       "Privacy-preserving healthcare platform combining Federated Learning (PyTorch, FedAvg, Opacus DP), Ethereum Smart Contracts (Solidity), and Explainable AI (SHAP) across hospitals.",
     storyParagraphs: [
-      "Developed as my Undergraduate Thesis (Skripsi) in Informatics Engineering at Universitas Muhammadiyah Surakarta, this platform solves a critical clinical bottleneck: training high-accuracy diabetes detection models across multiple hospitals without ever centralizing or exposing raw, confidential patient medical records.",
+      "Developed as my Undergraduate Thesis in Informatics Engineering at Muhammadiyah University of Surakarta, this platform solves a critical clinical bottleneck: training high-accuracy diabetes detection models across multiple hospitals without ever centralizing or exposing raw, confidential patient medical records.",
       "A Python/FastAPI backend orchestrates localized PyTorch training rounds using Federated Averaging (FedAvg) and Opacus Differential Privacy. Patient identity verification (KTP) is anchored on Ethereum Testnet via Solidity Smart Contracts and Web3.py, while hospital clinicians inspect model decisions through SHAP/Captum Explainable AI dashboards built in Next.js.",
     ],
     contributions: [

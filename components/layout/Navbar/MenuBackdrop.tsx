@@ -43,7 +43,7 @@ export const MenuBackdrop: React.FC<MenuBackdropProps> = ({
           {/* Tekstur kertas kalkir kedua (/paper-texture-2.jpg) menyatu lembut dengan halaman */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-45 mix-blend-multiply"
+            className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-55 mix-blend-multiply"
             style={{ backgroundImage: "url('/paper-texture-2.jpg')" }}
           />
         </button>

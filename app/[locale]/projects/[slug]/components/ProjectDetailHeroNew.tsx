@@ -1,12 +1,107 @@
 "use client"
 
 import React, { useState } from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useTranslations, useLocale } from "next-intl"
 import { ProjectData } from "@/components/sections/Projects/constants"
 import { HeroProjectPreview } from "@/components/sections/Projects/ProjectBlueprintPreview"
 
 interface ProjectDetailHeroNewProps {
   project: ProjectData
+  locale?: string
+}
+
+const PROJECT_METADATA_LOCALIZED: Record<
+  string,
+  {
+    id: { summary: string; categoryLabel: string; discipline: string }
+    en: { summary: string; categoryLabel: string; discipline: string }
+  }
+> = {
+  "sipasi-pdam-surakarta": {
+    id: {
+      summary:
+        "Sistem informasi manajemen persuratan dan disposisi dinas internal PDAM Tirta Makmur Surakarta yang mendigitalisasi alur kerja korespondensi pegawai — mulai dari alur disposisi multi-peran, persetujuan direksi, tanda tangan digital QR dinamis, hingga rekam jejak audit keamanan forensik.",
+      categoryLabel: "MAGANG · FULLSTACK",
+      discipline: "Pengembangan Web Korporat Fullstack",
+    },
+    en: {
+      summary:
+        "An internal enterprise document & correspondence management system built for PDAM Tirta Makmur Surakarta that centralizes employee correspondence workflows — from multi-role disposition, approvals, dynamic QR digital signatures, to real-time audit logging.",
+      categoryLabel: "INTERNSHIP · FULLSTACK",
+      discipline: "Fullstack Enterprise Development",
+    },
+  },
+  "nusa-terminal": {
+    id: {
+      summary:
+        "Terminal riset pasar modal dan inteligensi saham ritel Indonesia (IHSG) bergaya Bloomberg dengan arsitektur Retrieval-Augmented Generation (RAG) berbasis IndoBERT dan Google Gemini 1.5 Flash.",
+      categoryLabel: "KOMPETISI · APPLIED AI",
+      discipline: "NLP Keuangan & Rekayasa Fullstack",
+    },
+    en: {
+      summary:
+        "An Indonesian retail stock market intelligence and investment terminal inspired by Bloomberg, powered by Retrieval-Augmented Generation (RAG) using IndoBERT and Google Gemini 1.5 Flash.",
+      categoryLabel: "COMPETITION · APPLIED AI",
+      discipline: "Financial NLP & Fullstack Engineering",
+    },
+  },
+  "rekan-pabrik": {
+    id: {
+      summary:
+        "Sistem eksekusi manufaktur modern untuk pabrik tekstil dan garmen di Surakarta yang menyatukan pemantauan IoT alat tenun real-time, manajemen inventaris benang, dan otomasi logistik armada.",
+      categoryLabel: "TUGAS AKHIR · IOT & FULLSTACK",
+      discipline: "Otomasi Industri & Operasional",
+    },
+    en: {
+      summary:
+        "A modern manufacturing execution system tailored for textile and garment mills in Surakarta, unifying real-time IoT loom monitoring, yarn inventory tracking, and logistics automation.",
+      categoryLabel: "COURSEWORK · IOT & FULLSTACK",
+      discipline: "Industrial Automation & Operations",
+    },
+  },
+  "surakarta-tourism-hub": {
+    id: {
+      summary:
+        "Platform peta digital dan penjelajahan destinasi warisan budaya Solo berbasis geolokasi interaktif, integrasi rute transportasi Batik Solo Trans (BST), dan rekomendasi kuliner lokal cerdas.",
+      categoryLabel: "KOMUNITAS · WEB GEOSPASIAL",
+      discipline: "Sistem Informasi Geografis",
+    },
+    en: {
+      summary:
+        "An interactive geographic information system and heritage cultural navigation platform for Solo, featuring transit routing with Batik Solo Trans (BST) and local culinary discovery.",
+      categoryLabel: "COMMUNITY · GEOSPATIAL WEB",
+      discipline: "Geographic Information Systems",
+    },
+  },
+  "solonet-portal": {
+    id: {
+      summary:
+        "Portal layanan pelanggan dan manajemen tagihan performa tinggi untuk penyedia jasa internet (ISP) dengan otomasi invoice PDF dan gerbang pembayaran multi-channel.",
+      categoryLabel: "ENTERPRISE · ARSITEKTUR CLOUD",
+      discipline: "Infrastruktur Telekomunikasi & Penagihan",
+    },
+    en: {
+      summary:
+        "A high-performance customer service portal and billing engine engineered for an enterprise Internet Service Provider (ISP), featuring automated PDF invoices and payment gateways.",
+      categoryLabel: "ENTERPRISE · CLOUD ARCHITECTURE",
+      discipline: "Billing & Telecom Infrastructure",
+    },
+  },
+  "girantra-agritech": {
+    id: {
+      summary:
+        "Aplikasi web progresif (PWA) agritech cerdas yang memberdayakan petani lokal melalui diagnosis penyakit tanaman berbasis visi komputer Gemini AI dan rantai pasok perdagangan hasil bumi langsung.",
+      categoryLabel: "SKRIPSI · GENERATIVE AI",
+      discipline: "Agritech & Machine Learning Multimodal",
+    },
+    en: {
+      summary:
+        "A smart progressive web app (PWA) empowering local smallholder farmers through computer-vision crop pathology diagnostics powered by Google Gemini AI and a fair-trade crop marketplace.",
+      categoryLabel: "THESIS · GENERATIVE AI",
+      discipline: "Agritech & Multimodal Machine Learning",
+    },
+  },
 }
 
 /**
@@ -29,10 +124,24 @@ interface ProjectDetailHeroNewProps {
  */
 export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
   project,
+  locale: localeProp,
 }) => {
+  const t = useTranslations("projects")
+  const hookLocale = useLocale()
+  const locale = localeProp || hookLocale || "en"
+  const isId = locale === "id"
   const [copiedShare, setCopiedShare] = useState<boolean>(false)
   const [likes, setLikes] = useState<number>(24)
   const [hasLiked, setHasLiked] = useState<boolean>(false)
+
+  const normSlug =
+    project.slug === "sipasi-pdam-sukoharjo"
+      ? "sipasi-pdam-surakarta"
+      : project.slug
+  const meta = PROJECT_METADATA_LOCALIZED[normSlug]?.[isId ? "id" : "en"]
+  const summaryText = meta?.summary || project.summary
+  const categoryLabelText = meta?.categoryLabel || project.categoryLabel
+  const disciplineText = meta?.discipline || project.discipline
 
   const handleShare = async () => {
     try {
@@ -58,33 +167,47 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
 
   return (
     <div className="w-full">
-      {/* 1. Breadcrumbs Navigasi (Home > Projects > Title) */}
-      <nav
-        aria-label="Breadcrumbs"
-        className="mb-6 flex flex-wrap items-center gap-2 font-mono text-xs text-[#736E65]"
-      >
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 transition-colors hover:text-[#1C1C1A]"
-        >
-          <span>⌂</span>
-          <span>Home</span>
-        </Link>
-        <span className="text-[#A8A49C]">›</span>
+      {/* 1. Baris Navigasi: Tombol Back Arsitektur + Breadcrumbs */}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        {/* Tombol Back Bergaya Arsitektur */}
         <Link
           href="/#projects"
-          className="transition-colors hover:text-[#1C1C1A]"
+          className="group inline-flex items-center gap-2.5 rounded-full border border-[#1C1C1A]/20 bg-[#FAF6F0] px-4 py-2 font-mono text-xs font-semibold tracking-wider text-[#1C1C1A] uppercase transition-all duration-300 hover:border-[#8C5E38] hover:bg-[#8C5E38] hover:text-[#FAF8F5] hover:shadow-md active:scale-95 shadow-2xs"
         >
-          Projects
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1C1C1A]/10 text-[#1C1C1A] transition-all duration-300 group-hover:bg-white group-hover:text-[#8C5E38] group-hover:-translate-x-0.5">
+            ←
+          </span>
+          <span>{t("backToProjects")}</span>
         </Link>
-        <span className="text-[#A8A49C]">›</span>
-        <span className="font-semibold text-[#1C1C1A] truncate max-w-[260px] sm:max-w-none">
-          {project.title}
-        </span>
-      </nav>
+
+        {/* Breadcrumbs Navigasi */}
+        <nav
+          aria-label="Breadcrumbs"
+          className="flex flex-wrap items-center gap-2 font-mono text-xs text-[#736E65]"
+        >
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 transition-colors hover:text-[#1C1C1A]"
+          >
+            <span>⌂</span>
+            <span>{t("breadcrumbHome")}</span>
+          </Link>
+          <span className="text-[#A8A49C]">›</span>
+          <Link
+            href="/#projects"
+            className="transition-colors hover:text-[#1C1C1A]"
+          >
+            {t("breadcrumbProjects")}
+          </Link>
+          <span className="text-[#A8A49C]">›</span>
+          <span className="font-semibold text-[#1C1C1A] truncate max-w-[200px] sm:max-w-none">
+            {project.title}
+          </span>
+        </nav>
+      </div>
 
       {/* 2. Hero Visual Banner (Aspect-Video) */}
-      <div className="relative aspect-video w-full overflow-hidden rounded-2xl md:rounded-3xl border border-[#1C1C1A]/20 bg-[#161614] shadow-md">
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl md:rounded-3xl border border-[#1C1C1A]/20 bg-[#F4EFEA] shadow-md">
         <div className="h-full w-full">
           <HeroProjectPreview project={project} />
         </div>
@@ -99,11 +222,19 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
               <span>★</span>
               <span>
                 {project.statusType === "internship"
-                  ? "Internship · In Progress"
+                  ? isId
+                    ? "Magang · Dalam Proses"
+                    : "Internship · In Progress"
                   : project.statusType === "competition"
-                  ? "Competition · Finalist"
+                  ? isId
+                    ? "Kompetisi · Finalis"
+                    : "Competition · Finalist"
                   : project.statusType === "thesis"
-                  ? "Thesis · R&D"
+                  ? isId
+                    ? "Skripsi · R&D"
+                    : "Thesis · R&D"
+                  : isId
+                  ? "Proyek Pilihan"
                   : "Featured Project"}
               </span>
             </span>
@@ -112,7 +243,7 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
           <button
             type="button"
             onClick={handleShare}
-            aria-label="Share project"
+            aria-label={isId ? "Bagikan proyek" : "Share project"}
             className="group relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#1C1C1A]/15 bg-[#EBE3D7]/60 text-[#55534E] transition-all hover:border-[#8C5E38] hover:text-[#1C1C1A]"
           >
             {copiedShare ? (
@@ -134,14 +265,17 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
             )}
             {copiedShare && (
               <span className="absolute -top-8 right-0 rounded bg-[#1C1C1A] px-2 py-0.5 font-mono text-[10px] text-[#FAF6F0] shadow-md">
-                Copied!
+                {isId ? "Tersalin!" : "Copied!"}
               </span>
             )}
           </button>
         </div>
 
         {/* Judul Proyek Besar */}
-        <h1 className="mt-4 font-sans text-2xl font-bold tracking-tight text-[#1C1C1A] sm:text-3xl md:text-4xl lg:text-5xl">
+        <h1
+          id="project-overview"
+          className="mt-4 font-sans text-2xl font-bold tracking-tight text-[#1C1C1A] sm:text-3xl md:text-4xl lg:text-5xl"
+        >
           {project.title}
         </h1>
 
@@ -167,7 +301,9 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
               />
             </svg>
-            <span>{86 + project.title.length * 7} views</span>
+            <span>
+              {86 + project.title.length * 7} {isId ? "tayangan" : "views"}
+            </span>
           </div>
           <div className="flex items-center gap-1.5">
             <svg
@@ -183,13 +319,13 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <span>8m read</span>
+            <span>{isId ? "8 mnt baca" : "8m read"}</span>
           </div>
         </div>
 
         {/* Ringkasan Proyek */}
         <p className="mt-4 text-sm leading-relaxed text-[#4A4742] sm:text-base">
-          {project.summary}
+          {summaryText}
         </p>
 
         {/* Banner Peringatan Kerahasiaan (Internal & Confidential Project) */}
@@ -211,11 +347,12 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
           </div>
           <div className="text-xs leading-relaxed sm:text-sm">
             <span className="font-bold text-[#8C5E38] block mb-0.5">
-              Internal &amp; Confidential Project
+              {isId ? "Proyek Internal & Rahasia" : "Internal & Confidential Project"}
             </span>
             <span>
-              Source code and internal credentials are protected under institutional NDA compliance.
-              Nevertheless, system architecture, engineering methodologies, and core outcomes are transparently documented below.
+              {isId
+                ? "Kode sumber dan kredensial internal dilindungi kepatuhan NDA institusi. Namun demikian, arsitektur sistem, metodologi rekayasa, dan hasil pencapaian utama didokumentasikan secara transparan di bawah ini."
+                : "Source code and internal credentials are protected under institutional NDA compliance. Nevertheless, system architecture, engineering methodologies, and core outcomes are transparently documented below."}
             </span>
           </div>
         </div>
@@ -225,7 +362,7 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
           {/* Author Block */}
           <div>
             <div className="font-mono text-[10.5px] font-semibold tracking-wider text-[#736E65] uppercase">
-              AUTHOR
+              {isId ? "PENULIS" : "AUTHOR"}
             </div>
             <div className="mt-2 flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1C1C1A] font-mono text-xs font-bold text-[#FAF6F0] shadow-sm">
@@ -236,7 +373,9 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
                   M. Nuril Anwar
                 </div>
                 <div className="text-[11px] text-[#736E65]">
-                  Full-Stack &amp; Applied AI Developer
+                  {isId
+                    ? "Pengembang Full-Stack & Applied AI"
+                    : "Full-Stack & Applied AI Developer"}
                 </div>
               </div>
             </div>
@@ -245,7 +384,7 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
           {/* Published Date */}
           <div>
             <div className="font-mono text-[10.5px] font-semibold tracking-wider text-[#736E65] uppercase">
-              PUBLISHED ON
+              {isId ? "DITERBITKAN PADA" : "PUBLISHED ON"}
             </div>
             <div className="mt-2 flex items-center gap-2 font-mono text-sm font-medium text-[#1C1C1A]">
               <svg
@@ -261,21 +400,21 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <span>Friday, May 29, 2026</span>
+              <span>{isId ? "Jumat, 29 Mei 2026" : "Friday, May 29, 2026"}</span>
             </div>
           </div>
 
           {/* Categories */}
           <div className="sm:col-span-2">
             <div className="font-mono text-[10.5px] font-semibold tracking-wider text-[#736E65] uppercase">
-              CATEGORIES
+              {isId ? "KATEGORI" : "CATEGORIES"}
             </div>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-[#EBE3D7] px-3 py-1 font-mono text-xs font-semibold text-[#1C1C1A] border border-[#1C1C1A]/15">
-                {project.categoryLabel}
+                {categoryLabelText}
               </span>
               <span className="rounded-full bg-[#EBE3D7] px-3 py-1 font-mono text-xs font-semibold text-[#1C1C1A] border border-[#1C1C1A]/15">
-                {project.discipline}
+                {disciplineText}
               </span>
               <span className="rounded-full bg-[#EBE3D7] px-3 py-1 font-mono text-xs font-semibold text-[#1C1C1A] border border-[#1C1C1A]/15">
                 {project.sheetCode}
@@ -286,7 +425,7 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
           {/* Tech Stack Pills */}
           <div className="sm:col-span-2">
             <div className="font-mono text-[10.5px] font-semibold tracking-wider text-[#736E65] uppercase">
-              TECH STACK
+              {isId ? "TEKNOLOGI" : "TECH STACK"}
             </div>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               {project.techStack.map((tech, idx) => (
@@ -309,7 +448,7 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
             rel="noopener noreferrer"
             className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#1C1C1A] px-5 py-3 font-semibold text-[#FAF6F0] transition-all hover:bg-[#8C5E38] shadow-md active:scale-[0.99]"
           >
-            <span>Live Demo</span>
+            <span>{isId ? "Demo Langsung" : "Live Demo"}</span>
             <span>↗</span>
           </a>
 
@@ -330,7 +469,7 @@ export const ProjectDetailHeroNew: React.FC<ProjectDetailHeroNewProps> = ({
                 d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
               />
             </svg>
-            <span>Source Code</span>
+            <span>{isId ? "Kode Sumber" : "Source Code"}</span>
           </a>
         </div>
 

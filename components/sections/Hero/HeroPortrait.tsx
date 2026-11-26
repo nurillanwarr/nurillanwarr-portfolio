@@ -10,6 +10,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react"
+import { useTranslations } from "next-intl"
 import { HERO_PORTRAIT } from "./constants"
 
 const springConfig = {
@@ -20,12 +21,7 @@ const springConfig = {
 
 /**
  * Komponen Tape
- * Menampilkan elemen visual selotip kertas perekat di sudut bingkai foto:
- * - Efek blur latar belakang halus dengan bayangan tipis
- * - Posisi absolut dengan rotasi dinamis untuk memperkuat estetika lembar kerja fisik
- *
- * @param {{ className: string }} props - Kelas CSS Tailwind tambahan untuk penempatan dan orientasi sudut
- * @returns {JSX.Element} Elemen dekorasi selotip kertas
+ * Menampilkan elemen visual selotip kertas perekat di sudut bingkai foto
  */
 const Tape: React.FC<{ className: string }> = ({ className }) => (
   <span
@@ -36,17 +32,10 @@ const Tape: React.FC<{ className: string }> = ({ className }) => (
 
 /**
  * Komponen HeroPortrait
- * Menampilkan kartu foto profil interaktif bergaya sketsa/lembar kerja arsitektur:
- * - Efek kemiringan 3D (3D tilt & perspective) berbasis fisika pegas (spring animation) yang mengikuti koordinat kursor mouse
- * - Efek pencahayaan/kilau radial dinamis (glare sheen) saat pointer digerakkan di atas kartu
- * - Bingkai foto dengan selotip perekat (Tape) dan tekstur kertas sekunder (/paper-texture-2.jpg)
- * - Dukungan fallback placeholder jika gambar belum tersedia atau gagal dimuat
- * - Anotasi teknis (rasio skala 1:1, nomor figur gambar, peran, dan indikator status ketersediaan kerja berkedip)
- * - Penonaktifan otomatis animasi interaktif jika preferensi pengguna mengaktifkan reduced motion atau pada perangkat sentuh (touchscreen)
- *
- * @returns {JSX.Element} Elemen kartu potret foto profil interaktif
+ * Menampilkan kartu foto profil interaktif bergaya sketsa/lembar kerja arsitektur
  */
 export const HeroPortrait: React.FC = () => {
+  const t = useTranslations("hero.portrait")
   const [hasError, setHasError] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
   const prefersReducedMotion = useReducedMotion()
@@ -58,94 +47,90 @@ export const HeroPortrait: React.FC = () => {
   const rotateXTarget = useMotionValue(0)
   const rotateYTarget = useMotionValue(0)
   const scaleTarget = useMotionValue(1)
-  const shadowAlphaTarget = useMotionValue(0.12)
-  const pressureTarget = useMotionValue(0)
 
   const rotateX = useSpring(rotateXTarget, springConfig)
   const rotateY = useSpring(rotateYTarget, springConfig)
   const scale = useSpring(scaleTarget, springConfig)
-  const shadowAlpha = useSpring(shadowAlphaTarget, springConfig)
-  const pressure = useSpring(pressureTarget, springConfig)
 
-  const glareAlpha = useTransform(pressure, [0, 1], [0, 0.18])
-  const cardShadow = useMotionTemplate`0 22px 48px rgba(28, 28, 26, ${shadowAlpha})`
-  const pressureGlare = useMotionTemplate`radial-gradient(circle at ${cursorX}% ${cursorY}%, rgba(255, 252, 245, ${glareAlpha}) 0%, rgba(255, 252, 245, 0.04) 22%, transparent 48%)`
+  const glareX = useTransform(rotateY, [-10, 10], [80, 20])
+  const glareY = useTransform(rotateX, [-10, 10], [20, 80])
+  const pressureGlare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 65%)`
+
+  const shadowX = useTransform(rotateY, [-10, 10], [18, -18])
+  const shadowY = useTransform(rotateX, [-10, 10], [-14, 24])
+  const cardShadow = useMotionTemplate`${shadowX}px ${shadowY}px 36px rgba(28, 28, 26, 0.16)`
 
   useEffect(() => {
+    if (prefersReducedMotion) return
+
     const card = cardRef.current
     if (!card) return
 
-    function resetCard() {
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0)
+    if (isTouchDevice) return
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+
+      const clampedX = Math.max(0, Math.min(rect.width, x))
+      const clampedY = Math.max(0, Math.min(rect.height, y))
+
+      cursorX.set((clampedX / rect.width) * 100)
+      cursorY.set((clampedY / rect.height) * 100)
+
+      const normX = clampedX / rect.width - 0.5
+      const normY = clampedY / rect.height - 0.5
+
+      rotateYTarget.set(normX * 12)
+      rotateXTarget.set(-normY * 12)
+    }
+
+    const handleMouseEnter = () => {
+      scaleTarget.set(1.025)
+    }
+
+    const handleMouseLeave = () => {
+      scaleTarget.set(1)
       rotateXTarget.set(0)
       rotateYTarget.set(0)
-      scaleTarget.set(1)
-      shadowAlphaTarget.set(0.12)
-      pressureTarget.set(0)
       cursorX.set(50)
       cursorY.set(50)
     }
 
-    if (
-      prefersReducedMotion ||
-      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
-    ) {
-      resetCard()
-      return
-    }
-
-    function handleMouseMove(event: MouseEvent) {
-      if (!card) return
-      const rect = card.getBoundingClientRect()
-      const x = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 1)
-      const y = Math.min(Math.max((event.clientY - rect.top) / rect.height, 0), 1)
-      const offsetX = x - 0.5
-      const offsetY = y - 0.5
-
-      cursorX.set(x * 100)
-      cursorY.set(y * 100)
-      rotateXTarget.set(offsetY * -8)
-      rotateYTarget.set(offsetX * 8)
-      scaleTarget.set(0.988)
-      shadowAlphaTarget.set(0.18)
-      pressureTarget.set(1)
-    }
-
-    function handleMouseEnter() {
-      scaleTarget.set(0.992)
-      shadowAlphaTarget.set(0.16)
-      pressureTarget.set(0.7)
-    }
-
-    card.addEventListener("mouseenter", handleMouseEnter)
-    card.addEventListener("mouseleave", resetCard)
     card.addEventListener("mousemove", handleMouseMove)
+    card.addEventListener("mouseenter", handleMouseEnter)
+    card.addEventListener("mouseleave", handleMouseLeave)
 
     return () => {
-      card.removeEventListener("mouseenter", handleMouseEnter)
-      card.removeEventListener("mouseleave", resetCard)
       card.removeEventListener("mousemove", handleMouseMove)
+      card.removeEventListener("mouseenter", handleMouseEnter)
+      card.removeEventListener("mouseleave", handleMouseLeave)
     }
   }, [
     cursorX,
     cursorY,
     prefersReducedMotion,
-    pressureTarget,
     rotateXTarget,
     rotateYTarget,
     scaleTarget,
-    shadowAlphaTarget,
   ])
 
   return (
-    <div className="relative mx-auto w-full max-w-[340px] [perspective:1200px] sm:max-w-[370px] lg:mr-0">
-      {/* Label anotasi atas */}
-      <div className="mb-2.5 flex items-center gap-3 font-mono text-[10.5px] tracking-[0.14em] text-[#55534E] uppercase">
-        <span>{p.fig}</span>
-        <span className="h-px flex-1 bg-[#1C1C1A]/30" />
+    <div className="relative mx-auto w-full max-w-[420px] select-none [perspective:1200px]">
+      {/* Garis Ukur CAD Pojok Kanan Atas */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-5 right-0 flex items-center gap-1.5 font-mono text-[9px] tracking-widest text-[#736E65]"
+      >
         <span>1:1</span>
+        <span className="h-[1px] w-8 bg-[#1C1C1A]/30" />
+        <span>{t("fig")}</span>
       </div>
 
-      {/* Lembar kertas kedua (/paper-texture-2.jpg) dengan efek 3D tilt */}
       <motion.div
         ref={cardRef}
         style={{
@@ -183,7 +168,7 @@ export const HeroPortrait: React.FC = () => {
                 N
               </span>
               <span className="font-mono text-[10px] tracking-[0.14em] text-[#6B6964] uppercase">
-                Letakkan foto di /public/profile.jpg
+                {t("photoPrompt")}
               </span>
             </div>
           )}
@@ -199,14 +184,14 @@ export const HeroPortrait: React.FC = () => {
         {/* Keterangan bawah foto */}
         <div className="relative mt-3 flex items-end justify-between gap-4 font-mono">
           <div>
-            <p className="text-[13px] font-medium text-[#1C1C1A]">{p.name}</p>
+            <p className="text-[13px] font-medium text-[#1C1C1A]">{t("name")}</p>
             <p className="mt-0.5 text-[10.5px] tracking-[0.12em] text-[#6B6964] uppercase">
-              {p.role}
+              {t("role")}
             </p>
           </div>
           <span className="inline-flex items-center gap-1.5 text-[10.5px] tracking-[0.1em] text-[#1C1C1A] uppercase">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#B7835A]" />
-            {p.status}
+            {t("status")}
           </span>
         </div>
       </motion.div>

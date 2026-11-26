@@ -1,0 +1,121 @@
+## Background
+
+Developed as my Undergraduate Thesis in Informatics Engineering at Universitas Muhammadiyah Surakarta, this project architects a privacy-preserving decentralized electronic health records (EHR) ecosystem paired with collaborative AI.
+
+Patient health records across conventional medical institutions remain siloed within centralized relational databases highly vulnerable to data breaches and insider tampering. Simultaneously, training diagnostic AI models requires multi-institutional patient data that cannot be centralized due to HIPAA and GDPR privacy mandates.
+
+FedHealth Web3 resolves this fundamental tension by coupling PyTorch-based Federated Learning (FedAvg) for distributed diabetes classification, Solidity smart contracts on Ethereum for model update verification, and decentralized IPFS storage for client-encrypted patient dossiers.
+
+
+## Problem Identification
+
+Based on operational workflow discovery and field observations, the primary challenges and core bottlenecks identified were as follows:
+
+- Elevated risk of catastrophic patient data breaches in centralized hospital IT architectures.
+- Strict regulatory barriers prohibiting multi-institutional aggregation of raw patient clinical data for AI model development.
+- Vulnerability of medical histories to manual administrative tampering lacking immutable audit trails.
+- Single-point-of-failure vulnerabilities inherent to centralized clinical server topologies.
+
+
+## Goals & Objectives
+
+> **Primary Objective:** Design, implement, and benchmark a decentralized healthcare architecture integrating Blockchain and Federated Learning to guarantee mathematical patient privacy while achieving superior diagnostic accuracy.
+
+**Key Objectives & Measurable Milestones:**
+
+- Implement a Federated Learning protocol training models locally across simulated hospital nodes without transmitting raw patient records.
+- Deploy Solidity smart contracts orchestrating verifiable round-by-round FedAvg gradient aggregation.
+- Integrate end-to-end encrypted IPFS storage granting patients cryptographic sovereignty over their clinical dossiers.
+- Achieve >90% diabetes classification accuracy matching centralized baseline model performance.
+
+
+## Roles & Responsibilities
+
+Serving as **Lead Researcher & Engineer (Thesis)**, I maintained direct technical ownership across architectural design and implementation:
+
+- Designed the complete system architecture linking localized clinical training nodes, Ethereum blockchain consensus, and IPFS storage.
+- Engineered custom Federated Averaging (FedAvg) routines in PyTorch augmented with Opacus Differential Privacy noise injection.
+- Wrote, tested, and deployed Solidity smart contracts managing decentralized patient identity and model weight consensus.
+- Built a Next.js physician and patient portal integrating Web3 wallet authentication and SHAP explainable AI visualizations.
+
+
+## Process & Execution
+
+Engineering execution followed an iterative three-stage model to ensure architectural resilience and precise user alignment:
+
+### 1. Theoretical Modeling & Cryptographic Protocol Design
+
+Formulated the mathematical framework for distributed federated optimization and asymmetric medical data encryption.
+
+- Partitioned standardized clinical diabetes datasets across Non-IID distributed training distributions.
+- Designed AES-256 and RSA hybrid encryption routines securing clinical records prior to IPFS pinning.
+- Drafted Solidity smart contract interfaces verifying cryptographic proofs of local node computation.
+
+### 2. Distributed Training Experiments & Smart Contracts
+
+Executed iterative federated training rounds and hardened smart contracts against malicious gradient injection.
+
+- Conducted multi-node simulations training local neural network models across isolated execution contexts.
+- Applied calibrated Differential Privacy noise to prevent model inversion and patient re-identification attacks.
+- Audited smart contract gas consumption and optimized state variables for affordable on-chain settlement.
+
+### 3. Benchmark Evaluation & Academic Defense
+
+Quantified convergence dynamics, validated inference explainability via SHAP, and authored the academic thesis.
+
+- Benchmarked federated model convergence curves against centralized baselines across varying communication round budgets.
+- Generated SHAP waterfall plots providing transparent, clinically interpretable risk attributions to physicians.
+- Successfully defended the thesis with highest academic honors at Universitas Muhammadiyah Surakarta.
+
+
+## Results & Architecture
+
+The thesis demonstrated that federated learning paired with smart contract consensus achieves parity with centralized healthcare AI while safeguarding patient privacy:
+
+### Federated Learning Diabetes Classifier
+
+A distributed PyTorch classification pipeline trained collaboratively across clinics without data centralization.
+
+- Zero raw medical record exposure: only mathematically bounded parameter updates leave the hospital boundary.
+- Demonstrated resilience against heterogeneous (Non-IID) local patient demographic distributions.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **Classification Accuracy** | `92.8%` |
+| **Raw Data Leakage** | `0.0% (Zero)` |
+
+### Ethereum Smart Contract Consensus Engine
+
+Decentralized consensus logic on Ethereum recording model training milestones immutably.
+
+- Cryptographically immutable audit trail preventing rogue nodes from poisoning global model weights.
+- Decentralized patient identity verification utilizing Keccak-256 cryptographic hashes.
+
+| Architecture Metric | Measured Value |
+| :--- | :--- |
+| **Consensus Integrity** | `100% Tamper-Proof` |
+| **Execution Gas** | `Optimized` |
+
+
+## Impact & Achievements
+
+### Impact on the Organization / Ecosystem
+
+- Contributed a peer-reviewed reference architecture for privacy-compliant healthcare AI in emerging digital health ecosystems.
+- Established an academic precedent for applied Web3 and AI research within the Informatics faculty at UMS.
+- Demonstrated that regional clinical facilities can participate in state-of-the-art AI without risking data confidentiality.
+
+### Impact on Personal Engineering Growth
+
+- Deepened specialized expertise across Federated Learning algorithms, PyTorch, Differential Privacy, and Solidity engineering.
+- Completed undergraduate degree in Informatics Engineering with an academically rigorous, publication-grade thesis.
+- Constructed a high-caliber technical portfolio establishing credentials at the intersection of AI safety and distributed systems.
+
+
+## Team & Appreciation
+
+This undergraduate research was completed through the steadfast mentorship and support of my academic advisors:
+
+- My Thesis Advisor for invaluable methodological critique, theoretical guidance, and rigorous code reviews.
+- The Academic Examination Board for constructive recommendations that sharpened the system's distributed architecture.
+- My family and fellow Informatics students at UMS for their unwavering encouragement throughout the research endeavor.

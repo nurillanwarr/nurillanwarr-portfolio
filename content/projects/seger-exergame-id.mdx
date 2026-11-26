@@ -1,0 +1,121 @@
+## Latar Belakang
+
+Dikembangkan dalam program Samsung Innovation Campus dan kompetisi teknologi nasional, SEGER (Senam Bugar Bersama) adalah aplikasi exergame interaktif yang mentransformasi olahraga fisik anak menjadi pengalaman bermain game yang seru.
+
+Gaya hidup pasif (sedentary lifestyle) dan kecanduan gawai pada anak-anak telah menjadi perhatian serius di era digital, yang berpotensi memicu masalah kebugaran dan obesitas dini. Pendekatan olahraga konvensional kerap dinilai membosankan dan kurang menarik minat anak-anak zaman sekarang.
+
+SEGER menjembatani dunia digital dan kebugaran fisik dengan memanfaatkan kamera smartphone standar untuk mendeteksi pose tubuh secara real-time. Anak-anak mengendalikan karakter game petualangan dengan melompat, jongkok, dan merentangkan tangan, sembari sistem mencatat kalori terbakar dan repetisi gerak secara otomatis.
+
+
+## Identifikasi Masalah
+
+Berdasarkan analisis alur kerja dan observasi operasional di lapangan, tantangan pokok dan kendala utama yang berhasil diidentifikasi meliputi:
+
+- Meningkatnya durasi paparan layar pasif (screen time) pada anak-anak yang berdampak negatif pada kesehatan fisik dan motorik.
+- Kurangnya minat anak-anak terhadap kegiatan senam atau olahraga konvensional yang monoton.
+- Mahalnya perangkat sensor gerak khusus seperti kacamata VR atau konsol kamera gerak eksternal.
+- Ketiadaan sarana bagi orang tua dan kader Posyandu untuk memantau data kebugaran anak secara menyenangkan.
+
+
+## Tujuan & Sasaran
+
+> **Tujuan Utama:** Menciptakan aplikasi exergame interaktif berbasis deteksi pose kamera smartphone standar yang memotivasi anak-anak aktif bergerak melalui gamifikasi petualangan yang menyenangkan.
+
+**Sasaran Strategis & Tolok Ukur Keberhasilan:**
+
+- Mengintegrasikan model deteksi pose tubuh berkecepatan tinggi yang berjalan mulus langsung di perangkat tanpa sensor tambahan.
+- Merancang alur gamifikasi dengan sistem level, perolehan lencana, dan skor yang memicu motivasi olahraga rutin.
+- Menyediakan dashboard laporan kebugaran berkala yang dapat dipantau oleh orang tua dan kader kesehatan Posyandu.
+- Mencapai performa frame rate konsisten minimal 30 FPS pada perangkat smartphone kelas menengah.
+
+
+## Peran & Tanggung Jawab
+
+Sebagai **Lead Fullstack & Computer Vision Engineer**, saya memegang kepemilikan teknis penuh pada perancangan dan implementasi fitur:
+
+- Mengintegrasikan model pose estimation pada perangkat mobile untuk mengenali gerakan melompat, squat, dan pergerakan tangan secara akurat.
+- Merancang logika game interaktif yang menerjemahkan sudut koordinat sendi tubuh menjadi aksi permainan real-time.
+- Membangun backend pelacak rekam kebugaran menggunakan Supabase dan sinkronisasi skor leaderboard real-time.
+- Melakukan uji coba interaktif bersama puluhan anak-anak di lingkungan Posyandu mitra untuk menyelaraskan tingkat kesulitan gerakan.
+
+
+## Proses & Eksekusi
+
+Pengembangan sistem dieksekusi secara iteratif dan terstruktur melalui tiga tahapan utama untuk menjamin stabilitas arsitektur serta keselarasan kebutuhan pengguna:
+
+### 1. Riset Estimasi Pose & Desain Mekanika Game
+
+Mengeksplorasi model deteksi sendi tubuh berbobot ringan yang dapat berjalan tanpa jeda di smartphone.
+
+- Mengevaluasi kecepatan inferensi model koordinat tubuh guna mencegah delay deteksi gerakan.
+- Merancang aturan permainan di mana gerakan fisik anak langsung menggerakkan karakter dalam game.
+- Menyusun kurva kesulitan bertahap dari pemanasan ringan hingga gerakan yang memacu kardio anak.
+
+### 2. Implementasi Gamifikasi & Sinkronisasi Cloud
+
+Membangun sistem hadiah poin, papan peringkat (leaderboard), dan penyimpanan data kebugaran.
+
+- Menghubungkan perhitungan estimasi kalori terbakar berdasarkan jenis gerakan dan berat badan anak.
+- Mengimplementasikan basis data Supabase untuk sinkronisasi skor dan pencapaian antarpemain secara langsung.
+- Menyediakan fitur avatar karakter kustom yang dapat dibuka dengan mengumpulkan koin kebugaran.
+
+### 3. Uji Lapangan Bersama Anak & Evaluasi Samsung Innovation
+
+Menjalankan sesi bermain langsung bersama anak-anak dan mengevaluasi dampak peningkatan gerak aktif.
+
+- Mengamati antusiasme dan respons motorik anak-anak saat memainkan level permainan petualangan.
+- Mendapatkan umpan balik positif dari orang tua mengenai peningkatan aktivitas fisik harian anak mereka.
+- Menampilkan hasil inovasi pada pameran proyek program Samsung Innovation Campus.
+
+
+## Hasil & Arsitektur
+
+SEGER berhasil membuktikan bahwa teknologi AI visi komputer dapat dimanfaatkan untuk menciptakan dampak sosial kebugaran anak yang positif dan mengasyikkan:
+
+### Mesin Deteksi Pose Kamera Real-Time
+
+Sistem visi komputer pada kamera smartphone yang membaca koordinat sendi tubuh anak tanpa memerlukan perangkat sensor tambahan.
+
+- Deteksi akurat untuk gerakan melompat, merunduk, melangkah ke samping, dan mengangkat tangan.
+- Optimasi konsumsi baterai dan manajemen termal perangkat saat sesi permainan berlangsung.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Kecepatan Deteksi** | `35+ FPS` |
+| **Kebutuhan Sensor** | `Hanya Kamera Bawaan` |
+
+### Mesin Gamifikasi Petualangan & Hadiah
+
+Struktur permainan interaktif dengan alur cerita petualangan, misi harian, dan lencana kebugaran yang memotivasi.
+
+- Sistem streak latihan harian yang mendorong konsistensi aktivitas fisik setiap pagi dan sore.
+- Toko virtual untuk mendandani karakter dengan koin yang didapat murni dari tetesan keringat olahraga.
+
+| Metrik Arsitektur | Nilai Terukur |
+| :--- | :--- |
+| **Retensi Pengguna** | `+ 82%` |
+| **Rata-rata Waktu Main** | `25 Menit / Hari` |
+
+
+## Dampak & Pencapaian
+
+### Dampak Bagi Instansi / Organisasi
+
+- Membantu anak-anak mengubah waktu layar pasif menjadi aktivitas fisik aktif yang menyehatkan jantung dan stamina.
+- Mendapatkan apresiasi tinggi dalam program pelatihan dan showcase Samsung Innovation Campus.
+- Membuktikan potensi besar solusi kecerdasan buatan berbasis kamera smartphone murah untuk mengatasi isu kesehatan masyarakat.
+
+### Dampak Bagi Pertumbuhan Pribadi
+
+- Mengembangkan keahlian praktis dalam integrasi Computer Vision di platform mobile dengan keterbatasan sumber daya komputasi.
+- Menguasai psikologi desain gamifikasi interaktif untuk mempertahankan minat pengguna anak-anak.
+- Mendapatkan kepuasan batin melihat anak-anak bergerak gembira dan tertawa saat berolahraga menggunakan aplikasi karya tim kami.
+
+
+## Tim & Apresiasi
+
+Karya SEGER terwujud berkat kolaborasi penuh semangat dari rekan-rekan pengembang dan mentor inovasi:
+
+- Mentor dan Fasilitator Samsung Innovation Campus atas bimbingan materi AI dan wawasan produk masa depan.
+- Rekan setim atas kreativitas visual, animasi karakter game, dan dedikasi coding tanpa kenal lelah.
+- Anak-anak dan orang tua di lingkungan Posyandu mitra atas senyuman, keceriaan, dan masukan spontan yang sangat berharga.

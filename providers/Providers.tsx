@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { ThemeProvider } from "./ThemeProvider"
 import { NextIntlClientProvider } from "next-intl"
 
 type ProvidersProps = {
@@ -11,29 +10,21 @@ type ProvidersProps = {
 }
 
 /**
- * Provider Providers (Root Providers Wrapper)
- * Menyediakan pembungkus konteks global terpadu untuk seluruh hierarki aplikasi Next.js:
- * - Menjalankan `NextIntlClientProvider` untuk penyediaan kamus terjemahan dan locale di komponen client
- * - Menginisialisasi `ThemeProvider` (`next-themes`) dengan atribut class dan tema kertas terang yang terkontrol
+ * Root Providers Wrapper
  *
- * @param {ProvidersProps} props Properti wrapper provider
- * @param {React.ReactNode} props.children Komponen anak atau subtree halaman yang dibungkus
- * @param {string} props.locale Kode bahasa aktif (misal "en", "id", "zh")
- * @param {Record<string, unknown>} props.messages Objek kamus pesan translasi untuk locale yang bersangkutan
- * @returns {React.JSX.Element} Elemen pohon provider komposit yang membungkus children
+ * Menyediakan konteks internasionalisasi (i18n)
+ * untuk seluruh hierarki komponen aplikasi.
+ *
+ * @param props Properti wrapper provider
+ * @param props.children Komponen anak yang dibungkus
+ * @param props.locale Kode bahasa aktif, misalnya "id" atau "en"
+ * @param props.messages Kumpulan pesan terjemahan sesuai locale
+ * @returns Komponen provider yang membungkus seluruh halaman aplikasi
  */
 export function Providers({ children, locale, messages }: ProvidersProps) {
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="light"
-        forcedTheme="light"
-        enableSystem={false}
-        disableTransitionOnChange
-      >
-        {children}
-      </ThemeProvider>
+      {children}
     </NextIntlClientProvider>
   )
 }

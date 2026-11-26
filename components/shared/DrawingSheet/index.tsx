@@ -17,9 +17,11 @@ interface DrawingSheetProps {
   /**
    * Variasi tampilan bingkai lembar kerja arsitektur:
    * - "default": Bingkai ganda klasik dengan 4 tanda bidik lingkaran (RegistrationMark) di sudut (dipakai pada Hero)
-   * - "editorial": Bingkai spesifikasi vellum dengan siku L presisi tembaga, mistar skala samping, dan garis lipat CAD (dipakai pada About)
+   * - "second": Bingkai spesifikasi vellum dengan siku L presisi tembaga, mistar skala samping, dan garis lipat CAD (dipakai pada About)
    */
-  variant?: "default" | "editorial"
+  variant?: "default" | "second" | "third"
+  /** Tema tampilan lembar: "light" (kertas gambar terang) atau "dark" (kertas sketsa grafit arsitektur gelap) */
+  theme?: "light" | "dark"
 }
 
 /**
@@ -27,7 +29,9 @@ interface DrawingSheetProps {
  */
 const EditorialCornerBracket: React.FC<{
   position: "top-left" | "top-right" | "bottom-left" | "bottom-right"
-}> = ({ position }) => {
+  theme?: "light" | "dark"
+}> = ({ position, theme = "light" }) => {
+  const isDark = theme === "dark"
   const posClasses = {
     "top-left": "-top-[3px] -left-[3px] border-t-2 border-l-2",
     "top-right": "-top-[3px] -right-[3px] border-t-2 border-r-2",
@@ -46,11 +50,15 @@ const EditorialCornerBracket: React.FC<{
     <>
       <span
         aria-hidden="true"
-        className={`pointer-events-none absolute z-20 h-5 w-5 border-[#1C1C1A] ${posClasses}`}
+        className={`pointer-events-none absolute z-20 h-5 w-5 transition-colors duration-500 ${
+          isDark ? "border-[#FAF6F0]" : "border-[#1C1C1A]"
+        } ${posClasses}`}
       />
       <span
         aria-hidden="true"
-        className={`pointer-events-none absolute z-20 h-1.5 w-1.5 bg-[#A3724B] ${dotClasses}`}
+        className={`pointer-events-none absolute z-20 h-1.5 w-1.5 transition-colors duration-500 ${
+          isDark ? "bg-[#D48B47]" : "bg-[#A3724B]"
+        } ${dotClasses}`}
       />
     </>
   )
@@ -60,7 +68,7 @@ const EditorialCornerBracket: React.FC<{
  * Komponen DrawingSheet
  * Menampilkan lembar kerja arsitektural (architectural drafting sheet) dengan presisi gambar teknik:
  * - Varian "default": Garis tepi ganda (double border) dan 4 tanda registrasi lingkaran CAD di setiap sudutnya
- * - Varian "editorial": Lembar spesifikasi teknis dengan siku L tembaga, bar skala mistar CAD, dan tekstur vellum
+ * - Varian "second": Lembar spesifikasi teknis dengan siku L tembaga, bar skala mistar CAD, dan tekstur vellum
  */
 export const DrawingSheet: React.FC<DrawingSheetProps> = ({
   children,
@@ -68,27 +76,42 @@ export const DrawingSheet: React.FC<DrawingSheetProps> = ({
   id,
   className = "",
   variant = "default",
+  theme = "light",
 }) => {
-  if (variant === "editorial") {
+  if (variant === "second") {
+    const isDark = theme === "dark"
+
     return (
       <section
         id={id}
-        className={`relative mx-auto w-full max-w-[1440px] scroll-mt-24 px-3 md:px-6 ${className}`}
+        className={`relative mx-auto w-full max-w-[2800px] scroll-mt-24 px-3 md:px-6 ${className}`}
       >
         {/* Bingkai Luar Editorial Spesifikasi dengan Siku L Tembaga */}
-        <div className="relative border border-[#1C1C1A]/60 bg-[#E6DDD0]/60 p-2 md:p-3">
-          <EditorialCornerBracket position="top-left" />
-          <EditorialCornerBracket position="top-right" />
-          <EditorialCornerBracket position="bottom-left" />
-          <EditorialCornerBracket position="bottom-right" />
+        <div
+          className={`relative border p-2 md:p-3 transition-colors duration-500 ${
+            isDark
+              ? "border-[#FAF6F0]/25 bg-[#1F1E1B]/95 shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
+              : "border-[#1C1C1A]/50 bg-[#E6DDD0]/60"
+          }`}
+        >
+          <EditorialCornerBracket position="top-left" theme={theme} />
+          <EditorialCornerBracket position="top-right" theme={theme} />
+          <EditorialCornerBracket position="bottom-left" theme={theme} />
+          <EditorialCornerBracket position="bottom-right" theme={theme} />
 
           {/* Bar Indikator Mistar Skala Atas */}
           <div
             aria-hidden="true"
-            className="mb-2 hidden items-center justify-between px-2 font-mono text-[9px] tracking-[0.22em] uppercase text-[#736E65] md:flex"
+            className={`mb-2 hidden items-center justify-between px-2 font-mono text-[9px] tracking-[0.22em] uppercase transition-colors duration-500 md:flex ${
+              isDark ? "text-[#A8A399]" : "text-[#736E65]"
+            }`}
           >
             <div className="flex items-center gap-3">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#A3724B]" />
+              <span
+                className={`inline-block h-2 w-2 rounded-full transition-colors duration-500 ${
+                  isDark ? "bg-[#D48B47]" : "bg-[#A3724B]"
+                }`}
+              />
               <span>CAD // SPEC-INSERT REV 2.4</span>
             </div>
             <div className="flex items-center gap-6 opacity-60">
@@ -106,20 +129,30 @@ export const DrawingSheet: React.FC<DrawingSheetProps> = ({
           </div>
 
           {/* Kertas Vellum Dalam dengan Garis Tepi Putus-putus Teknis di Samping */}
-          <div className="relative overflow-hidden border border-[#1C1C1A]/80 bg-[#F2ECE1] shadow-[inset_0_0_40px_rgba(28,28,26,0.03)]">
+          <div
+            className={`relative overflow-hidden border transition-colors duration-500 ${
+              isDark
+                ? "border-[#FAF6F0]/20 bg-[#161514] shadow-[inset_0_0_60px_rgba(0,0,0,0.55)]"
+                : "border-[#1C1C1A]/80 bg-[#F2ECE1] shadow-[inset_0_0_40px_rgba(28,28,26,0.03)]"
+            }`}
+          >
             <PaperTexture
               src={paperSrc ?? "/paper-texture-2.jpg"}
-              opacity={0.35}
+              opacity={isDark ? 0.14 : 0.25}
             />
 
             {/* Aksen Garis Lipat Vertikal Kiri & Kanan (Blueprint Fold Margin) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 left-3 z-10 hidden w-px border-l border-dashed border-[#1C1C1A]/20 lg:block"
+              className={`pointer-events-none absolute inset-y-0 left-3 z-10 hidden w-px border-l border-dashed lg:block ${
+                isDark ? "border-[#FAF6F0]/15" : "border-[#1C1C1A]/20"
+              }`}
             />
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 right-3 z-10 hidden w-px border-r border-dashed border-[#1C1C1A]/20 lg:block"
+              className={`pointer-events-none absolute inset-y-0 right-3 z-10 hidden w-px border-r border-dashed lg:block ${
+                isDark ? "border-[#FAF6F0]/15" : "border-[#1C1C1A]/20"
+              }`}
             />
 
             <div className="relative z-10">{children}</div>
@@ -132,7 +165,7 @@ export const DrawingSheet: React.FC<DrawingSheetProps> = ({
   return (
     <section
       id={id}
-      className={`relative mx-auto w-full max-w-[1440px] scroll-mt-24 px-3 md:px-6 ${className}`}
+      className={`relative mx-auto w-full max-w-[2800px] scroll-mt-24 px-3 md:px-6 ${className}`}
     >
       {/* Garis tepi luar */}
       <div className="relative border border-[#1C1C1A] p-[14px]">

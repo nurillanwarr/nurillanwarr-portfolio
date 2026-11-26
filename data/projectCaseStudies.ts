@@ -356,7 +356,7 @@ export const PROJECT_CASE_STUDIES: Record<string, CaseStudyData> = {
   "decentralized-healthcare-skripsi": {
     slug: "decentralized-healthcare-skripsi",
     background: {
-      lead: "Conducted as my undergraduate thesis research at the Department of Informatics, Universitas Muhammadiyah Surakarta, this study couples Federated Learning with Ethereum Smart Contracts to facilitate privacy-preserving collaborative medical AI diagnosis.",
+      lead: "Conducted as my undergraduate thesis research at the Department of Informatics Engineering, Muhammadiyah University of Surakarta, this study couples Federated Learning with Ethereum Smart Contracts to facilitate privacy-preserving collaborative medical AI diagnosis.",
       paragraphs: [
         "In modern medical informatics, multi-hospital data collaboration is essential for training robust deep learning diagnostic models. However, strict medical privacy legislation (such as Indonesia's PDP Law and HIPAA) prohibits the centralization of patient electronic health records (EHR) into external repositories.",
         "This research introduces a decentralized paradigm: training deep neural networks locally across distributed medical nodes via Federated Learning. The AI model travels to the clinical data, never the reverse. Global model weight updates are aggregated securely and governed by Solidity Smart Contracts deployed on the Ethereum Virtual Machine (EVM).",
@@ -485,7 +485,7 @@ export const PROJECT_CASE_STUDIES: Record<string, CaseStudyData> = {
       lead: "This thesis was successfully concluded thanks to the boundless guidance and support from:",
       members: [
         "My Thesis Advisor for rigorous methodological guidance, theoretical mentorship, and tireless encouragement.",
-        "The Informatics Laboratory at Universitas Muhammadiyah Surakarta for GPU computational infrastructure.",
+        "The Informatics Engineering Laboratory at Muhammadiyah University of Surakarta for GPU computational infrastructure.",
         "My fellow engineering peers for insightful technical discussions and peer reviews throughout the study.",
       ],
     },
@@ -905,3 +905,29 @@ export const PROJECT_CASE_STUDIES: Record<string, CaseStudyData> = {
     },
   },
 }
+
+import { PROJECT_CASE_STUDIES_ID } from "./projectCaseStudies.id"
+
+/**
+ * Helper to retrieve localized case study data according to current locale.
+ */
+export function getProjectCaseStudy(slug: string, locale?: string): CaseStudyData {
+  const normSlug = slug === "sipasi-pdam-sukoharjo" ? "sipasi-pdam-surakarta" : slug
+
+  if (locale === "id") {
+    return (
+      PROJECT_CASE_STUDIES_ID[normSlug] ||
+      PROJECT_CASE_STUDIES_ID[normSlug.replace("sukoharjo", "surakarta")] ||
+      PROJECT_CASE_STUDIES[normSlug] ||
+      PROJECT_CASE_STUDIES["sipasi-pdam-surakarta"]
+    )
+  }
+
+  return (
+    PROJECT_CASE_STUDIES[normSlug] ||
+    PROJECT_CASE_STUDIES[normSlug.replace("sukoharjo", "surakarta")] ||
+    PROJECT_CASE_STUDIES_ID[normSlug] ||
+    PROJECT_CASE_STUDIES["sipasi-pdam-surakarta"]
+  )
+}
+

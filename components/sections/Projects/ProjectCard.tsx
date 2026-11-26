@@ -2,6 +2,7 @@
 
 import React from "react"
 import { Link } from "@/i18n/navigation"
+import { useTranslations } from "next-intl"
 import { ProjectData } from "./constants"
 import { CadReticle, StatusDot } from "./ProjectPrimitives"
 import { HeroProjectPreview } from "./ProjectBlueprintPreview"
@@ -20,6 +21,8 @@ interface ProjectCardProps {
  * - Ketika diklik, mengarahkan ke halaman detail studi kasus `/projects/[slug]`
  */
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const t = useTranslations("projects.tableColumns")
+
   const reticlePosClass = {
     "bottom-left": "-bottom-6 -left-6",
     "top-right": "-top-6 -right-6",
@@ -59,54 +62,32 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               <span className="absolute -top-1 left-0 h-2.5 w-[1px] rotate-30 bg-[#1C1C1A]/70" />
               <span className="absolute -top-1 right-0 h-2.5 w-[1px] rotate-30 bg-[#1C1C1A]/70" />
             </div>
-            <span className="mt-0.5 font-mono text-[8px] leading-none text-[#55534E]">
-              ↓
+          </div>
+
+          {/* Garis Dimensi Kanan (1080 + Panah ←) */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-6 inset-y-0 hidden flex-row items-center sm:flex"
+          >
+            <div className="relative h-full w-[1px] bg-[#1C1C1A]/45">
+              <span className="absolute top-0 -left-1 h-[1px] w-2.5 rotate-30 bg-[#1C1C1A]/70" />
+              <span className="absolute bottom-0 -left-1 h-[1px] w-2.5 rotate-30 bg-[#1C1C1A]/70" />
+            </div>
+            <span className="font-mono text-[8.5px] leading-none tracking-widest text-[#55534E] [writing-mode:vertical-rl] pl-1 rotate-180">
+              {project.dimHeight}
             </span>
           </div>
 
-          {/* Garis Dimensi Kiri (1080 + Panah →) */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 -left-5 flex items-center"
-          >
-            <div className="relative flex h-full items-center">
-              <span className="-rotate-90 font-mono text-[8.5px] leading-none tracking-widest text-[#55534E]">
-                {project.dimHeight}
-              </span>
-              <div className="relative h-full w-[1px] bg-[#1C1C1A]/45">
-                <span className="absolute top-0 -left-1 h-[1px] w-2.5 -rotate-30 bg-[#1C1C1A]/70" />
-                <span className="absolute bottom-0 -left-1 h-[1px] w-2.5 -rotate-30 bg-[#1C1C1A]/70" />
-              </div>
-              <span className="ml-0.5 font-mono text-[8px] leading-none text-[#55534E]">
-                →
-              </span>
-            </div>
-          </div>
-
-          {/* Garis Ekstensi Sudut CAD (Overhanging Corner Hairlines) */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-x-3 top-0 h-[1px] bg-[#1C1C1A]/45"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-x-3 bottom-0 h-[1px] bg-[#1C1C1A]/45"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-y-3 left-0 w-[1px] bg-[#1C1C1A]/45"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-y-3 right-0 w-[1px] bg-[#1C1C1A]/45"
-          />
-
-          {/* Simbol Target Reticle CAD (⊕) */}
-          <CadReticle className={`absolute ${reticlePosClass}`} />
-
-          {/* Visualisasi Sistem & UI Proyek Asli */}
-          <div className="relative aspect-[16/10] w-full overflow-hidden border border-[#1C1C1A]/80 bg-[#1C1C1A] transition-transform duration-500 ease-out group-hover:scale-[1.015]">
+          {/* Bingkai Kanvas Pratinjau Sistem Arsitektur */}
+          <div className="relative aspect-[16/10] w-full overflow-hidden border border-[#1C1C1A] bg-[#F4EFEA] shadow-inner">
             <HeroProjectPreview project={project} />
+
+            {/* Reticle Target CAD di Sudut Terpilih */}
+            <div
+              className={`pointer-events-none absolute z-30 flex items-center justify-center ${reticlePosClass}`}
+            >
+              <CadReticle />
+            </div>
           </div>
         </div>
       </div>
@@ -116,7 +97,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         {/* Kolom 1: PROJECT */}
         <div className="col-span-12 border-b border-[#1C1C1A] px-3.5 py-2.5 sm:col-span-4 sm:border-r sm:border-b-0">
           <div className="font-mono text-[8.5px] tracking-[0.14em] uppercase text-[#736E65]">
-            PROJECT
+            {t("project")}
           </div>
           <div className="mt-0.5 truncate text-[15px] font-medium tracking-tight text-[#1C1C1A] transition-colors group-hover:text-[#8C5E38]">
             {project.title}
@@ -126,7 +107,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         {/* Kolom 2: TECH STACK */}
         <div className="col-span-4 border-r border-[#1C1C1A] px-3 py-2.5 sm:col-span-3">
           <div className="font-mono text-[8.5px] tracking-[0.14em] uppercase text-[#736E65]">
-            TECH STACK
+            {t("techStack")}
           </div>
           <div className="mt-1 truncate text-xs text-[#1C1C1A]">
             {project.techStack.slice(0, 3).join(", ")}
@@ -136,7 +117,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         {/* Kolom 3: YEAR */}
         <div className="col-span-2 border-r border-[#1C1C1A] px-2.5 py-2.5 sm:col-span-1">
           <div className="font-mono text-[8.5px] tracking-[0.14em] uppercase text-[#736E65]">
-            YEAR
+            {t("year")}
           </div>
           <div className="mt-1 font-mono text-xs text-[#1C1C1A]">
             {project.year}
@@ -146,7 +127,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         {/* Kolom 4: ROLE */}
         <div className="col-span-3 border-r border-[#1C1C1A] px-2.5 py-2.5 sm:col-span-2">
           <div className="font-mono text-[8.5px] tracking-[0.14em] uppercase text-[#736E65]">
-            ROLE
+            {t("role")}
           </div>
           <div className="mt-1 truncate font-mono text-xs text-[#1C1C1A]">
             {project.role}
@@ -156,7 +137,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         {/* Kolom 5: STATUS */}
         <div className="col-span-3 px-2.5 py-2.5 sm:col-span-2">
           <div className="font-mono text-[8.5px] tracking-[0.14em] uppercase text-[#736E65]">
-            STATUS
+            {t("status")}
           </div>
           <div className="mt-1 flex items-center gap-1.5 truncate text-xs text-[#1C1C1A]">
             <StatusDot type={project.statusType} />

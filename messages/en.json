@@ -1,1 +1,155 @@
-{}
+{
+  "navbar": {
+    "brandSubtitle": "Portfolio",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "process": "Process",
+      "achievements": "Achievements",
+      "contact": "Contact"
+    },
+    "status": {
+      "city": "Surakarta",
+      "live": "Live",
+      "updating": "Updating..."
+    }
+  },
+  "hero": {
+    "badge": "NURIL ANWAR — FULLSTACK DEVELOPER, SURAKARTA",
+    "greeting": "Hi, I'm",
+    "name": "Nuril",
+    "roles": [
+      "Full-Stack Web Developer",
+      "Applied AI Developer",
+      "Informatics @UMS",
+      "Dicoding Bootcamp Alum"
+    ],
+    "locationStatus": "CENTRAL JAVA, INDONESIA • AVAILABLE FOR HIRE",
+    "actions": {
+      "resume": "Resume",
+      "contact": "Tell me about your idea"
+    },
+    "portrait": {
+      "fig": "FIG. 01 — PORTRAIT",
+      "name": "Nuril Anwar",
+      "role": "Full-Stack & AI Developer",
+      "status": "Available for work",
+      "photoPrompt": "Place photo in /public/profile.jpg"
+    },
+    "footer": {
+      "scroll": "Scroll"
+    }
+  },
+  "about": {
+    "sheetCode": "SHEET A-102",
+    "sectionIndex": "(02)",
+    "sectionLabel": "SPECIFICATION // ABOUT & APPLIED AI FOCUS",
+    "tags": ["UMS", "INFORMATICS", "DICODING ALUMNI"],
+    "watermark": "ABOUT",
+    "leadPrefix": "Informatics Engineering student at Muhammadiyah University of Surakarta, dedicated to architecting",
+    "leadHighlight": "reliable full-stack applications and applied AI products",
+    "leadSuffix": ".",
+    "description": "Experience across web and mobile development — crafting responsive user interfaces, engineering robust RESTful APIs, and seamlessly embedding Large Language Models like Google Gemini into intuitive, high-performance digital ecosystems.",
+    "caption": "[ DICODING BOOTCAMP ALUMNI • SYSTEM INTEGRATION • COLLABORATIVE TECH TEAM CONTRIBUTOR ]",
+    "cta": "Learn More About Me",
+    "metrics": {
+      "origin": { "label": "ORIGIN // UMS", "value": "Surakarta", "desc": "Informatics Eng." },
+      "core": { "label": "CORE ARCHITECTURE", "value": "Full-Stack Dev", "desc": "Web & Mobile Apps" },
+      "ai": { "label": "APPLIED AI", "value": "Gemini LLM", "desc": "Intelligent Systems" },
+      "credential": { "label": "CREDENTIAL", "value": "Dicoding Alumni", "desc": "Certified Engineer" }
+    },
+    "lanyard": {
+      "title": "ARCHITECT // 2026",
+      "status": "VERIFIED",
+      "role": "FULL-STACK & APPLIED AI",
+      "affiliation": "UMS // INFORMATICS ENGINEERING",
+      "code": "ID: N28-SURAKARTA"
+    }
+  },
+  "projects": {
+    "backToProjects": "Back to Projects",
+    "breadcrumbHome": "Home",
+    "breadcrumbProjects": "Projects",
+    "sectionIndex": "(03)",
+    "sectionLabel": "PROCESS & BLUEPRINTS // IN DEV",
+    "sheetCode": "SHEET A-301",
+    "heading": "Six systems in active process.",
+    "introDesc": "All projects documented below are in active development — spanning enterprise internships, national competitions, undergraduate thesis research, and coursework.",
+    "statusBadge": "STATUS: IN DEVELOPMENT",
+    "filterAll": "All Projects",
+    "progressBar": "SCROLL TO LEAF THROUGH",
+    "status": {
+      "internship": "INTERNSHIP // IN PROGRESS",
+      "competition": "COMPETITION // IN PROGRESS",
+      "thesis": "THESIS // IN PROGRESS",
+      "coursework": "COURSEWORK // ACTIVE",
+      "completed": "COMPLETED // ARCHIVED"
+    },
+    "tableColumns": {
+      "project": "PROJECT",
+      "techStack": "TECH STACK",
+      "year": "YEAR",
+      "role": "ROLE",
+      "status": "STATUS"
+    },
+    "actions": {
+      "viewDetails": "Inspect Sheet",
+      "visitSite": "Live Preview",
+      "viewCode": "Source Code"
+    }
+  },
+  "contact": {
+    "sectionIndex": "(04)",
+    "sectionLabel": "CONTACT // BLUEPRINT ARCHIVE",
+    "sheetCode": "SHEET A-900",
+    "subheading": "GET IN TOUCH",
+    "headline": "LET'S WORK TOGETHER",
+    "description": "Open for software engineering roles, fullstack consulting, and applied AI product development. My inbox is always open.",
+    "status": "AVAILABLE FOR FULL-TIME / FREELANCE",
+    "actions": {
+      "copyEmail": "Copy Email",
+      "copied": "Email Copied!",
+      "resume": "Download Resume (PDF)"
+    },
+    "github": {
+      "title": "GitHub Contributions",
+      "subtitle": "Open-source commit telemetry, pull requests, and continuous code activity across web, mobile, and AI repositories.",
+      "lastYear": "contributions in the last year",
+      "less": "Less",
+      "more": "More"
+    },
+    "colophon": {
+      "coordinates": "7.56° S, 110.82° E",
+      "location": "Surakarta, Central Java, Indonesia",
+      "legal": "© 2026 M. Nuril Anwar. All rights reserved.",
+      "returnTop": "Back to top",
+      "office": "OFFICE",
+      "studio": "STUDIO",
+      "contact": "CONTACT",
+      "sheet": "SHEET",
+      "scale": "SCALE",
+      "revision": "REVISION",
+      "index": "INDEX",
+      "elsewhere": "ELSEWHERE",
+      "drawn": "DRAWN",
+      "checked": "CHECKED"
+    }
+  },
+  "aboutPage": {
+    "backToOverview": "BACK TO OVERVIEW",
+    "dossier": "DOSSIER // BIOGRAPHY & CREDENTIALS",
+    "title": "About Me",
+    "intro": "A brief introduction to my journey as a Full-Stack & Applied AI Developer — bridging clean interface engineering with intelligent system integration.",
+    "scrollForDossier": "Scroll For Dossier"
+  },
+  "components": {
+    "header": {
+      "toggle": {
+        "ariaLabel": {
+          "language": "Change language"
+        }
+      }
+    }
+  }
+}

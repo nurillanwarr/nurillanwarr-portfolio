@@ -3,6 +3,7 @@
 import React from "react"
 import { Link } from "@/i18n/navigation"
 import { DEFAULT_DRAWER_ITEMS } from "./constants"
+import { LanguageSwitcher } from "./LanguageSwitcher"
 import { NavItem, NavSocialItem } from "./types"
 import { useLiveWeatherClock } from "./useLiveWeatherClock"
 
@@ -85,8 +86,9 @@ export const MenuPanel: React.FC<MenuPanelProps> = ({
           <div className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" aria-hidden="true" />
         </div>
 
-        <div className="mt-2 font-mono text-[10px] text-[#8B8983] capitalize">
-          {weather}
+        <div className="mt-3 flex items-center justify-between font-mono text-[10px] text-[#8B8983]">
+          <span className="capitalize">{weather}</span>
+          <LanguageSwitcher isDark={true} />
         </div>
 
         {/* Daftar Navigasi (01. Home - 05. Contact) */}

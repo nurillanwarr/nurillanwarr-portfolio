@@ -1,17 +1,18 @@
+"use client"
+
 import React from "react"
+import { useTranslations } from "next-intl"
 import { HERO_ACTIONS } from "./constants"
 
 /**
  * Komponen HeroActions
  * Menampilkan sepasang tombol aksi (Call to Action) berdesain pil khas arsitektur minimalis:
- * - Tombol utama (Primary): Latar hitam pekat dengan transisi hover cokelat tembaga
- * - Tombol sekunder (Secondary): Garis tepi (outline border) dengan transisi hover krem lembut
- * - Efek animasi garis bawah teks yang melebar dari tengah ke sisi kanan dan kiri saat disentuh (hover)
- * - Ikon lingkaran panah yang berotasi halus dari posisi mendatar (→) menjadi serong ke atas (↗) saat kursor hover
- *
- * @returns {JSX.Element} Elemen grup tombol aksi Hero
+ * - Tombol utama (Primary / Resume): Latar hitam pekat dengan transisi hover cokelat tembaga
+ * - Tombol sekunder (Secondary / Contact): Garis tepi (outline border) dengan transisi hover krem lembut
+ * - Menggunakan kamus bahasa next-intl dinamis
  */
 export const HeroActions: React.FC = () => {
+  const t = useTranslations("hero.actions")
   const { primary, secondary } = HERO_ACTIONS
 
   return (
@@ -22,8 +23,7 @@ export const HeroActions: React.FC = () => {
         className="group inline-flex items-center gap-4 rounded-full bg-[#1C1C1A] py-2 pr-2 pl-6 text-[15px] font-medium text-[#F2EFE8] transition-colors duration-300 hover:bg-[#8C5E38]"
       >
         <span className="relative py-0.5">
-          {primary.label}
-          {/* Garis bawah animasi dari tengah ke kanan & kiri */}
+          {t("resume")}
           <span
             className="pointer-events-none absolute bottom-0 left-1/2 h-[1.5px] w-0 -translate-x-1/2 bg-current transition-all duration-300 ease-out group-hover:w-full"
             aria-hidden="true"
@@ -54,16 +54,14 @@ export const HeroActions: React.FC = () => {
         className="group inline-flex items-center gap-4 rounded-full border border-[#1C1C1A] py-2 pr-2 pl-6 text-[15px] font-medium text-[#1C1C1A] transition-colors duration-300 hover:bg-[#E2D9CB]"
       >
         <span className="relative py-0.5">
-          {secondary.label}
-          {/* Garis bawah animasi dari tengah ke kanan & kiri */}
+          {t("contact")}
           <span
             className="pointer-events-none absolute bottom-0 left-1/2 h-[1.5px] w-0 -translate-x-1/2 bg-current transition-all duration-300 ease-out group-hover:w-full"
             aria-hidden="true"
           />
         </span>
 
-        {/* Lingkaran panah: lurus ke kanan (→) berputar ke serong atas (↗) saat hover */}
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1C1C1A] text-[#F2EFE8] transition-colors duration-300">
+        <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#1C1C1A] bg-transparent text-[#1C1C1A] transition-colors duration-300 group-hover:border-[#1C1C1A] group-hover:bg-[#1C1C1A] group-hover:text-[#F2EFE8]">
           <svg
             viewBox="0 0 24 24"
             fill="none"

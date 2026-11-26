@@ -93,7 +93,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
       const normalizePath = (p: string) => p.replace(/\/+$/, "") || "/"
       const curPath = normalizePath(currentUrl.pathname)
       const destPath = normalizePath(destination.pathname)
-      const isLocaleHome = /^\/(en|id|zh)$/.test(curPath)
+      const isLocaleHome = /^\/(en|id)$/.test(curPath)
 
       const isSameDocument =
         (curPath === destPath || (isLocaleHome && destPath === "/")) &&
@@ -107,6 +107,9 @@ export default function PageTransition({ children }: PageTransitionProps) {
       originPathRef.current = pathname
       targetHrefRef.current = `${destination.pathname}${destination.search}${destination.hash}`
       targetHashRef.current = destination.hash
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("route-change-start"))
+      }
       setPhase("covering")
     }
 

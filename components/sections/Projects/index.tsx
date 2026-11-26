@@ -75,13 +75,13 @@ export const ProjectsSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative w-full overflow-hidden scroll-mt-24 bg-transparent pt-20 pb-8 md:pt-24 md:pb-10"
+      className="relative w-full overflow-hidden scroll-mt-24 bg-transparent pt-16 pb-8 md:pt-20 md:pb-10"
     >
       {/* Anchor identifier untuk navigasi #process */}
       <span id="process" className="absolute -top-24 pointer-events-none opacity-0" />
       <div
         ref={viewportRef}
-        className="mx-auto flex h-[calc(100vh-7.5rem)] min-h-[540px] max-h-[780px] w-full max-w-[1440px] flex-col justify-between px-4 md:px-8 lg:px-12"
+        className="relative z-10 mx-auto flex h-[calc(100vh-7.5rem)] min-h-[540px] max-h-[780px] w-full max-w-[1440px] flex-col justify-between px-4 md:px-8 lg:px-12"
       >
         {/* Area Tengah: Track Horizontal yang Bergeser ke Kiri Saat Scroll */}
         <div className="relative flex flex-1 items-center overflow-visible">
