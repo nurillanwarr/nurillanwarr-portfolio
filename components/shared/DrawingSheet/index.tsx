@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react"
+import { motion } from "framer-motion"
 import { PaperTexture } from "./PaperTexture"
 import { RegistrationMark } from "./RegistrationMark"
 
@@ -16,12 +19,18 @@ interface DrawingSheetProps {
   className?: string
   /**
    * Variasi tampilan bingkai lembar kerja arsitektur:
-   * - "default": Bingkai ganda klasik dengan 4 tanda bidik lingkaran (RegistrationMark) di sudut (dipakai pada Hero)
-   * - "second": Bingkai spesifikasi vellum dengan siku L presisi tembaga, mistar skala samping, dan garis lipat CAD (dipakai pada About)
+   * - "default": Bingkai ganda klasik dengan 4 tanda bidik lingkaran (RegistrationMark) di sudut (dipakai pada Hero & AboutHero)
+   * - "second": Bingkai spesifikasi vellum dengan siku L presisi tembaga, mistar skala samping, dan garis lipat CAD (dipakai pada Home About)
    */
   variant?: "default" | "second" | "third"
   /** Tema tampilan lembar: "light" (kertas gambar terang) atau "dark" (kertas sketsa grafit arsitektur gelap) */
   theme?: "light" | "dark"
+}
+
+// Durasi & Easing tarikan garis khas gambar teknik arsitektural
+const drawTransition = {
+  duration: 0.85,
+  ease: [0.16, 1, 0.3, 1] as const,
 }
 
 /**
@@ -67,7 +76,7 @@ const EditorialCornerBracket: React.FC<{
 /**
  * Komponen DrawingSheet
  * Menampilkan lembar kerja arsitektural (architectural drafting sheet) dengan presisi gambar teknik:
- * - Varian "default": Garis tepi ganda (double border) dan 4 tanda registrasi lingkaran CAD di setiap sudutnya
+ * - Varian "default": Garis tepi ditarik animasi berseri (top -> right -> bottom -> left) dan 4 tanda registrasi CAD di setiap sudutnya
  * - Varian "second": Lembar spesifikasi teknis dengan siku L tembaga, bar skala mistar CAD, dan tekstur vellum
  */
 export const DrawingSheet: React.FC<DrawingSheetProps> = ({
@@ -167,18 +176,64 @@ export const DrawingSheet: React.FC<DrawingSheetProps> = ({
       id={id}
       className={`relative mx-auto w-full max-w-[2800px] scroll-mt-24 px-3 md:px-6 ${className}`}
     >
-      {/* Garis tepi luar */}
-      <div className="relative border border-[#1C1C1A] p-[14px]">
-        <RegistrationMark corner="top-left" />
-        <RegistrationMark corner="top-right" />
-        <RegistrationMark corner="bottom-left" />
-        <RegistrationMark corner="bottom-right" />
+      {/* Bingkai Luar dengan Garis yang Ditarik Otomatis (Line-Drawing Animation) */}
+      <div className="relative p-[14px]">
+        {/* 1. Garis Atas: ditarik dari kiri ke kanan */}
+        <motion.span
+          aria-hidden="true"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ ...drawTransition, delay: 0.1 }}
+          style={{ originX: 0 }}
+          className="absolute inset-x-0 top-0 h-[1px] bg-[#1C1C1A]"
+        />
 
-        {/* Garis tepi dalam + kertas */}
-        <div className="relative overflow-hidden border border-[#1C1C1A]/40 bg-[#EBE3D7]">
+        {/* 2. Garis Kanan: ditarik dari atas ke bawah */}
+        <motion.span
+          aria-hidden="true"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ ...drawTransition, delay: 0.35 }}
+          style={{ originY: 0 }}
+          className="absolute inset-y-0 right-0 w-[1px] bg-[#1C1C1A]"
+        />
+
+        {/* 3. Garis Bawah: ditarik dari kanan ke kiri */}
+        <motion.span
+          aria-hidden="true"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ ...drawTransition, delay: 0.6 }}
+          style={{ originX: 1 }}
+          className="absolute inset-x-0 bottom-0 h-[1px] bg-[#1C1C1A]"
+        />
+
+        {/* 4. Garis Kiri: ditarik dari bawah ke atas */}
+        <motion.span
+          aria-hidden="true"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ ...drawTransition, delay: 0.85 }}
+          style={{ originY: 1 }}
+          className="absolute inset-y-0 left-0 w-[1px] bg-[#1C1C1A]"
+        />
+
+        {/* Tanda Bidik Sudut CAD (Registration Marks) dengan delay sinkron per sudut */}
+        <RegistrationMark corner="top-left" delay={0.15} />
+        <RegistrationMark corner="top-right" delay={0.4} />
+        <RegistrationMark corner="bottom-right" delay={0.65} />
+        <RegistrationMark corner="bottom-left" delay={0.9} />
+
+        {/* Garis Tepi Dalam + Tekstur Kertas dengan kemunculan halus */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.995 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="relative overflow-hidden border border-[#1C1C1A]/40 bg-[#EBE3D7]"
+        >
           <PaperTexture src={paperSrc} />
           <div className="relative z-10">{children}</div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

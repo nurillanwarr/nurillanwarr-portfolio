@@ -112,30 +112,42 @@ export default function AboutHero({ locale: localeProp }: AboutHeroProps) {
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#1C1C1A]/15 pb-4 font-mono text-[11px] tracking-[0.16em] uppercase text-[#736E65]"
+          className="relative mb-8 pb-4 font-mono text-[11px] tracking-[0.16em] uppercase text-[#736E65]"
         >
-          <Link
-            href="/#about"
-            className="group inline-flex items-center gap-2 rounded-full border border-[#1C1C1A]/25 bg-[#F5F2EB] px-4 py-1.5 text-[10.5px] font-medium text-[#1C1C1A] transition-all duration-300 hover:border-[#1C1C1A] hover:bg-[#1C1C1A] hover:text-[#FAF8F5]"
-          >
-            <span className="transition-transform duration-300 group-hover:-translate-x-1">
-              ←
-            </span>
-            <span>{t("backToOverview")}</span>
-          </Link>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <Link
+              href="/#about"
+              className="group inline-flex items-center gap-2 rounded-full border border-[#1C1C1A]/25 bg-[#F5F2EB] px-4 py-1.5 text-[10.5px] font-medium text-[#1C1C1A] transition-all duration-300 hover:border-[#1C1C1A] hover:bg-[#1C1C1A] hover:text-[#FAF8F5]"
+            >
+              <span className="transition-transform duration-300 group-hover:-translate-x-1">
+                ←
+              </span>
+              <span>{t("backToOverview")}</span>
+            </Link>
 
-          <div className="hidden sm:block text-[10px] text-[#736E65]/80">
-            {isId ? "DOKUMEN // BIOGRAFI & KREDENSIAL" : "DOSSIER // BIOGRAPHY & CREDENTIALS"}
+            <div className="hidden sm:block text-[10px] text-[#736E65]/80">
+              {isId ? "DOKUMEN // BIOGRAFI & KREDENSIAL" : "DOSSIER // BIOGRAPHY & CREDENTIALS"}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="inline-block border border-[#1C1C1A] bg-[#FAF8F5] px-2 py-0.5 font-semibold text-[#1C1C1A]">
+                A-201
+              </span>
+              <span className="hidden md:inline">
+                {isId ? "NURIL ANWAR — ARSIP" : "NURIL ANWAR — ARCHIVE"}
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="inline-block border border-[#1C1C1A] bg-[#FAF8F5] px-2 py-0.5 font-semibold text-[#1C1C1A]">
-              A-201
-            </span>
-            <span className="hidden md:inline">
-              {isId ? "NURIL ANWAR — ARSIP" : "NURIL ANWAR — ARCHIVE"}
-            </span>
-          </div>
+          {/* Garis Pembatas Horisontal CAD yang Ditarik Memanjang */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.85, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{ originX: 0 }}
+            className="absolute bottom-0 inset-x-0 h-px bg-[#1C1C1A]/15"
+          />
         </motion.div>
 
         {/* Konten Utama Hero 2-Kolom (Gaya Alvalens + Staggered Motion) */}

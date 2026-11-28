@@ -89,17 +89,28 @@ export default function AboutDetails({ locale: localeProp }: AboutDetailsProps) 
       id="who-am-i"
       className="relative mx-auto w-full max-w-[1440px] px-4 py-16 md:px-8 md:py-24 lg:px-12"
     >
-      {/* Garis Pembatas CAD Atas (Gaya Oda Arkitekter) */}
-      <div className="mb-12 flex items-center justify-between border-t border-[#1C1C1A] pt-3 font-mono text-[11px] tracking-[0.16em] uppercase text-[#736E65]">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-[#A3724B]">(02)</span>
-          <span>{isId ? "IDENTITAS & LATAR BELAKANG" : "IDENTITY & BACKGROUND"}</span>
-        </div>
-        <div className="hidden md:block text-[10px] text-[#736E65]/80">
-          {isId ? "SIAPA SAYA • FULL-STACK, MOBILE & APPLIED AI" : "WHO AM I • FULL-STACK, MOBILE & APPLIED AI"}
-        </div>
-        <div>
-          <span>SHEET A-202</span>
+      {/* Garis Pembatas CAD Atas (Gaya Oda Arkitekter - Animated Line Drawing) */}
+      <div className="relative mb-12 pt-3">
+        <motion.div
+          aria-hidden="true"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          style={{ originX: 0 }}
+          className="absolute top-0 inset-x-0 h-px bg-[#1C1C1A]"
+        />
+        <div className="flex items-center justify-between font-mono text-[11px] tracking-[0.16em] uppercase text-[#736E65]">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-[#A3724B]">(02)</span>
+            <span>{isId ? "IDENTITAS & LATAR BELAKANG" : "IDENTITY & BACKGROUND"}</span>
+          </div>
+          <div className="hidden md:block text-[10px] text-[#736E65]/80">
+            {isId ? "SIAPA SAYA • FULL-STACK, MOBILE & APPLIED AI" : "WHO AM I • FULL-STACK, MOBILE & APPLIED AI"}
+          </div>
+          <div>
+            <span>SHEET A-202</span>
+          </div>
         </div>
       </div>
 
