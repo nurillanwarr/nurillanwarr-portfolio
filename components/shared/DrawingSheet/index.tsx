@@ -77,7 +77,7 @@ const EditorialCornerBracket: React.FC<{
  * Komponen DrawingSheet
  * Menampilkan lembar kerja arsitektural (architectural drafting sheet) dengan presisi gambar teknik:
  * - Varian "default": Garis tepi ditarik animasi berseri (top -> right -> bottom -> left) dan 4 tanda registrasi CAD di setiap sudutnya
- * - Varian "second": Lembar spesifikasi teknis dengan siku L tembaga, bar skala mistar CAD, dan tekstur vellum
+ * - Varian "second": Lembar spesifikasi teknis dengan siku L tembaga, bar skala mistar CAD, tekstur vellum, dan tarikan garis animasi saat masuk viewport
  */
 export const DrawingSheet: React.FC<DrawingSheetProps> = ({
   children,
@@ -95,14 +95,63 @@ export const DrawingSheet: React.FC<DrawingSheetProps> = ({
         id={id}
         className={`relative mx-auto w-full max-w-[2800px] scroll-mt-24 px-3 md:px-6 ${className}`}
       >
-        {/* Bingkai Luar Editorial Spesifikasi dengan Siku L Tembaga */}
+        {/* Bingkai Luar Editorial Spesifikasi dengan Siku L Tembaga & Animasi Garis */}
         <div
-          className={`relative border p-2 md:p-3 transition-colors duration-500 ${
+          className={`relative p-2 md:p-3 transition-colors duration-500 ${
             isDark
-              ? "border-[#FAF6F0]/25 bg-[#1F1E1B]/95 shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
-              : "border-[#1C1C1A]/50 bg-[#E6DDD0]/60"
+              ? "bg-[#1F1E1B]/95 shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
+              : "bg-[#E6DDD0]/60"
           }`}
         >
+          {/* Garis Bingkai Atas */}
+          <motion.span
+            aria-hidden="true"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ ...drawTransition, delay: 0.1 }}
+            style={{ originX: 0 }}
+            className={`absolute inset-x-0 top-0 h-[1px] ${
+              isDark ? "bg-[#FAF6F0]/25" : "bg-[#1C1C1A]/50"
+            }`}
+          />
+          {/* Garis Bingkai Kanan */}
+          <motion.span
+            aria-hidden="true"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ ...drawTransition, delay: 0.3 }}
+            style={{ originY: 0 }}
+            className={`absolute inset-y-0 right-0 w-[1px] ${
+              isDark ? "bg-[#FAF6F0]/25" : "bg-[#1C1C1A]/50"
+            }`}
+          />
+          {/* Garis Bingkai Bawah */}
+          <motion.span
+            aria-hidden="true"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ ...drawTransition, delay: 0.5 }}
+            style={{ originX: 1 }}
+            className={`absolute inset-x-0 bottom-0 h-[1px] ${
+              isDark ? "bg-[#FAF6F0]/25" : "bg-[#1C1C1A]/50"
+            }`}
+          />
+          {/* Garis Bingkai Kiri */}
+          <motion.span
+            aria-hidden="true"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ ...drawTransition, delay: 0.7 }}
+            style={{ originY: 1 }}
+            className={`absolute inset-y-0 left-0 w-[1px] ${
+              isDark ? "bg-[#FAF6F0]/25" : "bg-[#1C1C1A]/50"
+            }`}
+          />
+
           <EditorialCornerBracket position="top-left" theme={theme} />
           <EditorialCornerBracket position="top-right" theme={theme} />
           <EditorialCornerBracket position="bottom-left" theme={theme} />
